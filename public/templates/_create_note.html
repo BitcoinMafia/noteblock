@@ -1,0 +1,39 @@
+<div class="create-note">
+  <div class="modal-header">
+    <h2 class='text-center'>
+      <span class='calvin-klein thin'>CREATE A NOTE</span>
+      <button type="button" class="close" ng-click="cancel()">×</button>
+    </h2>
+  </div>
+  <div class="modal-body">
+    <p class="lead">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <br>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label h3 thin">NOTE: </label>
+        <div class="col-sm-10">
+          <textarea
+            class='form-control'
+            placeholder="80 characters or less"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label h3 thin">FROM: </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="(optional)">
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="create()">CREATE</button>
+    <button class="btn btn-warning" ng-click="cancel()">CANCEL</button>
+  </div>
+</div>

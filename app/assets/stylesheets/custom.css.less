@@ -36,3 +36,42 @@
     color: #fff;
   }
 }
+
+.create-note {
+  input, textarea {
+    border-radius: 0;
+    width: 100%;
+    margin: 0 auto;
+    vertical-align: middle;
+    outline: 1px solid @gray-lighter;
+    padding: 7px;
+    border: none;
+    overflow: hidden;
+    font-size: @font-size-h3;
+    box-shadow: none;
+    font-weight: 100;
+
+    &:focus {
+      outline: 1px solid @brand-success;
+      box-shadow: none;
+    }
+
+  }
+}
+
+.thin {
+  font-weight: 100;
+}
+
+textarea.address {
+  width: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  // text-align: center;
+}
+
+.dim {
+  opacity: 0.2;
+}
