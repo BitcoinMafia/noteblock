@@ -26,4 +26,4 @@ nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 		};
 	};
 
-} )
+} );

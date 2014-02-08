@@ -10,7 +10,7 @@ nbApp.config( function( $locationProvider ) {
 	$locationProvider.html5Mode( true );
 } )
 
-nbApp.run( function( $rootScope, $location, $anchorScroll ) {
+nbApp.run( function( $rootScope, $location, $anchorScroll, $modal ) {
 	$rootScope.global = {}
 
 	$rootScope.global.isOnLink = function( path ) {
@@ -20,6 +20,21 @@ nbApp.run( function( $rootScope, $location, $anchorScroll ) {
 	$rootScope.$on( '$routeChangeSuccess', function( next, current ) {
 		$anchorScroll();
 	} );
+
+	$rootScope.What = {
+		open: function() {
+			$modal.open( {
+				templateUrl: "/templates/_what.html",
+				controller: modalCtrl
+			} );
+		}
+	};
+
+	var modalCtrl = function( $scope, $modalInstance ) {
+		$scope.cancel = function() {
+			$modalInstance.dismiss( 'cancel' );
+		};
+	};
 } )
 
 nbApp.config( function( $routeProvider ) {
@@ -37,6 +52,10 @@ nbApp.config( function( $routeProvider ) {
 	$routeProvider.when( "/confirm", {
 		controller: "confirmCtrl",
 		templateUrl: "/templates/confirm.html"
+	} )
+
+	$routeProvider.when( "/how-it-works", {
+		templateUrl: "/templates/how-it-works.html"
 	} )
 
 	$routeProvider.otherwise( {
