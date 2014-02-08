@@ -311,6 +311,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "<div class=\"container\">\n" +
     "  <br>\n" +
     "  <h1 class='text-center'>CONFIRMATION</h1>\n" +
+    "  <br>\n" +
     "  <div class=\"col-md-10 col-md-offset-1\">\n" +
     "    <table class=\"table table-striped table-confirm\">\n" +
     "      <tbody>\n" +
@@ -340,8 +341,18 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2\">\n" +
-    "              <span class=\"label label-warning\">WAITING</span>\n" +
+    "              <span class=\"label label-primary\">WAITING</span>\n" +
     "              <span class=\"label label-success dim\">RECEIVED</span>\n" +
+    "            </div>\n" +
+    "          </td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "          <td>\n" +
+    "            <span class=\"h2\">URL:</span>\n" +
+    "          </td>\n" +
+    "          <td>\n" +
+    "            <div class=\"h2 thin\">\n" +
+    "              <a href=\"#\" target=\"_blank\">http://www.thenoteblock.com/notes/57</a>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -349,7 +360,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    </table>\n" +
     "    <blockquote>\n" +
     "      <div class=\"h3 thin\">\n" +
-    "        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forevered stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
     "      </div>\n" +
     "    </blockquote>\n" +
     "    <h1 class='text-center'>{{address}}</h1>\n" +
