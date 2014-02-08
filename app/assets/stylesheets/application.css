@@ -11,6 +11,7 @@
  *= require_self
  *= require lumen/loader
  *= require lumen/bootswatch
+ *= require custom
  *= require sidebar
  *= require global
  *= require font-awesome

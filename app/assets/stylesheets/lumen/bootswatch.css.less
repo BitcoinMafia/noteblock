@@ -4,7 +4,7 @@
 // Bootswatch
 // -----------------------------------------------------
 
-@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
+@import url("//fonts.googleapis.com/css?family=Lobster|Source+Sans+Pro:300,400,700,400italic");
 
 .shadow (@width: 4px) {
   border-width: 0 1px @width 1px;
@@ -16,11 +16,19 @@
   .shadow();
 }
 
+.navbar-inverse {
+  .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: @cupid-blue;
+    background-color: transparent;
+  }
+
+}
+
 // Buttons ====================================================================
 
 .btn {
   .shadow();
-  font-size: 12px;
+  font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
 
@@ -189,13 +197,21 @@ label {
   }
 }
 
+.nav-pills {
+  > li > a {
+    border-radius: 0;
+    cursor: pointer;
+  }
+}
+
 .nav-tabs {
 
   > li > a {
     margin-top: 6px;
+    border-radius: 0;
     border-color: @navbar-default-border;
     color: @gray-dark;
-    .transition(all 0.2s ease-in-out);
+    .transition(all 0.01s ease-in-out);
   }
 
   > li > a:hover,
@@ -209,6 +225,9 @@ label {
     padding-top: @padding-large-vertical + 3px;
     padding-bottom: @padding-large-vertical + 3px;
     margin-top: 0;
+    cursor: pointer;
+    color: #fff;
+    background-color: @brand-primary;
   }
 
   .open > a,

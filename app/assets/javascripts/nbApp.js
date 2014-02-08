@@ -25,19 +25,19 @@ nbApp.run( function( $rootScope, $location, $anchorScroll ) {
 nbApp.config( function( $routeProvider ) {
 
 	$routeProvider.when( "/", {
-		templateUrl: "/assets/landing.html"
+		templateUrl: "/templates/landing.html"
 	} )
 
 	$routeProvider.when( "/docs", {
-		templateUrl: "/assets/docs.html"
+		templateUrl: "/templates/docs.html"
 	} )
 
 	$routeProvider.when( "/explorer", {
-		templateUrl: "/assets/explorer.html"
+		templateUrl: "/templates/explorer.html"
 	} )
 
 	$routeProvider.otherwise( {
-		redirectTo: '/'
+		templateUrl: '/404.html'
 	} );
 
 } )
