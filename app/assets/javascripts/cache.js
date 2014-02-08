@@ -435,7 +435,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        <br>\n" +
     "        <div class=\"col-md-8\">\n" +
     "          <p class='lead text-center'>\n" +
-    "            <a class=\"text-gray\" href='#'>\n" +
+    "            <a class=\"text-gray\" href='/notes/1'>\n" +
     "              \"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.\" - Anonymous\n" +
     "            </a>\n" +
     "          </p>\n" +
@@ -469,35 +469,35 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/notes.html',
-    "<div class=\"centerpiece centerpiece-notes\">\n" +
-    "  <h1 class='text-center calvin-klein'>\n" +
+    "<div id=\"centerpiece\">\n" +
+    "  <div class='h1 text-center calvin-klein'>\n" +
     "    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
     "    tempor incididunt ut labore et dolore magna aliqua. - ScottyLi\n" +
-    "  </h1>\n" +
+    "  </div>\n" +
     "</div>\n" +
     "<BR>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"col-md-8 col-md-offset-2\">\n" +
-    "    <div class=\"alert alert-dismissable alert-danger text-center\">\n" +
+    "    <div class=\"alert alert-dismissable alert-danger alert-danger-lighter text-center\">\n" +
     "      <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
-    "      <!-- <span class=\"h4\"> -->\n" +
+    "      <p class=\"lead\">\n" +
     "        THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.\n" +
-    "      <!-- </span> -->\n" +
+    "      </p>\n" +
     "    </div>\n" +
-    "    <table class=\"table table-bordered table-striped table-note\">\n" +
+    "    <table class=\"table table-bordered table-striped table-note thin\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
-    "          <td>Username</td>\n" +
+    "          <td>FROM:</td>\n" +
     "          <td>ScottyLi</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>Decoded Note</td>\n" +
+    "          <td>NOTE (DECODED):</td>\n" +
     "          <td>\n" +
     "            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>Raw Note</td>\n" +
+    "          <td>NOTE (RAW HEX):</td>\n" +
     "          <td>\n" +
     "            <a href=\"#\">\n" +
     "              mpjuaPusdVC5cKvVYCFX94bJX1SNUY8EJo\n" +
@@ -505,7 +505,13 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>Transaction Hash</td>\n" +
+    "          <td>NOTE ID:</td>\n" +
+    "          <td>\n" +
+    "            14\n" +
+    "          </td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "          <td>TRANSACTION HASH:</td>\n" +
     "          <td>\n" +
     "            <a href=\"#\">\n" +
     "              6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3\n" +
@@ -513,15 +519,15 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>Time Received</td>\n" +
+    "          <td>TIME RECEIVED:</td>\n" +
     "          <td>2014-2-14 12:14 UTC</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>Magic Bytes</td>\n" +
+    "          <td>MAGIC BYTES:</td>\n" +
     "          <td>0x98</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>BTC Dedicated</td>\n" +
+    "          <td>BTC DEDICATED:</td>\n" +
     "          <td>0.001 BTC</td>\n" +
     "        </tr>\n" +
     "      </tbody>\n" +

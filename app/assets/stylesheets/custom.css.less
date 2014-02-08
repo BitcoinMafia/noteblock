@@ -89,3 +89,18 @@ textarea.address {
 table.table-confirm tbody td {
   padding: 16px;
 }
+
+table.table-note {
+  font-size: 17px;
+
+  tbody {
+    td:nth-of-type(1) {
+      text-align: right;
+    }
+  }
+}
+
+.alert-danger-lighter {
+  background-color: lighten(@btn-danger-bg, 15%);
+  border-color: lighten(@btn-danger-border, 15%);
+}
