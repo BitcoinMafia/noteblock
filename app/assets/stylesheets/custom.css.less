@@ -1,14 +1,39 @@
 @import "lumen/base";
 
-.title-fancy {
-  font-family: 'Lobster', cursive;
-  font-weight: 500;
-  font-size: @font-size-h1 * 2;
-  color: @gray-dark;
+.note {
+  border-bottom: 1px solid @gray-lighter;
+
+  p.username {
+    line-height: 2;
+  }
 }
 
-.calvin-klein {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-style: italic;
+.label-lg {
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.thick-line {
+  background-color: #ffffff;
+  border-color: #e6e6e6;
+  border-width: 0 1px 4px 1px;
+}
+
+.centerpiece {
+  padding: 50px;
+  background-image: url("http://subtlepatterns.com/patterns/old_map.png");
+
+  .title-fancy {
+    font-family: 'Lobster', cursive;
+    font-weight: 500;
+    font-size: @font-size-h1 * 2;
+    color: #fff;
+  }
+
+  .calvin-klein {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    color: #fff;
+  }
 }

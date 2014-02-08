@@ -1,28 +1,52 @@
-<div class="container">
-  <h1 class='title-fancy text-center'>The Noteblock</h1>
+<div class="centerpiece">
+  <div class="text-center">
+    <span class='h1 title-fancy text-center'>The Noteblock</span>
+  </div>
+
 
   <h1 class='text-center calvin-klein'>
     "Roses will wither, but the Blockchain is Forever."
   </h1>
+</div>
 
-  <!-- CTA MESSAGE -->
-
+<div class="container">
+  <div class="thick-line"></div>
   <br>
-  <div class="col-md-10">
-    <tabset>
-      <tab heading="LATEST MESSAGES">
-        LATEST
-        <!-- <div ng-include="'/templates/blockExplorer/_tx.html'"></div> -->
-      </tab>
-      <tab heading="TOP MESSAGES">
-        TOP
-        <!-- <div ng-include="'/templates/blockExplorer/_tx.html'"></div> -->
-      </tab>
-    </tabset>
-  </div>
-  <div class="col-md-2">
-    <a class="btn btn-danger">+ CREATE A MESSAGE</a>
-  </div>
+  <tabset>
+    <tab heading="LATEST NOTES">
+      <br>
+      <div class="note">
+        <div class="row">
+          <div class="col-md-8">
+            <p class='lead text-center'>
+              <a href="#">
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."
+              </a>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <p class='username text-center'>
+              <strong>(anon.)</strong>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <div class="text-center">
+              <span class="label label-primary label-lg">0.01 BTC</span>
+              DEDICATED
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div ng-include="'/templates/blockExplorer/_tx.html'"></div> -->
+    </tab>
+    <tab heading="TOP NOTES">
+      <!-- <div ng-include="'/templates/blockExplorer/_tx.html'"></div> -->
+    </tab>
+    <div class="pull-right">
+      <a class="btn btn-info">+ CREATE A NOTE</a>
+    </div>
+
+  </tabset>
 
 </div>
 
