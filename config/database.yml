@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: noteblock_development
+  pool: 5
+  username: noteblock
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: noteblock_test
+  pool: 5
+  username: noteblock
+  password:
+
+
+# Mock Production Db, not heroku
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: noteblock_production
+  pool: 5
+  username: noteblock
+  password:

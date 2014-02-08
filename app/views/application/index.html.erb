@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="nbApp">
+<head>
+  <title>Hello, Block</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+
+  <%= csrf_meta_tags %>
+
+  <!-- <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <meta name="description" content="Send Bitcoins over Twitter">
+  <meta name="og:description" content="Send Bitcoins over Twitter">
+  <meta name="keywords" content="bitcoin, twitter" />
+
+  <meta property="og:title" content="TipperCoin | Send Bitcoins over Twitter">
+  <meta property="og:url" content="http://www.tippercoin.com/">
+  <meta property="og:image" content="http://i.imgur.com/POLpNIW.png" /> -->
+
+</head>
+<body ng-cloak>
+	<navbar></navbar>
+	<div class="container" ng-view></div>
+
+	<%= javascript_include_tag "application" %>
+
+	<!-- GA -->
+	<% if Rails.env.production? %>
+
+	<% end %>
+</body>
+</html>

@@ -1,0 +1,19 @@
+== Rails/Angular Boilerplate
+
+1. Change name
+
+Noteblock,
+nbApp,
+filenames nbApp,
+$ find . -name nbApp\*
+$ find . -name noteblock\*
+
+2. createuser -s -r user
+3. create/migrate db
+4. Change secret keys in .env with SecureRandom.hex(64)
+5. Pick bootswatch theme, default is yeti
+
+Deploy
+1. Heroku New Relic
+2. Heroku Memcachier
+3. Google Analytics

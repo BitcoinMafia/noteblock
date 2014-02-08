@@ -1,0 +1,43 @@
+'use strict';
+
+var nbApp = angular.module( 'nbApp', [
+	'ngRoute',
+	'ngResource',
+	'ui.bootstrap'
+] )
+
+nbApp.config( function( $locationProvider ) {
+	$locationProvider.html5Mode( true );
+} )
+
+nbApp.run( function( $rootScope, $location, $anchorScroll ) {
+	$rootScope.global = {}
+
+	$rootScope.global.isOnLink = function( path ) {
+		return path === $location.path().split( "/" )[ 1 ];
+	}
+
+	$rootScope.$on( '$routeChangeSuccess', function( next, current ) {
+		$anchorScroll();
+	} );
+} )
+
+nbApp.config( function( $routeProvider ) {
+
+	$routeProvider.when( "/", {
+		templateUrl: "/assets/landing.html"
+	} )
+
+	$routeProvider.when( "/docs", {
+		templateUrl: "/assets/docs.html"
+	} )
+
+	$routeProvider.when( "/explorer", {
+		templateUrl: "/assets/explorer.html"
+	} )
+
+	$routeProvider.otherwise( {
+		redirectTo: '/'
+	} );
+
+} )
