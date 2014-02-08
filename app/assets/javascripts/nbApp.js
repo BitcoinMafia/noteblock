@@ -28,12 +28,9 @@ nbApp.config( function( $routeProvider ) {
 		templateUrl: "/templates/landing.html"
 	} )
 
-	$routeProvider.when( "/docs", {
-		templateUrl: "/templates/docs.html"
-	} )
-
-	$routeProvider.when( "/explorer", {
-		templateUrl: "/templates/explorer.html"
+	$routeProvider.when( "/notes", {
+		controller: "notesCtrl",
+		templateUrl: "/templates/notes.html"
 	} )
 
 	$routeProvider.otherwise( {
