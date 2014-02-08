@@ -13,6 +13,8 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
+//= require lumen/loader
+//= require lumen/bootswatch
 //= require angular
 //= require angular-route
 //= require angular-resource
