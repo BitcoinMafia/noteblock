@@ -1,3 +1,0 @@
-// Yeti
-// Bootswatch
-// bootswatch.js

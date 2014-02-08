@@ -13,8 +13,6 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
-//= require yeti/loader
-//= require yeti/bootswatch
 //= require angular
 //= require angular-route
 //= require angular-resource
