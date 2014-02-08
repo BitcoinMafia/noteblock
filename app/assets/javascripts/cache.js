@@ -505,17 +505,17 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>NOTE ID:</td>\n" +
-    "          <td>\n" +
-    "            14\n" +
-    "          </td>\n" +
-    "        </tr>\n" +
-    "        <tr>\n" +
     "          <td>TRANSACTION HASH:</td>\n" +
     "          <td>\n" +
     "            <a href=\"#\">\n" +
     "              6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3\n" +
     "            </a>\n" +
+    "          </td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "          <td>NOTE ID:</td>\n" +
+    "          <td>\n" +
+    "            14\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
