@@ -18,14 +18,22 @@
 
 .navbar-inverse {
   .navbar-nav > li {
-    button {
+    .what a {
       margin-top: 5px;
     }
   }
 
+  .navbar-nav > li > a {
+    color: @gray;
+  }
+
   .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color: @brand-info;
+    color: @brand-primary;
     background-color: transparent;
+  }
+
+  .navbar-brand {
+    color: @gray;
   }
 
   margin-bottom: 0;
@@ -239,7 +247,7 @@ label {
     margin-top: 0;
     cursor: pointer;
     color: #fff;
-    background-color: @gray;
+    background-color: @gray-light;
   }
 
   .open > a,
