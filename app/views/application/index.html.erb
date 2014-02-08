@@ -23,9 +23,9 @@
 
 	<%= javascript_include_tag "application" %>
 
-	<!-- GA -->
+	<!-- Production Cache -->
 	<% if Rails.env.production? %>
-
-	<% end %>
+    <%= javascript_include_tag "cache" %>
+  <% end %>
 </body>
 </html>
