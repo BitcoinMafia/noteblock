@@ -17,7 +17,7 @@ nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 			// Redirect on callback to confirm with queries
 			$modalInstance.dismiss( 'cancel' );
 			$location.path( "/confirm" ).search( {
-				address: "asdfasdf"
+				address: "16ps38WzmDhEWMPQecVndrWZADekC4FU42"
 			} )
 		};
 

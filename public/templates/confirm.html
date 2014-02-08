@@ -1,41 +1,47 @@
 <div class="container">
-  <br><br><br>
-  <blockquote>
-    <div class="h1 thin text-center">
-      Seal Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-  </blockquote>
-  <br><br>
+  <br>
+  <h1 class='text-center'>CONFIRMATION</h1>
   <div class="col-md-10 col-md-offset-1">
-    <table class="table table-striped">
+    <table class="table table-striped table-confirm">
       <tbody>
         <tr>
           <td>
-            <span class="h2"><strong>STATUS: </strong></span>
+            <span class="h2">NOTE:</span>
           </td>
           <td>
-            <div class="h2">
-              <span class="label label-warning">PENDING</span>
-              <span class="label label-success dim">RECEIVED</span>
+            <div class="h2 thin">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <span class="h2"><strong>ADDRESS: </strong></span>
+            <span class="h2">FROM:</span>
+          </td>
+          <td>
+            <div class="h2 thin">
+              ScottyLi
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="h2">STATUS:</span>
           </td>
           <td>
             <div class="h2">
-              <textarea
-                class="address thin"
-                spellcheck="false"
-                readonly
-                selected>{{address}}</textarea>
+              <span class="label label-warning">WAITING</span>
+              <span class="label label-success dim">RECEIVED</span>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+    <blockquote>
+      <div class="h3 thin">
+        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forevered stored in the Blockchain. See <a href="/how-it-works">how this works.</a>
+      </div>
+    </blockquote>
+    <h1 class='text-center'>{{address}}</h1>
   </div>
 </div>

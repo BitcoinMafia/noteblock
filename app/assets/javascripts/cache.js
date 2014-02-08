@@ -189,10 +189,10 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
   $templateCache.put('/templates/_create_note.html',
     "<div class=\"create-note\">\n" +
     "  <div class=\"modal-header\">\n" +
-    "    <h2 class='text-center'>\n" +
-    "      <span class='calvin-klein thin'>CREATE A NOTE</span>\n" +
+    "    <h1 class='text-center'>\n" +
+    "      <span class='thin'>CREATE A NOTE</span>\n" +
     "      <button type=\"button\" class=\"close\" ng-click=\"cancel()\">×</button>\n" +
-    "    </h2>\n" +
+    "    </h1>\n" +
     "  </div>\n" +
     "  <div class=\"modal-body\">\n" +
     "    <p class=\"lead\">\n" +
@@ -205,6 +205,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        <label class=\"col-sm-2 control-label h3 thin\">NOTE: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
     "          <textarea\n" +
+    "            tabindex=\"1\"\n" +
     "            class='form-control'\n" +
     "            placeholder=\"80 characters or less\"\n" +
     "            rows=\"4\"\n" +
@@ -215,15 +216,15 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">FROM: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
-    "          <input type=\"text\" class=\"form-control\" placeholder=\"(optional)\">\n" +
+    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" placeholder=\"(optional)\">\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </form>\n" +
     "\n" +
     "  </div>\n" +
     "  <div class=\"modal-footer\">\n" +
-    "    <button class=\"btn btn-primary\" ng-click=\"create()\">CREATE</button>\n" +
-    "    <button class=\"btn btn-warning\" ng-click=\"cancel()\">CANCEL</button>\n" +
+    "    <button tabindex=\"3\" class=\"btn btn-primary\" ng-click=\"create()\">CREATE</button>\n" +
+    "    <button class=\"btn btn-default\" ng-click=\"cancel()\">CANCEL</button>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -260,9 +261,11 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </a>\n" +
     "        </li>\n" +
     "        <li>\n" +
-    "          <button class=\"btn btn-warning\" ng-click=\"What.open()\">\n" +
-    "            What is this?\n" +
-    "          </button>\n" +
+    "          <span class='what'>\n" +
+    "            <a class=\"btn btn-info\" ng-click=\"What.open()\">\n" +
+    "              What is this?\n" +
+    "            </a>\n" +
+    "          </span>\n" +
     "        </li>\n" +
     "      </ul>\n" +
     "    </div><!-- /.nav-collapse -->\n" +
@@ -274,16 +277,25 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
   $templateCache.put('/templates/_what.html',
     "<div class=\"create-note\">\n" +
     "  <div class=\"modal-header\">\n" +
-    "    <h2 class='text-center'>\n" +
-    "      <span class='calvin-klein thin'>WHAT IS THIS?</span>\n" +
+    "    <h1 class='text-center'>\n" +
+    "      <span class='thin'>WHAT IS THIS?</span>\n" +
     "      <button type=\"button\" class=\"close\" ng-click=\"cancel()\">&times;</button>\n" +
-    "    </h2>\n" +
+    "    </h1>\n" +
     "  </div>\n" +
     "  <div class=\"modal-body\">\n" +
     "    <p class=\"lead\">\n" +
-    "      <span class=\"h1\">Hello, </span>\n" +
+    "      <span class=\"h1 thin\">Hello, </span>\n" +
     "      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
     "      tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p class=\"lead\">\n" +
+    "      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+    "      tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p class=\"lead pull-right\">\n" +
+    "      From scott@helloblock.io\n" +
     "    </p>\n" +
     "    <br>\n" +
     "  </div>\n" +
@@ -297,44 +309,50 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('/templates/confirm.html',
     "<div class=\"container\">\n" +
-    "  <br><br><br>\n" +
-    "  <blockquote>\n" +
-    "    <div class=\"h1 thin text-center\">\n" +
-    "      Seal Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "      tempor incididunt ut labore et dolore magna aliqua.\n" +
-    "    </div>\n" +
-    "  </blockquote>\n" +
-    "  <br><br>\n" +
+    "  <br>\n" +
+    "  <h1 class='text-center'>CONFIRMATION</h1>\n" +
     "  <div class=\"col-md-10 col-md-offset-1\">\n" +
-    "    <table class=\"table table-striped\">\n" +
+    "    <table class=\"table table-striped table-confirm\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
     "          <td>\n" +
-    "            <span class=\"h2\"><strong>STATUS: </strong></span>\n" +
+    "            <span class=\"h2\">NOTE:</span>\n" +
     "          </td>\n" +
     "          <td>\n" +
-    "            <div class=\"h2\">\n" +
-    "              <span class=\"label label-warning\">PENDING</span>\n" +
-    "              <span class=\"label label-success dim\">RECEIVED</span>\n" +
+    "            <div class=\"h2 thin\">\n" +
+    "              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>\n" +
-    "            <span class=\"h2\"><strong>ADDRESS: </strong></span>\n" +
+    "            <span class=\"h2\">FROM:</span>\n" +
+    "          </td>\n" +
+    "          <td>\n" +
+    "            <div class=\"h2 thin\">\n" +
+    "              ScottyLi\n" +
+    "            </div>\n" +
+    "          </td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "          <td>\n" +
+    "            <span class=\"h2\">STATUS:</span>\n" +
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2\">\n" +
-    "              <textarea\n" +
-    "                class=\"address thin\"\n" +
-    "                spellcheck=\"false\"\n" +
-    "                readonly\n" +
-    "                selected>{{address}}</textarea>\n" +
+    "              <span class=\"label label-warning\">WAITING</span>\n" +
+    "              <span class=\"label label-success dim\">RECEIVED</span>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "      </tbody>\n" +
     "    </table>\n" +
+    "    <blockquote>\n" +
+    "      <div class=\"h3 thin\">\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forevered stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "      </div>\n" +
+    "    </blockquote>\n" +
+    "    <h1 class='text-center'>{{address}}</h1>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -393,7 +411,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/landing.html',
-    "<div class=\"centerpiece\">\n" +
+    "<div id=\"centerpiece\">\n" +
     "  <div class=\"text-center\">\n" +
     "    <span class='h1 title-fancy text-center'>The Noteblock</span>\n" +
     "  </div>\n" +
@@ -402,9 +420,10 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <em> Forever embed your love note in the Blockchain</em>\n" +
     "  </small> -->\n" +
     "\n" +
-    "  <h1 class='text-center calvin-klein'>\n" +
+    "  <br>\n" +
+    "  <div class='h1 text-center calvin-klein'>\n" +
     "    Roses will wither, but the Blockchain is Forever.\n" +
-    "  </h1>\n" +
+    "  </div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -412,30 +431,25 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <br>\n" +
     "  <tabset>\n" +
     "    <tab heading=\"LATEST NOTES\">\n" +
-    "      <br>\n" +
-    "      <div class=\"note\">\n" +
-    "        <div class=\"row\">\n" +
-    "          <div class=\"col-md-8\">\n" +
-    "            <p class='lead text-center'>\n" +
-    "              <a href=\"#\">\n" +
-    "                \"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.\"\n" +
-    "              </a>\n" +
-    "            </p>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-md-2\">\n" +
-    "            <p class='username text-center'>\n" +
-    "              <img src=\"https://identicoin.herokuapp.com/address/b\" height='16'>\n" +
-    "              <strong> (ANON.)</strong>\n" +
-    "            </p>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-md-2\">\n" +
-    "            <p>\n" +
-    "              <strong>\n" +
-    "                <span class=\"label label-info label-lg\">0.01 BTC</span>\n" +
-    "                DEDICATED\n" +
-    "              </strong>\n" +
-    "            </p>\n" +
-    "          </div>\n" +
+    "      <div class=\"row note\"  ng-repeat=\"i in [1, 2, 3, 4, 5, 6, 7]\">\n" +
+    "        <br>\n" +
+    "        <div class=\"col-md-8\">\n" +
+    "          <p class='lead text-center'>\n" +
+    "            <a class=\"text-gray\" href='#'>\n" +
+    "              \"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.\" - Anonymous\n" +
+    "            </a>\n" +
+    "          </p>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-md-2\">\n" +
+    "          <p class='lead text-center'>\n" +
+    "            15 min ago\n" +
+    "          </p>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-md-2\">\n" +
+    "          <p class='lead text-center'>\n" +
+    "            <span class=\"label label-default label-lg\">0.01 BTC</span>\n" +
+    "            <small class='smaller'>DEDICATED</small>\n" +
+    "          </p>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <!-- <div ng-include=\"'/templates/blockExplorer/_tx.html'\"></div> -->\n" +
