@@ -36,8 +36,13 @@ ActiveRecord::Schema.define(version: 20140209040227) do
     t.string   "content"
     t.string   "from"
     t.string   "address"
+    t.string   "encrypted_private_key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "notes", ["address"], name: "index_notes_on_address", using: :btree
+  add_index "notes", ["content"], name: "index_notes_on_content", using: :btree
+  add_index "notes", ["from"], name: "index_notes_on_from", using: :btree
 
 end

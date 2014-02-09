@@ -5,7 +5,7 @@ describe Note do
     let(:content) { "I love you forever babe" }
     let(:address) { "n1hvXVVmnjmHWBBVDR8p3TAkcvG8vhRR3r" }
     let(:private_key) { "7ad9df131580c3b5fabd947f9b7cc861fd0ea2625fb7aac7259b42fa7ed78215" }
-    let(:encrypted_priv_key) { "+bFR1JxIAphskjK6r26VJgCF46p2vjR2kBaX4SXnJHLs+yI0ezDqpw7YOrqwKi8ljq9i1eNU8Xz2Ya7/YPYuWZZYz4ZFYFL1RZ60xYHpbF+QC9a3fbQg5AQfXKt9l059" }
+    let(:encrypted_private_key) { "+bFR1JxIAphskjK6r26VJgCF46p2vjR2kBaX4SXnJHLs+yI0ezDqpw7YOrqwKi8ljq9i1eNU8Xz2Ya7/YPYuWZZYz4ZFYFL1RZ60xYHpbF+QC9a3fbQg5AQfXKt9l059" }
 
     before(:each) do
       @note = Note.new
@@ -45,7 +45,7 @@ describe Note do
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
       @note.from = nil
-      expect(@note.save).to eq(false)
+      expect(@note.save).to eq(true)
     end
 
     it "should otherwise save" do
@@ -53,7 +53,7 @@ describe Note do
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
       @note.from = 'ScottyLi'
-      expect(@note.save).to eq(false)
+      expect(@note.save).to eq(true)
     end
 
   end
