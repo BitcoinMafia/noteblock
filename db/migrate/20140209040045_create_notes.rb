@@ -4,6 +4,7 @@ class CreateNotes < ActiveRecord::Migration
       t.string :content
       t.string :from
       t.string :address
+      t.string :encrypted_private_key
 
       t.timestamps
     end
