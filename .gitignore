@@ -22,4 +22,5 @@ config/ssl/
 public/assets
 node_modules/
 bower_components/
-notes
+ideas
+ideas.rb
