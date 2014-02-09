@@ -30,6 +30,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    bitcoin-ruby (0.0.4)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -160,6 +161,7 @@ DEPENDENCIES
   angular-ui-bootstrap-rails
   angularjs-rails (~> 1.2.5)
   awesome_print
+  bitcoin-ruby
   coffee-rails (~> 4.0.0)
   dalli
   font-awesome-rails

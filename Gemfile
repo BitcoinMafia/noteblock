@@ -37,3 +37,5 @@ gem 'dalli'
 gem 'newrelic_rpm'
 
 gem 'rspec-rails'
+
+gem 'bitcoin-ruby'
