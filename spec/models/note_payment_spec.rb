@@ -10,7 +10,7 @@ describe NotePayment do
     end
 
     it "should not save without tx_hash" do
-      @note_payment.tx_hash = valid_hash
+      @note_payment.tx_hash = nil
       expect(@note_payment.save).to eq(false)
     end
 

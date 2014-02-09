@@ -10,7 +10,7 @@ describe NoteCreator do
     end
 
     it "should not save without tx_hash" do
-      @note_creator.tx_hash = valid_hash
+      @note_creator.tx_hash = nil
       expect(@note_creator.save).to eq(false)
     end
 
