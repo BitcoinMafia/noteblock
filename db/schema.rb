@@ -11,9 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140209040227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "note_creators", force: true do |t|
+    t.integer  "note_id"
+    t.string   "tx_hash"
+    t.integer  "satoshis"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "note_payments", force: true do |t|
+    t.integer  "note_id"
+    t.string   "tx_hash"
+    t.integer  "satoshis"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", force: true do |t|
+    t.string   "content"
+    t.string   "from"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
