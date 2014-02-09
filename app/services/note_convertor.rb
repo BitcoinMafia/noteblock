@@ -17,7 +17,13 @@ module NoteConvertor
     return hex_array
   end
 
-  def hex_to_uft8(hex)
+  def hex_to_utf8(hexArr)
+    raise "Input must be array" unless hexArr.is_a?(Array)
+    raise "Does not contain magic bytes" if hexArr[0][0..7] != MAGIC_BYTES
 
+    full_hex = hexArr.join
+    stripped_hex = full_hex[8..-1]
+
+    return [stripped_hex].pack("H*").strip
   end
 end
