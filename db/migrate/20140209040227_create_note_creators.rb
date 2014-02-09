@@ -7,5 +7,7 @@ class CreateNoteCreators < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :note_creators, :tx_hash
   end
 end

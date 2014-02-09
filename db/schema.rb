@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20140209040227) do
     t.datetime "updated_at"
   end
 
+  add_index "note_creators", ["tx_hash"], name: "index_note_creators_on_tx_hash", using: :btree
+
   create_table "note_payments", force: true do |t|
     t.integer  "note_id"
     t.string   "tx_hash"
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 20140209040227) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "note_payments", ["tx_hash"], name: "index_note_payments_on_tx_hash", using: :btree
 
   create_table "notes", force: true do |t|
     t.string   "content"

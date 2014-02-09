@@ -7,5 +7,7 @@ class CreateNotePayments < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :note_payments, :tx_hash
   end
 end
