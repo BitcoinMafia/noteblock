@@ -10,12 +10,12 @@ describe NoteMailer do
 
     it "should no require sender" do
       email = "scottli_010hotmail.com"
-      token = SecureRandom.hex(32)
+      encrypted_token = SecureRandom.hex(32)
       note_id = 17
 
       mail = NoteMailer.index(
         email: email,
-        token: token,
+        encrypted_token: encrypted_token,
         note_id: note_id
       )
 
@@ -27,13 +27,13 @@ describe NoteMailer do
         @sender = 'Samantha'
         @email = "scottli_010@hotmail.com"
         @recipient = "scottli_010"
-        @token = SecureRandom.hex(32)
+        @encrypted_token = SecureRandom.hex(32)
         @note_id = 17
 
         @mail = NoteMailer.index(
           email: @email,
           sender: @sender,
-          token: @token,
+          encrypted_token: @encrypted_token,
           note_id: @note_id
         )
       end
@@ -49,7 +49,7 @@ describe NoteMailer do
       end
 
       it "should render url" do
-        url = "http://www.thenoteblock.com/notes/#{@note_id}/claim?token=#{@token}"
+        url = "http://www.thenoteblock.com/notes/#{@note_id}/claim?token=#{@encrypted_token}"
         expect(@mail.body).to include("#{url}")
       end
 
@@ -65,20 +65,20 @@ describe NoteMailer do
       @sender = 'Samantha'
       @email = "scottli_010@hotmail.com"
       @recipient = "scottli_010"
-      @token = SecureRandom.hex(32)
+      @encrypted_token = SecureRandom.hex(32)
       @note_id = 17
 
       @mail = NoteMailer.index(
         email: @email,
         sender: @sender,
-        token: @token,
+        encrypted_token: @encrypted_token,
         note_id: @note_id,
       )
 
       @prod_mail = NoteMailer.index(
         email: @email,
         sender: @sender,
-        token: @token,
+        encrypted_token: @encrypted_token,
         note_id: @note_id,
         force: true
       )

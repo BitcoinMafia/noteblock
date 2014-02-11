@@ -11,19 +11,31 @@ namespace :addresses do
   end
 
   task socket: :environment do
-    client = SocketIO.connect("https://mainnet-helloblock-socket.herokuapp.com:443") do
-      p 'CONNECTING ...'
+    recursive_socket()
+  end
 
-      on_connect do |data|
-        p "CONNECTED!"
-      end
+end
 
-      on_event("latest") do |data|
-        transaction =  data[0]["message"]
-        NoteRunner.execute(transaction)
-      end
 
+def recursive_socket
+  client = SocketIO.connect("https://mainnet-helloblock-socket.herokuapp.com:443", {
+    reconnect: true
+  }) do
+    p 'connecting ...'
+
+    on_connect do |data|
+      ap "CONNECTED"
+    end
+
+    on_event("latest") do |data|
+      transaction =  data[0]["message"]
+      NoteRunner.execute(transaction)
     end
   end
 
+  # Shouldn't go there, means it's disconnected
+  # TODO: Pager duty!
+  ap "DISCONNECTED!"
+  ap "reconnecting ..."
+  recursive_socket()
 end

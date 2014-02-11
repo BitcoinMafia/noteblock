@@ -5,13 +5,16 @@ module NoteRunner
     addresses = TransactionUtils.pluck_addresses(transaction, inputs: false)
     # TODO: only pluck unpaid, unflagged
     all_notes = Note.pluck(:address)
-    selected_address = addresses[0]
-    note = Note.where(address: selected_address)[0]
 
     # Check Presence
     if !Task.address_present?(addresses, all_notes)
       return;
     end
+
+    ap "PAYMENT MADE!"
+
+    selected_address = addresses[0]
+    note = Note.where(address: selected_address)[0]
 
     # Save Payment
     if !Task.save_payment(note, transaction);
