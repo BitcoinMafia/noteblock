@@ -36,22 +36,20 @@ describe NoteRunner do
     end
 
     it "should create payment" do
-      expect(NoteRunner::Task.create_payment(@transaction, @address)).to equal(true)
+      expect(NoteRunner::Task.save_payment(@note, @transaction)).to equal(true)
 
-      payment = NotePayment.where(tx_hash: @transaction["tx_hash"])
+      payment = NoteTransaction.where(tx_hash: @transaction["tx_hash"])[0]
       expect(payment.satoshis).to equal(@transaction["out"][0]["value"])
     end
 
-    it "should create transaction" do
+    it "should check payment validity"
 
+    it "should create note proof" do
+      expect(NoteRunner::Task.create_proof(@note)).to equal(true)
     end
 
-    it "should create token" do
+    it "should create token"
 
-    end
-
-    it "should create email" do
-
-    end
+    it "should create email"
 
   end

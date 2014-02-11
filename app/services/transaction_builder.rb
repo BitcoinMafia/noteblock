@@ -3,16 +3,15 @@ module TransactionBuilder
   extend self
   extend Bitcoin::Builder
 
-  def build(from_address: nil, encrypted_private_key: nil, to_addresses: nil, amount: 22000, fee: 10000)
-    if !from_address || !encrypted_private_key || !to_addresses || !amount || !fee
+  def build(from_address: nil, private_key: nil, to_addresses: nil, amount: 22000, fee: 10000)
+    if !from_address || !private_key || !to_addresses || !amount || !fee
       raise "missing arguments";
     end
 
     raw_unspents = BitcoinNodeAPI::Addresses.unspents(from_address)
     selected_unspents = self.select_unspents(raw_unspents, amount + fee)
 
-    private_key = AES.decrypt(encrypted_private_key, ENV["DECRYPTION_KEY"])
-    key = Bitcoin::Key.from_base58(private_key)
+    key = Bitcoin::Key.new(private_key, nil, true)
 
     tx_hashes = selected_unspents.map { |u| u["tx_hash"] }
 
