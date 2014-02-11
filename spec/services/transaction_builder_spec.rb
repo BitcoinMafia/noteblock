@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NoteTransaction do
+describe TransactionBuilder do
 
   let(:note) { "I love you baby 4eva and eva" }
   let(:private_key) {"cPL4Lx1R19kdeW3DVkFDwbVMTc7A3HgeoLAjS3RAo9ZzKqtSVC6N"}
@@ -16,8 +16,8 @@ describe NoteTransaction do
 
   it "should reject if no from_address" do
     expect {
-      hex = NoteTransaction.build(from_address: nil )
-    }.to raise_error(RuntimeError, /address/)
+      hex = TransactionBuilder.build(from_address: nil )
+    }.to raise_error(RuntimeError, /arguments/)
   end
 
   it "should reject if no to_addresses"
@@ -29,7 +29,7 @@ describe NoteTransaction do
   it "should return error if to_addresses invalid"
 
   it "should otherwise build a transaction hex" do
-    raw_transaction = NoteTransaction.build(
+    raw_transaction = TransactionBuilder.build(
       from_address: from_address,
       encrypted_private_key: encrypted_private_key,
       to_addresses: @to_addresses
@@ -39,7 +39,7 @@ describe NoteTransaction do
   end
 
   it "should propagate transaction and return in the blockchain" do
-    raw_transaction = NoteTransaction.build(
+    raw_transaction = TransactionBuilder.build(
       from_address: from_address,
       encrypted_private_key: encrypted_private_key,
       to_addresses: @to_addresses

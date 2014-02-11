@@ -1,4 +1,4 @@
-module NoteTransaction
+module TransactionBuilder
   # gives build_tx DSL
   extend self
   extend Bitcoin::Builder
@@ -32,8 +32,6 @@ module NoteTransaction
           i.prev_out_index(unspent["n"])
           i.signature_key(key)
         end
-
-        binding.pry
 
       end
 
