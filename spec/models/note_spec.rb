@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Note do
   let(:content) { "I love you forever babe" }
   let(:address) { "n1hvXVVmnjmHWBBVDR8p3TAkcvG8vhRR3r" }
+  let(:email) { "scott@example.com" }
   let(:private_key) { "7ad9df131580c3b5fabd947f9b7cc861fd0ea2625fb7aac7259b42fa7ed78215" }
   let(:encrypted_private_key) { "+bFR1JxIAphskjK6r26VJgCF46p2vjR2kBaX4SXnJHLs+yI0ezDqpw7YOrqwKi8ljq9i1eNU8Xz2Ya7/YPYuWZZYz4ZFYFL1RZ60xYHpbF+QC9a3fbQg5AQfXKt9l059" }
 
@@ -48,6 +49,15 @@ describe Note do
       expect(@note.save).to eq(true)
     end
 
+    it "should save if email is invalid" do
+      @note.content = content
+      @note.address = address
+      @note.email = "aslkdjfaklsdjlkajdsfkla"
+      @note.encrypted_private_key = encrypted_private_key
+      @note.sender = 'ScottyLi'
+      expect(@note.save).to eq(false)
+    end
+
     it "should otherwise save" do
       @note.content = content
       @note.address = address
@@ -59,6 +69,7 @@ describe Note do
     it "should have allow flagging" do
       @note.content = content
       @note.address = address
+      @note.address = email
       @note.encrypted_private_key = encrypted_private_key
       @note.sender = 'ScottyLi'
       @note.save

@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140211062204) do
   create_table "notes", force: true do |t|
     t.string   "content"
     t.string   "sender"
+    t.string   "email"
     t.string   "address"
     t.string   "encrypted_token"
     t.string   "encrypted_private_key"
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140211062204) do
 
   add_index "notes", ["address"], name: "index_notes_on_address", using: :btree
   add_index "notes", ["content"], name: "index_notes_on_content", using: :btree
+  add_index "notes", ["email"], name: "index_notes_on_email", using: :btree
   add_index "notes", ["encrypted_token"], name: "index_notes_on_encrypted_token", using: :btree
   add_index "notes", ["sender"], name: "index_notes_on_sender", using: :btree
 

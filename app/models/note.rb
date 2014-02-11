@@ -5,6 +5,8 @@ class Note < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 76 }
   validates :address, presence: true
   validates :encrypted_private_key, presence: true
+  validates :email, email_format: { message: 'Email invalid', allow_nil: true }
+
   validate :private_key_encrypted
   validate :token_encrypted
 
