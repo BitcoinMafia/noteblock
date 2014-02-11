@@ -19,7 +19,6 @@ module NoteRunner
     end
 
     # valid?
-
     if !Task.check_payment_validity(note, transaction)
       raise "Payment not valid"
     end
@@ -67,7 +66,13 @@ module NoteRunner
 
       # Fees
 
+
+
       return true
+    end
+
+    def send_to_client(note)
+
     end
 
     def create_proof(note)

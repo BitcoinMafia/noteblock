@@ -4,11 +4,11 @@ module AES
   extend self
 
   def encrypt(string, key)
-    Base64.strict_encode64(aes(key, string)).gsub /\s/, ''
+    Base64.urlsafe_encode64(aes(key, string))
   end
 
   def decrypt(string, key)
-    aes_decrypt(key, Base64.decode64(string))
+    aes_decrypt(key, Base64.urlsafe_decode64(string))
   end
 
   def aes(key,string)
@@ -31,5 +31,3 @@ module AES
   end
 
 end
-
-

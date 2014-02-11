@@ -4,6 +4,7 @@ class CreateNotes < ActiveRecord::Migration
       t.string :content
       t.string :from
       t.string :address
+      t.string :token
       t.string :encrypted_private_key
       t.boolean :flagged, default: false
 
@@ -13,6 +14,7 @@ class CreateNotes < ActiveRecord::Migration
     add_index :notes, :content
     add_index :notes, :from
     add_index :notes, :address
+    add_index :notes, :token
 
   end
 end

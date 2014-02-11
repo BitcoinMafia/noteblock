@@ -70,6 +70,45 @@ describe Note do
 
   end
 
+  context "Token" do
+    before(:each) do
+      @note = Note.new
+      @note.content = content
+      @note.address = address
+      @note.encrypted_private_key = encrypted_private_key
+      @note.from = 'ScottyLi'
+      @note.save
+    end
+
+    it "should allow token creation" do
+      token = Note.generate_token
+      expect(!token[/\H/]).to eq(true) # ensure it's a hex
+      expect(token.length).to eq(128)
+    end
+
+    it "should not save unencrypted token" do
+      @note.token = Note.generate_token
+      expect(@note.save).to eq(false)
+    end
+
+    it "should otherwise save" do
+      encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
+      @note.token = encrypted_token
+      expect(@note.save).to eq(true)
+    end
+
+    it "should allow queries on token" do
+      original_token = Note.generate_token
+      encrypted_token = AES.encrypt(original_token, ENV["DECRYPTION_KEY"])
+      @note.token = encrypted_token
+      @note.save
+
+      note = Note.where(token: encrypted_token)[0]
+      unencrypted_token =  AES.decrypt(note.token, ENV["DECRYPTION_KEY"])
+      expect(unencrypted_token).to eq(original_token)
+    end
+  end
+
   context "Assocations" do
     it "should have many NoteTransactions" do
       note = Note.reflect_on_association(:note_transactions)

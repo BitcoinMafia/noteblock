@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140211062204) do
     t.string   "content"
     t.string   "from"
     t.string   "address"
+    t.string   "token"
     t.string   "encrypted_private_key"
     t.boolean  "flagged",               default: false
     t.datetime "created_at"
@@ -40,5 +41,6 @@ ActiveRecord::Schema.define(version: 20140211062204) do
   add_index "notes", ["address"], name: "index_notes_on_address", using: :btree
   add_index "notes", ["content"], name: "index_notes_on_content", using: :btree
   add_index "notes", ["from"], name: "index_notes_on_from", using: :btree
+  add_index "notes", ["token"], name: "index_notes_on_token", using: :btree
 
 end

@@ -6,6 +6,7 @@ class Note < ActiveRecord::Base
   validates :address, presence: true
   validates :encrypted_private_key, presence: true
   validate :private_key_encrypted
+  validate :token_encrypted
 
   def private_key_encrypted
     return unless encrypted_private_key
@@ -18,10 +19,25 @@ class Note < ActiveRecord::Base
     end
   end
 
+  def token_encrypted
+    return unless token
+
+    # Check if encrypted_private_key all valid hex characters
+    # This implies it has not been AES encrypted
+    if !token[/\H/]
+      errors.add(:note_id, "Cannot store unencrypted token")
+      return false
+    end
+  end
+
   # ASSOCIATIONS =========================================================
 
   has_many :note_transactions
 
   # METHODS ==============================================================
+
+  def self.generate_token
+    SecureRandom.hex(64)
+  end
 
 end
