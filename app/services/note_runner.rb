@@ -60,11 +60,25 @@ module NoteRunner
     end
 
     def check_payment_validity(note, transaction)
-      # Amount
+      # TODO: send message to client
 
-      # Outputs
+      # Amount is >= min
+      if TransactionUtils.output_value_for(transaction, note.address) < NoteTransaction::MINIMUM
+        p "Payment amount is < min"
+        return false
+      end
 
-      # Fees
+      # Fees >= 10000
+      if transaction["fees"] < 10_000
+        p "Transaction fees is < min"
+        return false
+      end
+
+      # No outputs < 5400
+      if TransactionUtils.low_outputs?(transaction)
+        p "Some outputs < 5400"
+        return false
+      end
 
       return true
     end
@@ -103,7 +117,7 @@ module NoteRunner
     end
 
     def send_email(note)
-      return unless note.email
+      return true unless note.email
 
       mail = NoteMailer.index(
         email: note.email,
@@ -112,7 +126,7 @@ module NoteRunner
         note_id: note.id
       )
 
-      # Deliver
+      # # Deliver
       mail.deliver
       return true
     end

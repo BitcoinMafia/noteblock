@@ -31,5 +31,11 @@ class NoteTransaction < ActiveRecord::Base
 
   belongs_to :note
 
+  # CONSTANTS ============================================================
+
+  # Actual minimum is = 10_000 + 22000
+  # But people will forget miner fees
+  MINIMUM = 50000
+
   # METHODS ==============================================================
 end

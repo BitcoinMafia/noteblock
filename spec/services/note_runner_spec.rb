@@ -12,6 +12,7 @@ describe NoteRunner do
     @note = Note.create(
       content: "I love you baby for ever",
       address: @address,
+      email: "scottli_010@hotmail.com",
       encrypted_private_key: AES.encrypt(@key.priv, ENV["DECRYPTION_KEY"])
       )
 
@@ -31,25 +32,46 @@ describe NoteRunner do
     end
 
     it "should check presence" do
-      expect(NoteRunner::Task.address_present?(["random"], @notes)).to equal(false)
-      expect(NoteRunner::Task.address_present?(@addresses_array, @notes)).to equal(true)
+      expect(NoteRunner::Task.address_present?(["random"], @notes)).to eq(false)
+      expect(NoteRunner::Task.address_present?(@addresses_array, @notes)).to eq(true)
     end
 
     it "should create payment" do
-      expect(NoteRunner::Task.save_payment(@note, @transaction)).to equal(true)
+      expect(NoteRunner::Task.save_payment(@note, @transaction)).to eq(true)
 
       payment = NoteTransaction.where(tx_hash: @transaction["tx_hash"])[0]
-      expect(payment.satoshis).to equal(@transaction["out"][0]["value"])
+      expect(payment.satoshis).to eq(@transaction["out"][0]["value"])
     end
 
-    it "should check payment validity"
+    it "should not create payment if payment invalid" do
+      [FIXTURES::TRANSACTION_NO_FEES, FIXTURES::TRANSACTION_LOW_OUTPUTS].each do |transaction|
+        expect(NoteRunner::Task.check_payment_validity(@note, transaction)).to eq(false)
+      end
+    end
+
+    it "should check payment validity" do
+      expect(NoteRunner::Task.check_payment_validity(@note, @transaction)).to eq(true)
+    end
 
     it "should create note proof" do
-      expect(NoteRunner::Task.create_proof(@note)).to equal(true)
+      expect(NoteRunner::Task.create_proof(@note)).to eq(true)
     end
 
-    it "should create token"
+    it "should create token" do
+      expect(NoteRunner::Task.create_token(@note)).to eq(true)
+    end
 
-    it "should create email"
+    it "should send email" do
+      @note.encrypted_token = "random_token"
+      @note.save
+      expect(NoteRunner::Task.send_email(@note)).to eq(true)
+    end
+
+    it "should not send if no email" do
+      @note.encrypted_token = "random_token"
+      @note.email = nil
+      @note.save
+      expect(NoteRunner::Task.send_email(@note)).to eq(true)
+    end
 
   end
