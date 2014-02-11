@@ -9,7 +9,7 @@ module NoteRunner
     note = Note.where(address: selected_address)[0]
 
     # Check Presence
-    if Task.address_present?(addresses, all_notes)
+    if !Task.address_present?(addresses, all_notes)
       return;
     end
 
@@ -34,9 +34,11 @@ module NoteRunner
     end
 
     # # Email
-    if !Task.create_email(transaction, selected_address);
+    if !Task.send_email(note);
       raise "Emailed Failed"
     end
+
+    return true
   end
 
   module Task

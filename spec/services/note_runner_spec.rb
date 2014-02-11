@@ -29,8 +29,13 @@ describe NoteRunner do
     @notes = Note.pluck(:address)
     @transaction = FIXTURES::TRANSACTION
 
-    end
+  end
 
+  it "should execute all up" do
+    expect(NoteRunner.execute(@transaction)).to eq(true)
+  end
+
+  describe NoteRunner::Task do
     it "should check presence" do
       expect(NoteRunner::Task.address_present?(["random"], @notes)).to eq(false)
       expect(NoteRunner::Task.address_present?(@addresses_array, @notes)).to eq(true)
@@ -80,3 +85,5 @@ describe NoteRunner do
     end
 
   end
+
+end
