@@ -20,15 +20,7 @@ describe TransactionBuilder do
     }.to raise_error(RuntimeError, /arguments/)
   end
 
-  it "should reject if no to_addresses"
-
-  it "should return error if from_address invalid"
-
-  it "should return error if to_addresses invalid"
-
-  it "should return error if to_addresses invalid"
-
-  it "should otherwise build a transaction hex" do
+  it "should build a transaction hex" do
     raw_transaction = TransactionBuilder.build(
       from_address: from_address,
       private_key: private_key,

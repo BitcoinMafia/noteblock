@@ -45,7 +45,7 @@ module TransactionBuilder
       unspents_total_value = selected_unspents.sum {|u| u["value"]}
       change_value = unspents_total_value - (amount + fee)
 
-      if change_value > 0
+      if change_value > 5500
         t.output do |o|
           o.value(change_value)
           o.script {|s| s.recipient key.addr }
@@ -71,11 +71,6 @@ module TransactionBuilder
     unspentsArray.each do |unspent|
       if unspent["value"] >= total_value
         return [unspent]
-      end
-
-      # Output too small
-      if unspent["value"] <= 5400
-        next
       end
 
       selected_unspents << unspent
