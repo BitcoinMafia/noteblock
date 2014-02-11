@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140211062204) do
     t.string   "from"
     t.string   "address"
     t.string   "encrypted_private_key"
+    t.boolean  "flagged",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

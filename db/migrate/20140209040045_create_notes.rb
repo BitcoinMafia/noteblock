@@ -5,6 +5,7 @@ class CreateNotes < ActiveRecord::Migration
       t.string :from
       t.string :address
       t.string :encrypted_private_key
+      t.boolean :flagged, default: false
 
       t.timestamps
     end

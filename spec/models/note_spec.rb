@@ -56,11 +56,22 @@ describe Note do
       expect(@note.save).to eq(true)
     end
 
+    it "should have allow flagging" do
+      @note.content = content
+      @note.address = address
+      @note.encrypted_private_key = encrypted_private_key
+      @note.from = 'ScottyLi'
+      @note.save
+      expect(@note.flagged).to eq(false)
+      @note.flagged = true
+      @note.save
+      expect(@note.flagged).to eq(true)
+    end
+
   end
 
   context "Assocations" do
-    it "should have one note payment"
+    it "should have many note transactions"
 
-    it "should have one note proof"
   end
 end
