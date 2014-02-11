@@ -2,7 +2,7 @@ class NoteMailer < ActionMailer::Base
   default from: "The Noteblock <cupid@thenoteblock.com>"
 
 
-  def index(email: nil, sender: nil, note_id: nil, token: nil)
+  def index(email: nil, sender: nil, note_id: nil, token: nil, force: false)
     if !email || !token || !note_id
       raise "missing arguments"
       return;
@@ -11,10 +11,12 @@ class NoteMailer < ActionMailer::Base
     @recipient = email.split("@")[0]
     @sender = sender || "A secret admirer"
     @url = "http://www.thenoteblock.com/notes/#{note_id}/claim?token=#{token}"
+    delivery_method = Noteblock::Application.config.action_mailer.delivery_method
 
     mail(
       to: email,
-      subject: "Hi #{@recipient}, #{@sender} just sent some Bitcoins to you."
+      subject: "Hi #{@recipient}, #{@sender} just sent some Bitcoins to you.",
+      delivery_method: force ? :smtp : delivery_method
     )
   end
 end

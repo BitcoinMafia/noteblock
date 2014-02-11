@@ -45,4 +45,4 @@ gem 'httparty'
 
 gem 'socketio-client', github: 'lyondhill/socket.io-ruby-client'
 
-gem "letter_opener", :group => :development
+gem "letter_opener"

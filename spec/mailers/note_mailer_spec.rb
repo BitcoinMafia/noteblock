@@ -60,4 +60,42 @@ describe NoteMailer do
     end
   end
 
+  describe "Deliver" do
+    before(:each) do
+      @sender = 'Samantha'
+      @email = "scottli_010@hotmail.com"
+      @recipient = "scottli_010"
+      @token = SecureRandom.hex(32)
+      @note_id = 17
+
+      @mail = NoteMailer.index(
+        email: @email,
+        sender: @sender,
+        token: @token,
+        note_id: @note_id,
+      )
+
+      @prod_mail = NoteMailer.index(
+        email: @email,
+        sender: @sender,
+        token: @token,
+        note_id: @note_id,
+        force: true
+      )
+    end
+
+    after(:each) do
+      ActionMailer::Base.deliveries.clear
+    end
+
+    it "should deliver" do
+      expect(@mail.deliver).to be_true
+    end
+
+    it "should deliver in production" do
+      expect(@prod_mail.deliver).to be_true
+    end
+
+  end
+
 end
