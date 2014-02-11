@@ -11,30 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209040227) do
+ActiveRecord::Schema.define(version: 20140211062204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "note_payments", force: true do |t|
+  create_table "note_transactions", force: true do |t|
     t.integer  "note_id"
     t.string   "tx_hash"
     t.integer  "satoshis"
+    t.string   "tx_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "note_payments", ["tx_hash"], name: "index_note_payments_on_tx_hash", using: :btree
-
-  create_table "note_proofs", force: true do |t|
-    t.integer  "note_id"
-    t.string   "tx_hash"
-    t.integer  "satoshis"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "note_proofs", ["tx_hash"], name: "index_note_proofs_on_tx_hash", using: :btree
+  add_index "note_transactions", ["tx_hash"], name: "index_note_transactions_on_tx_hash", using: :btree
 
   create_table "notes", force: true do |t|
     t.string   "content"
