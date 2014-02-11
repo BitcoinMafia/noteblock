@@ -1,4 +1,7 @@
 class Note < ActiveRecord::Base
+
+  # VALIDATION =========================================================
+
   validates :content, presence: true, length: { maximum: 76 }
   validates :address, presence: true
   validates :encrypted_private_key, presence: true
@@ -15,5 +18,10 @@ class Note < ActiveRecord::Base
     end
   end
 
+  # ASSOCIATIONS =========================================================
+
+  has_many :note_transactions
+
+  # METHODS ==============================================================
 
 end

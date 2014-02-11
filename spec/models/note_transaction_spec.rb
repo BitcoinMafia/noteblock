@@ -49,6 +49,9 @@ describe NoteTransaction do
   end
 
   context "Associations" do
-    it "should belong to Note"
+    it "should belong to Note" do
+      note_transaction = NoteTransaction.reflect_on_association(:note)
+      expect(note_transaction.macro).to eq(:belongs_to)
+    end
   end
 end

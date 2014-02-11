@@ -1,4 +1,7 @@
 class NoteTransaction < ActiveRecord::Base
+
+  # VALIDATION =========================================================
+
   validates :tx_hash, presence: true
   validates :satoshis, presence: true
   validates :tx_type, presence: true
@@ -23,4 +26,10 @@ class NoteTransaction < ActiveRecord::Base
       errors.add(:note_transaction_id, "Invalid tx_type: #{tx_type}")
     end
   end
+
+  # ASSOCIATIONS =========================================================
+
+  belongs_to :note
+
+  # METHODS ==============================================================
 end

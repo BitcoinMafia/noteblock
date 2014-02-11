@@ -71,7 +71,10 @@ describe Note do
   end
 
   context "Assocations" do
-    it "should have many note transactions"
+    it "should have many NoteTransactions" do
+      note = Note.reflect_on_association(:note_transactions)
+      expect(note.macro).to eq(:has_many)
+    end
 
   end
 end
