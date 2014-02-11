@@ -44,7 +44,11 @@ describe NoteRunner do
     end
 
     it "should not create payment if payment invalid" do
-      [FIXTURES::TRANSACTION_NO_FEES, FIXTURES::TRANSACTION_LOW_OUTPUTS].each do |transaction|
+      [
+        FIXTURES::TRANSACTION_NO_FEES,
+        FIXTURES::TRANSACTION_BELOW_MIN,
+        FIXTURES::TRANSACTION_LOW_OUTPUTS
+      ].each do |transaction|
         expect(NoteRunner::Task.check_payment_validity(@note, transaction)).to eq(false)
       end
     end
@@ -67,6 +71,7 @@ describe NoteRunner do
       expect(NoteRunner::Task.send_email(@note)).to eq(true)
     end
 
+    # TODO: need better spec
     it "should not send if no email" do
       @note.encrypted_token = "random_token"
       @note.email = nil
