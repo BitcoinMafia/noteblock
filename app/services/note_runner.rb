@@ -23,6 +23,11 @@ module NoteRunner
       raise "Payment not valid"
     end
 
+    # Push to Client
+    # if !Task.push_to_client(note)
+    #   raise "Push to client fialed"
+    # end
+
     # # NoteTransaction
     if !Task.create_proof(note);
       raise "Note Proof Failed"
@@ -85,8 +90,8 @@ module NoteRunner
       return true
     end
 
-    def send_to_client(note)
-
+    def push_to_client(note)
+      # Pusher
     end
 
     def create_proof(note)
