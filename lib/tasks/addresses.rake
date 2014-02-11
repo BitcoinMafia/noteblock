@@ -1,6 +1,5 @@
 # TODO INCLUDE THESE GEMS
-require 'eventmachine'
-require 'faye/websocket'
+require 'SocketIO'
 
 namespace :addresses do
   desc "Listens for incoming transactions for notes' addresses"
@@ -12,36 +11,19 @@ namespace :addresses do
   end
 
   task socket: :environment do
-    EM.run {
-      ws = Faye::WebSocket::Client.new('ws://mainnet-helloblock-socket.herokuapp.com')
+    client = SocketIO.connect("https://mainnet-helloblock-socket.herokuapp.com:443") do
+      p 'CONNECTING ...'
 
-      ws.on :open do |event|
-        p [:open]
-        ws.send('Hello, world!')
+      on_connect do |data|
+        p "CONNECTED!"
       end
 
-      ws.on :message do |event|
-        p [:message, event.data]
-
-        # Check whether add
-        addresses = Note.pluck(:addresses)
-        if addresses.include?(event.data)
-          # Mark payment
-          payment = NotePayment.create()
-          # Create hex
-          # Propagate hex
-          # Proof
-          # Stream to client
-        end
+      on_event("latest") do |data|
+        transaction =  data[0]["message"]
+        NoteRunner.execute(transaction)
       end
 
-      ws.on :close do |event|
-        p [:close, event.code, event.reason]
-        ws = nil
-
-      end
-    }
-
+    end
   end
 
 end

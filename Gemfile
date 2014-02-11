@@ -42,3 +42,5 @@ gem 'bitcoin-ruby', require: 'bitcoin'
 gem 'ffi'
 
 gem 'httparty'
+
+gem 'socketio-client', github: 'lyondhill/socket.io-ruby-client'

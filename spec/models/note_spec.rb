@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe Note do
-  context "Validations" do
-    let(:content) { "I love you forever babe" }
-    let(:address) { "n1hvXVVmnjmHWBBVDR8p3TAkcvG8vhRR3r" }
-    let(:private_key) { "7ad9df131580c3b5fabd947f9b7cc861fd0ea2625fb7aac7259b42fa7ed78215" }
-    let(:encrypted_private_key) { "+bFR1JxIAphskjK6r26VJgCF46p2vjR2kBaX4SXnJHLs+yI0ezDqpw7YOrqwKi8ljq9i1eNU8Xz2Ya7/YPYuWZZYz4ZFYFL1RZ60xYHpbF+QC9a3fbQg5AQfXKt9l059" }
+  let(:content) { "I love you forever babe" }
+  let(:address) { "n1hvXVVmnjmHWBBVDR8p3TAkcvG8vhRR3r" }
+  let(:private_key) { "7ad9df131580c3b5fabd947f9b7cc861fd0ea2625fb7aac7259b42fa7ed78215" }
+  let(:encrypted_private_key) { "+bFR1JxIAphskjK6r26VJgCF46p2vjR2kBaX4SXnJHLs+yI0ezDqpw7YOrqwKi8ljq9i1eNU8Xz2Ya7/YPYuWZZYz4ZFYFL1RZ60xYHpbF+QC9a3fbQg5AQfXKt9l059" }
 
+  context "Validations" do
     before(:each) do
       @note = Note.new
     end
@@ -56,5 +56,11 @@ describe Note do
       expect(@note.save).to eq(true)
     end
 
+  end
+
+  context "Assocations" do
+    it "should have one note payment"
+
+    it "should have one note proof"
   end
 end
