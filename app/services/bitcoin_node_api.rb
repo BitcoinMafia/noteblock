@@ -12,40 +12,44 @@ module BitcoinNodeAPI
     URL = BASE + "/addresses"
 
     def single(address)
-      HTTParty.get("#{URL}/#{address}")
+      response = HelloBlock::Client.get("/addresses/#{address}")
+      return response["address"]
     end
 
     def unspents(address)
-      response = HTTParty.get("#{URL}/#{address}/unspents")
-      return response["data"]["unspents"]
+      response = HelloBlock::Client.get("/addresses/#{address}/unspents")
+      return response["unspents"]
     end
 
     def transactions(address)
-      HTTParty.get("#{URL}/#{address}/transactions")
+      response = HelloBlock::Client.get("/addresses/#{address}/transactions")
+      return response["transactions"]
     end
 
   end
 
   module Transactions
     extend self
-    URL = BASE + "/transactions"
 
     def single(tx_hash)
-      HTTParty.get("#{URL}/#{tx_hash}")
+      response = HelloBlock::Client.get("/transactions/#{tx_hash}")
+      return response["transaction"]
     end
 
     def batch(tx_hashes_arr)
-      response = HTTParty.get("#{URL}", query: {
+      response = HelloBlock::Client.get("/transactions", query: {
         tx_hashes: tx_hashes_arr
       })
 
-      response["data"]["transactions"]
+      return response["transactions"]
     end
 
-    def post(hex)
-      HTTParty.post("#{URL}", body: {
+    def propagate(hex)
+      response = HelloBlock::Client.post("/transactions", body: {
         hex: hex
       })
+
+      return response
     end
 
   end

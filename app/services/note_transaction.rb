@@ -8,8 +8,8 @@ module NoteTransaction
       raise "missing arguments";
     end
 
-    unspents = BitcoinNodeAPI::Addresses.unspents(from_address)
-    selected_unspents = self.select_unspents(unspents, amount + fee)
+    raw_unspents = BitcoinNodeAPI::Addresses.unspents(from_address)
+    selected_unspents = self.select_unspents(raw_unspents, amount + fee)
 
     private_key = AES.decrypt(encrypted_private_key, ENV["DECRYPTION_KEY"])
     key = Bitcoin::Key.from_base58(private_key)
@@ -32,6 +32,8 @@ module NoteTransaction
           i.prev_out_index(unspent["n"])
           i.signature_key(key)
         end
+
+        binding.pry
 
       end
 

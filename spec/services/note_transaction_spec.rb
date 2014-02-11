@@ -38,4 +38,21 @@ describe NoteTransaction do
     expect(raw_transaction[:hex].scan(/\H/).blank?).to equal(true)
   end
 
+  it "should propagate transaction and return in the blockchain" do
+    raw_transaction = NoteTransaction.build(
+      from_address: from_address,
+      encrypted_private_key: encrypted_private_key,
+      to_addresses: @to_addresses
+    )
+
+    res = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])
+
+    sleep 2
+
+    check = BitcoinNodeAPI::Transactions.single(raw_transaction[:tx_hash])
+
+    expect(res["tx_hash"]).to equal(raw_transaction[:tx_hash])
+    expect(check["tx_hash"]).to equal(raw_transaction[:tx_hash])
+  end
+
 end
