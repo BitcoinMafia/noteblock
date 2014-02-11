@@ -38,6 +38,7 @@ gem 'newrelic_rpm'
 
 gem 'rspec-rails'
 
-gem 'bitcoin-ruby'
+gem 'bitcoin-ruby', require: 'bitcoin'
+gem 'ffi'
 
-gem 'rest-client'
+gem 'httparty'

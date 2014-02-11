@@ -1,3 +1,6 @@
+# TODO: Local SSL Bug
+OpenSSL::SSL::VERIFY_PEER = 0 #OpenSSL::SSL::VERIFY_NONE
+
 # Need HelloBlock module to handle responses?
 module BitcoinNodeAPI
   extend self
@@ -9,15 +12,16 @@ module BitcoinNodeAPI
     URL = BASE + "/addresses"
 
     def single(address)
-      RestClient.get("#{URL}/#{address}")
+      HTTParty.get("#{URL}/#{address}")
     end
 
-    def unspents
-      RestClient.get("#{URL}/#{address}/unspents")
+    def unspents(address)
+      response = HTTParty.get("#{URL}/#{address}/unspents")
+      return response["data"]["unspents"]
     end
 
-    def transactions
-      RestClient.get("#{URL}/#{address}/transactions")
+    def transactions(address)
+      HTTParty.get("#{URL}/#{address}/transactions")
     end
 
   end
@@ -27,17 +31,19 @@ module BitcoinNodeAPI
     URL = BASE + "/transactions"
 
     def single(tx_hash)
-      RestClient.get("#{URL}/#{tx_hash}")
+      HTTParty.get("#{URL}/#{tx_hash}")
     end
 
     def batch(tx_hashes_arr)
-      RestClient.get("#{URL}", query: {
+      response = HTTParty.get("#{URL}", query: {
         tx_hashes: tx_hashes_arr
       })
+
+      response["data"]["transactions"]
     end
 
     def post(hex)
-      RestClient.post("#{URL}", body: {
+      HTTParty.post("#{URL}", body: {
         hex: hex
       })
     end
@@ -49,7 +55,7 @@ module BitcoinNodeAPI
     URL = BASE + "/blocks"
 
     def single(id)
-      RestClient.get("#{URL}/#{id}")
+      HTTParty.get("#{URL}/#{id}")
     end
 
   end

@@ -1,5 +1,3 @@
-require 'bitcoin'
-
 case ENV["BLOCKCHAIN_MODE"]
 when "testnet"
   Bitcoin.network = :testnet3
