@@ -44,7 +44,7 @@ describe Note do
       @note.content = content
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
-      @note.from = nil
+      @note.sender = nil
       expect(@note.save).to eq(true)
     end
 
@@ -52,7 +52,7 @@ describe Note do
       @note.content = content
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
-      @note.from = 'ScottyLi'
+      @note.sender = 'ScottyLi'
       expect(@note.save).to eq(true)
     end
 
@@ -60,7 +60,7 @@ describe Note do
       @note.content = content
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
-      @note.from = 'ScottyLi'
+      @note.sender = 'ScottyLi'
       @note.save
       expect(@note.flagged).to eq(false)
       @note.flagged = true
@@ -76,7 +76,7 @@ describe Note do
       @note.content = content
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
-      @note.from = 'ScottyLi'
+      @note.sender = 'ScottyLi'
       @note.save
     end
 

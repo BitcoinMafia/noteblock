@@ -2,7 +2,7 @@ class CreateNotes < ActiveRecord::Migration
   def change
     create_table :notes do |t|
       t.string :content
-      t.string :from
+      t.string :sender
       t.string :address
       t.string :encrypted_token
       t.string :encrypted_private_key
@@ -12,7 +12,7 @@ class CreateNotes < ActiveRecord::Migration
     end
 
     add_index :notes, :content
-    add_index :notes, :from
+    add_index :notes, :sender
     add_index :notes, :address
     add_index :notes, :encrypted_token
 
