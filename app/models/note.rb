@@ -20,11 +20,11 @@ class Note < ActiveRecord::Base
   end
 
   def token_encrypted
-    return unless token
+    return unless encrypted_token
 
     # Check if encrypted_private_key all valid hex characters
     # This implies it has not been AES encrypted
-    if !token[/\H/]
+    if !encrypted_token[/\H/]
       errors.add(:note_id, "Cannot store unencrypted token")
       return false
     end

@@ -34,9 +34,9 @@ module NoteRunner
     end
 
     # # Email
-    # if !Task.create_email(transaction, selected_address);
-    #   raise "Emailed Failed"
-    # end
+    if !Task.create_email(transaction, selected_address);
+      raise "Emailed Failed"
+    end
   end
 
   module Task
@@ -65,8 +65,6 @@ module NoteRunner
       # Outputs
 
       # Fees
-
-
 
       return true
     end
@@ -99,12 +97,24 @@ module NoteRunner
     end
 
     def create_token(note)
-      # Note.token
+      encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
+      note.encrypted_token = encrypted_token
+      note.save
     end
 
     def send_email(note)
-      # Note.email
+      return unless note.email
+
+      mail = NoteMailer.index(
+        email: note.email,
+        sender: note.sender,
+        encrypted_token: note.encrypted_token,
+        note_id: note.id
+      )
+
       # Deliver
+      mail.deliver
+      return true
     end
   end
 end
