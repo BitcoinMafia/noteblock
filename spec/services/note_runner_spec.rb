@@ -31,6 +31,10 @@ describe NoteRunner do
 
   end
 
+  after(:all) do
+    Note.delete_all
+  end
+
   it "should execute all up" do
     expect(NoteRunner.execute(@transaction)).to eq(true)
   end

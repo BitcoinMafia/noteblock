@@ -11,6 +11,7 @@ module HelloBlock
     end
 
     def post(resource, body: {})
+      # TODO: PagerDuty
       response = HTTParty.post("#{BASE}#{resource}", body: body)
       Errors.code(response.code, response.body)
       response['data']

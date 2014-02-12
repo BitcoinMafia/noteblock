@@ -79,22 +79,30 @@ class Note < ActiveRecord::Base
     }
   end
 
-  def self.claim(id: nil, encrypted_token: nil)
+  def self.claim(encrypted_token: nil, to_address: nil, amount: nil, compressed: false)
+    if !encrypted_token || !to_address
+      raise "missing arguments"
+    end
+
     note = Note.where(encrypted_token: encrypted_token)[0]
+    balance = BitcoinNodeAPI::Addresses.single(note.address)["balance"]
+    private_key = AES.decrypt(note.encrypted_private_key, ENV["DECRYPTION_KEY"])
+    amount ||= balance - NoteTransaction::MINER_FEE
 
     raw_transaction = TransactionBuilder.build(
       from_address: note.address,
       private_key: private_key,
-      to_addresses: to_addresses,
-      compressed: true
+      to_addresses: [to_address],
+      amount: amount,
+      compressed: compressed
     )
 
     response = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])
 
     note_transaction = note.note_transactions.new(
       tx_hash: response["tx_hash"],
-      satoshis: 22000,
-      tx_type: "proof"
+      satoshis: amount,
+      tx_type: "withdrawal"
     )
 
     return note_transaction.save

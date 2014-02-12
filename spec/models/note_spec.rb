@@ -144,4 +144,32 @@ describe Note do
       expect(private_key).to be_true
     end
   end
+
+  context "Claim" do
+    before(:each) do
+      @note = Note.new
+      @note.content = content
+      @note.sender = 'ScottyLi'
+
+      private_key = "cPL4Lx1R19kdeW3DVkFDwbVMTc7A3HgeoLAjS3RAo9ZzKqtSVC6N"
+      key = Bitcoin::Key.from_base58(private_key)
+
+      @note.address = key.addr
+      @note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
+
+      @encrypted_token = Note.generate_token
+      @note.encrypted_token = @encrypted_token
+      @note.save
+    end
+
+    it "should allow claiming" do
+      claim = Note.claim(
+        encrypted_token: @encrypted_token,
+        to_address: "mzPkw5EdvHCntC2hrhRXSqwHLHpLWzSZiL",
+        amount: 20_000,
+        compressed: true)
+
+      expect(claim).to eq(true)
+    end
+  end
 end

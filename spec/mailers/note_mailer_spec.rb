@@ -63,7 +63,7 @@ describe NoteMailer do
   describe "Deliver" do
     before(:each) do
       @sender = 'Samantha'
-      @email = "scottli0101@gmail.com"
+      @email = "scottli_010@hotmail.com"
       @recipient = "scottli_010"
       @encrypted_token = SecureRandom.hex(32)
       @note_id = 17

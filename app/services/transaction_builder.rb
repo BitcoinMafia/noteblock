@@ -70,13 +70,15 @@ module TransactionBuilder
     selected_unspents = []
 
     unspentsArray.each do |unspent|
+      # next unless unspent["confirmations"] > 0
+
       if unspent["value"] >= total_value
         return [unspent]
       end
 
       selected_unspents << unspent
 
-      if selected_unspents.unspent_value >= total_value
+      if selected_unspents.map {|u| u["value"]}.sum >= total_value
         return selected_unspents
       end
     end

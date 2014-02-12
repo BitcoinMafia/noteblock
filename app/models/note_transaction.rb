@@ -37,6 +37,8 @@ class NoteTransaction < ActiveRecord::Base
   # But people will forget miner fees
   MINIMUM = 50000
 
+  MINER_FEE = 10_000
+
   # METHODS ==============================================================
 
   def self.payments
@@ -49,6 +51,10 @@ class NoteTransaction < ActiveRecord::Base
 
   def self.withdrawals
     self.where(tx_type: "withdrawal")
+  end
+
+  def self.remaining_balance
+    self.payments.sum(:satoshis) - self.proofs.sum(:satoshis) - self.withdrawals.sum(:satoshis)
   end
 
 end
