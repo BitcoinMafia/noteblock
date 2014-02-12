@@ -202,12 +202,19 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <br>\n" +
     "    <form class=\"form-horizontal\">\n" +
     "      <div class=\"form-group\">\n" +
+    "        <label class=\"col-sm-2 control-label h3 thin\">EMAIL: </label>\n" +
+    "        <div class=\"col-sm-10\">\n" +
+    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" ng-model=\"note.email\" placeholder=\"(optional)\">\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">NOTE: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
     "          <textarea\n" +
     "            tabindex=\"1\"\n" +
     "            class='form-control'\n" +
     "            placeholder=\"80 characters or less\"\n" +
+    "            ng-model=\"note.content\"\n" +
     "            rows=\"4\"\n" +
     "          ></textarea>\n" +
     "        </div>\n" +
@@ -216,7 +223,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">FROM: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
-    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" placeholder=\"(optional)\">\n" +
+    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" ng-model=\"note.sender\" placeholder=\"(optional)\">\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </form>\n" +
@@ -307,6 +314,12 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('/templates/claim.html',
+    "<input type=\"text\" ng-model=\"to_address\">\n" +
+    "<a class=\"btn btn-defaut\" ng-click=\"claim()\">CLAIM</a>\n"
+  );
+
+
   $templateCache.put('/templates/confirm.html',
     "<div class=\"container\">\n" +
     "  <br>\n" +
@@ -321,7 +334,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2 thin\">\n" +
-    "              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "              {{note.content}}\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -331,7 +344,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2 thin\">\n" +
-    "              ScottyLi\n" +
+    "              {{note.sender}}\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -341,8 +354,8 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2\">\n" +
-    "              <span class=\"label label-primary\">WAITING</span>\n" +
-    "              <span class=\"label label-success dim\">RECEIVED</span>\n" +
+    "              <span class=\"label label-primary\" ng-class=\"{dim: note.payment_valid}\">WAITING</span>\n" +
+    "              <span class=\"label label-success\" ng-class=\"{dim: !note.payment_valid}\">RECEIVED</span>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -352,7 +365,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2 thin\">\n" +
-    "              <a href=\"#\" target=\"_blank\">http://www.thenoteblock.com/notes/57</a>\n" +
+    "              <a href=\"http://www.thenoteblock.com/notes/{{note.id}}\" target=\"_blank\">http://www.thenoteblock.com/notes/{{note.id}}</a>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -360,10 +373,10 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    </table>\n" +
     "    <blockquote>\n" +
     "      <div class=\"h3 thin\">\n" +
-    "        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.0005) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
     "      </div>\n" +
     "    </blockquote>\n" +
-    "    <h1 class='text-center'>{{address}}</h1>\n" +
+    "    <h1 class='text-center'>{{note.address}}</h1>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -469,7 +482,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      <!-- <div ng-include=\"'/templates/blockExplorer/_tx.html'\"></div> -->\n" +
     "    </tab>\n" +
     "    <div class=\"pull-right\">\n" +
-    "      <a class=\"btn btn-primary\" ng-click=\"Note.create()\">+ CREATE A NOTE</a>\n" +
+    "      <a class=\"btn btn-primary\" ng-click=\"NoteModal.open()\">+ CREATE A NOTE</a>\n" +
     "    </div>\n" +
     "\n" +
     "  </tabset>\n" +
@@ -482,64 +495,71 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
   $templateCache.put('/templates/notes.html',
     "<div id=\"centerpiece\">\n" +
     "  <div class='h1 text-center calvin-klein'>\n" +
-    "    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "    tempor incididunt ut labore et dolore magna aliqua. - ScottyLi\n" +
+    "    \"{{note.content}}\" - {{note.sender}}\n" +
     "  </div>\n" +
     "</div>\n" +
     "<BR>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"col-md-8 col-md-offset-2\">\n" +
-    "    <div class=\"alert alert-dismissable alert-danger alert-danger-lighter text-center\">\n" +
-    "      <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
-    "      <p class=\"lead\">\n" +
-    "        THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.\n" +
-    "      </p>\n" +
+    "    <div ng-if=\"note.payment_valid\">\n" +
+    "      <div class=\"alert alert-dismissable alert-danger alert-danger-lighter text-center\">\n" +
+    "        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
+    "        <p class=\"lead\">\n" +
+    "          THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.\n" +
+    "        </p>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div ng-if=\"!note.payment_valid\">\n" +
+    "      <div class=\"alert alert-dismissable alert-warning text-center\">\n" +
+    "        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
+    "        <p class=\"lead\">\n" +
+    "          THIS NOTE IS PENDING A 0.0005 BTC PAYMENT\n" +
+    "        </p>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "    <table class=\"table table-bordered table-striped table-note thin\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
     "          <td>FROM:</td>\n" +
-    "          <td>ScottyLi</td>\n" +
+    "          <td>{{note.sender}}</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>NOTE (DECODED):</td>\n" +
     "          <td>\n" +
-    "            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+    "            {{note.content}}\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>NOTE (RAW HEX):</td>\n" +
-    "          <td>\n" +
-    "            <a href=\"#\">\n" +
-    "              mpjuaPusdVC5cKvVYCFX94bJX1SNUY8EJo\n" +
-    "            </a>\n" +
+    "          <td class='break'>\n" +
+    "            {{note.note_hex}}\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>TRANSACTION HASH:</td>\n" +
     "          <td>\n" +
-    "            <a href=\"#\">\n" +
-    "              6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3\n" +
+    "            <a href=\"https://helloblock.io/mainnet/transactions/{{note.tx_hash}}\">\n" +
+    "              {{note.tx_hash}}\n" +
     "            </a>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>NOTE ID:</td>\n" +
     "          <td>\n" +
-    "            14\n" +
+    "            {{note.id}}\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
-    "          <td>TIME RECEIVED:</td>\n" +
-    "          <td>2014-2-14 12:14 UTC</td>\n" +
+    "          <td>TIME CREATED:</td>\n" +
+    "          <td>{{note.created_at}}</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>MAGIC BYTES:</td>\n" +
-    "          <td>0x98</td>\n" +
+    "          <td>4c4f5645</td>\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>BTC DEDICATED:</td>\n" +
-    "          <td>0.001 BTC</td>\n" +
+    "          <td to-btc=\"{{note.total_paid}}\"></td>\n" +
     "        </tr>\n" +
     "      </tbody>\n" +
     "\n" +
