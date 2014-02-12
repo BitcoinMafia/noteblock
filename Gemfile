@@ -47,3 +47,4 @@ gem 'socketio-client', github: 'lyondhill/socket.io-ruby-client'
 
 gem "letter_opener"
 gem 'validates_email_format_of'
+gem 'roadie'

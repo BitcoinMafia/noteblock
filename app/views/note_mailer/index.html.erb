@@ -252,7 +252,7 @@
         /*@editable*/ line-height:150%;
         padding-top:20px;
         padding-right:20px;
-        padding-bottom:20px;
+        padding-bottom:50px;
         padding-left:20px;
         /*@editable*/ text-align:center;
       }
@@ -447,12 +447,17 @@
 
         .footerContent a{display:block !important;} /* Place footer social and utility links on their own lines, for easier access */
 
-        a.claim-button {
+        .claim-button {
           background-color: #158CBA;
           min-height: 100px;
           color: white;
           padding: 15px;
           text-decoration: none;
+          margin-bottom: 50px;
+        }
+
+        .poem h1 {
+          color: white!important;
         }
 
       }
@@ -488,13 +493,21 @@
                                   <!-- BEGIN BODY // -->
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
                                         <tr>
-                                            <td valign="top" class="bodyContent" mc:edit="body_content00" style="background-image:url('http://i.imgur.com/EtsW93p.jpg'); background-size: cover; color:white;">
-                                              <div class="poem">
-                                                <h1>Roses are red,</h1>
-                                                <h1>Violets are blue.</h1>
-                                                <h1><%= @sender %> has just</h1>
-                                                <h1>sent some Bitcoins to you.</h1>
-                                              </div>
+                                            <td valign="top" class="bodyContent" mc:edit="body_content00">
+                                              <table background="http://i.imgur.com/EtsW93p.jpg" style="background-size: cover; color:white!important; width: 100%;">
+                                                <tbody style>
+                                                  <tr>
+                                                    <td style="padding:25px;">
+                                                      <div class="poem">
+                                                        <h1>Roses are red,</h1>
+                                                        <h1>Violets are blue.</h1>
+                                                        <h1><%= @sender %> has just</h1>
+                                                        <h1>sent some Bitcoins to you.</h1>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                             </td>
                                         </tr>
                                         <tr>
@@ -506,11 +519,7 @@
                                         </tr>
                                         <tr>
                                           <td valign="top" class="bodyContent" mc:edit="body_content00">
-                                            <a class='claim-button' href="<%= @url %>" style="background-color: #158CBA;
-                                            min-height: 100px;
-                                            color: white;
-                                            padding: 15px;
-                                            text-decoration: none;">CLAIM AND READ MESSAGE</a>
+                                            <a class='claim-button' href="<%= @url %>">CLAIM/READ MESSAGE</a>
                                           </td>
                                         </tr>
                                     </table>
