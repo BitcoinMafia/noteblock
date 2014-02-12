@@ -11,7 +11,7 @@ describe NoteRunner do
     @addresses_array = [@address]
     @note = Note.create(
       content: "I love you baby for ever",
-      sender: "ScottyLi"
+      sender: "ScottyLi",
       address: @address,
       email: "scottli_010@hotmail.com",
       encrypted_private_key: AES.encrypt(@key.priv, ENV["DECRYPTION_KEY"])
@@ -27,7 +27,7 @@ describe NoteRunner do
         )
     end
 
-    @all_addresses = Note.pluck(:address)
+    @all_addresses = Note.pending.pluck(:address)
     @transaction = FIXTURES::TRANSACTION
 
   end

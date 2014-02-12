@@ -4,11 +4,12 @@ module NoteRunner
   def execute(transaction)
     input_addresses = TransactionUtils.pluck_input_addresses(transaction)
     output_addresses = TransactionUtils.pluck_output_addresses(transaction)
-    # TODO: only pluck unpaid, unflagged
-    all_addresses = Note.pluck(:address)
+
+    all_addresses = Note.pending.pluck(:address)
 
     # Check Presence
     if !Task.payment_made?(input_addresses, output_addresses, all_addresses)
+      p 'Not a Payment ...'
       return;
     end
     ap "PAYMENT MADE!"

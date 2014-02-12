@@ -26,3 +26,14 @@
   satoshis: 10_000,
   tx_type: "withdrawal",
 )
+
+
+10.times do
+  key = Bitcoin.generate_key
+
+  Note.create(
+    content: SecureRandom.hex(30),
+    address: Bitcoin.pubkey_to_address(key[1]),
+    encrypted_private_key: AES.encrypt(key[0], ENV["DECRYPTION_KEY"])
+    )
+end

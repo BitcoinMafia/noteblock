@@ -38,6 +38,14 @@ class Note < ActiveRecord::Base
 
   # METHODS ==============================================================
 
+  def self.pending
+    Note.includes(:note_transactions).where(
+      note_transactions: {
+        note_id: nil
+      }
+    )
+  end
+
   def self.initial_build(params)
     note = Note.new
     note.email = params[:email]
