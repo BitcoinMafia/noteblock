@@ -4,21 +4,31 @@ describe NoteConvertor do
 
   let(:note) { "I love you baby 4eva and eva" }
   let(:note2) {
-    "To Jennifer Lawrence, how can I get in contact with you so we "\
-    "can run away together and start a family"
+    "To Jennifer Lawrence, please write me back so we "\
+    "can run away and start a family together"
   }
 
   let(:note_hex_array) {
     [
       "4c4f564549206c6f766520796f75206261627920",
-      "3465766120616e64206576612020202020202020",
+      "3465766120616e64206576610000000000000000",
+    ]
+  }
+
+  let(:note_hex_array2) {
+    [
+      "4c4f5645546f204a656e6e69666572204c617772",
+      "656e63652c20706c65617365207772697465206d",
+      "65206261636b20736f2077652063616e2072756e",
+      "206177617920616e642073746172742061206661",
+      "6d696c7920746f67657468657200000000000000"
     ]
   }
 
   let(:note_hex_array_invalid) {
     [
       "3c4f564549206c6f766520796f75206261627920",
-      "3465766120616e64206576612020202020202020",
+      "3465766120616e64206576610000000000000000",
     ]
   }
 
@@ -39,7 +49,15 @@ describe NoteConvertor do
     expect(result).to eq(note)
   end
 
-  it "should convert note2 to array of hexes"
+  it "should convert note2 to array of hexes2" do
+    hex_array = NoteConvertor.utf8_to_hex(note2)
+    expect(hex_array).to eq(note_hex_array2)
+  end
+
+  it "should convert note2 to array of hexes2" do
+    result2 = NoteConvertor.hex_to_utf8(note_hex_array2)
+    expect(result2).to eq(note2)
+  end
 
   it "should return error if not hexArray" do
     expect {
