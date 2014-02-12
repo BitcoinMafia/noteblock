@@ -1,5 +1,13 @@
 nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 
+	var notesChannel = PUSHERCLIENT.subscribe( "notes" );
+	notesChannel.bind( "latest", function( data ) {
+		console.log( data )
+		// TODO:
+		// Pusher.beep()
+		// change the .dim
+	} )
+
 	$scope.NoteModal = {
 		open: function() {
 			$modal.open( {

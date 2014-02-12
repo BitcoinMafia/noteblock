@@ -11,6 +11,7 @@ describe NoteRunner do
     @addresses_array = [@address]
     @note = Note.create(
       content: "I love you baby for ever",
+      sender: "ScottyLi"
       address: @address,
       email: "scottli_010@hotmail.com",
       encrypted_private_key: AES.encrypt(@key.priv, ENV["DECRYPTION_KEY"])
@@ -79,6 +80,11 @@ describe NoteRunner do
 
     it "should create note proof" do
       expect(NoteRunner::Task.create_proof(@note)).to eq(true)
+    end
+
+    # TODO: Need better spec, Pusher should receive
+    it "should push_to_client" do
+      expect(NoteRunner::Task.push_to_client(@note)).to eq(true)
     end
 
     it "should create token" do

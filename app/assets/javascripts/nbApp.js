@@ -6,6 +6,8 @@ var nbApp = angular.module( 'nbApp', [
 	'ui.bootstrap'
 ] )
 
+var PUSHERCLIENT = new Pusher( '6618588018b280759474' );
+
 nbApp.config( function( $locationProvider ) {
 	$locationProvider.html5Mode( true );
 } )

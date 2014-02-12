@@ -29,10 +29,10 @@ module NoteRunner
     end
 
     # Push to Client
-    # if !Task.push_to_client(note)
-    #   ap "Push to client fialed"
-    # return false
-    # end
+    if !Task.push_to_client(note)
+      ap "Push to client failed"
+      return false
+    end
 
     # # NoteTransaction
     if !Task.create_proof(note);
@@ -108,7 +108,18 @@ module NoteRunner
     end
 
     def push_to_client(note)
-      # Pusher
+      Pusher["notes"].trigger("latest", {
+        content: note.content,
+        sender: note.sender,
+        created_at: note.created_at,
+        satoshis: note.note_transactions.payments.sum(:satoshis)
+      })
+
+      Pusher["confirm"].trigger(note.address, {
+        payment: true
+      })
+
+      return true
     end
 
     def create_proof(note)
