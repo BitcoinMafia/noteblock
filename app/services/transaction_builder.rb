@@ -11,7 +11,8 @@ module TransactionBuilder
     raw_unspents = BitcoinNodeAPI::Addresses.unspents(from_address)
     selected_unspents = self.select_unspents(raw_unspents, amount + fee)
 
-    key = Bitcoin::Key.new(private_key, nil, true)
+    # TODO: Compressed/Uncompressed
+    key = Bitcoin::Key.new(private_key, nil, false)
 
     tx_hashes = selected_unspents.map { |u| u["tx_hash"] }
 

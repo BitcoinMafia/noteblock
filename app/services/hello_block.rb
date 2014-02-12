@@ -36,4 +36,45 @@ module HelloBlock
     end
 
   end
+
+  module Socket
+    extend self
+
+    BASE = "https://#{ENV["BLOCKCHAIN_MODE"]}-helloblock-socket.herokuapp.com:443"
+
+    def recursive_connect()
+      last = nil
+      client = SocketIO.connect(BASE) do
+        p 'connecting ...'
+
+        on_connect do |data|
+          p "CONNECTED"
+        end
+
+        on_event("latest") do |data|
+          begin
+            # Hack, as rake task is producing double
+            next if last == data
+            last = data
+
+            transaction = data[0]["message"]
+            ap transaction["tx_hash"]
+            # NoteRunner.execute(transaction)
+          rescue => e
+            # TODO PagerDuty
+            ap "Runner Failed"
+            ap e.inspect
+            ap e.backtrace
+          end
+        end
+      end
+
+      # Shouldn't go there, means it's disconnected
+      # TODO: Pager duty!
+      p "DISCONNECTED!"
+      p "reconnecting ..."
+      self.recursive_connect()
+    end
+
+  end
 end

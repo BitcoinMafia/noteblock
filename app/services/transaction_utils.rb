@@ -1,20 +1,20 @@
 module TransactionUtils
   extend self
 
-  def pluck_addresses(transaction, inputs: false)
-    addresses = []
+  def pluck_addresses(transaction)
+    pluck_input_addresses + pluck_output_addresses
+  end
 
-    if inputs
-      transaction["in"].each do |input|
-        addresses << input["prev_out"]["address"]
-      end
+  def pluck_input_addresses(transaction)
+    transaction["in"].map do |input|
+      input["prev_out"]["address"]
     end
+  end
 
-    transaction["out"].each do |output|
-      addresses << output["address"]
+  def pluck_output_addresses(transaction)
+    transaction["out"].map do |output|
+      output["address"]
     end
-
-    return addresses
   end
 
   def output_value_for(transaction, address)

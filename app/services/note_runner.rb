@@ -2,50 +2,57 @@ module NoteRunner
   extend self
 
   def execute(transaction)
-    addresses = TransactionUtils.pluck_addresses(transaction, inputs: false)
+    input_addresses = TransactionUtils.pluck_input_addresses(transaction)
+    output_addresses = TransactionUtils.pluck_output_addresses(transaction)
     # TODO: only pluck unpaid, unflagged
-    all_notes = Note.pluck(:address)
+    all_addresses = Note.pluck(:address)
 
     # Check Presence
-    if !Task.address_present?(addresses, all_notes)
+    if !Task.payment_made?(input_addresses, output_addresses, all_addresses)
       return;
     end
-
     ap "PAYMENT MADE!"
 
-    selected_address = addresses[0]
+    selected_address = (all_addresses & output_addresses)[0]
     note = Note.where(address: selected_address)[0]
 
     # Save Payment
     if !Task.save_payment(note, transaction);
-      raise "NotePayment Failed"
+      ap "NotePayment Failed"
+      return false
     end
 
     # valid?
     if !Task.check_payment_validity(note, transaction)
-      raise "Payment not valid"
+      ap "Payment not valid"
+      return false
     end
 
     # Push to Client
     # if !Task.push_to_client(note)
-    #   raise "Push to client fialed"
+    #   ap "Push to client fialed"
+    # return false
     # end
 
     # # NoteTransaction
     if !Task.create_proof(note);
-      raise "Note Proof Failed"
+      ap "Note Proof Failed"
+      return false
     end
 
     # # Token
     if !Task.create_token(note);
-      raise "Note Proof Failed"
+      ap "Note Proof Failed"
+      return false
     end
 
     # # Email
     if !Task.send_email(note);
-      raise "Emailed Failed"
+      ap "Emailed Failed"
+      return false
     end
 
+    ap "FINISHED!"
     return true
   end
 
@@ -53,9 +60,15 @@ module NoteRunner
     ### All methods should return BOOLEAN
     extend self
 
-    def address_present?(addresses, notes)
-      common_addresses = addresses & notes
-      return common_addresses.length == 0 ? false : true
+    def payment_made?(input_addresses, output_addresses, all_addresses)
+      common_outputs = output_addresses & all_addresses
+      return false if common_outputs.count == 0
+
+      # Makes sure its not self send, with change
+      common_inputs = input_addresses & all_addresses
+      return false if common_inputs.count > 0
+
+      return true
     end
 
     def save_payment(note, transaction)
@@ -70,23 +83,24 @@ module NoteRunner
     end
 
     def check_payment_validity(note, transaction)
+      # TODO: check previosu payments
       # TODO: send message to client
 
       # Amount is >= min
       if TransactionUtils.output_value_for(transaction, note.address) < NoteTransaction::MINIMUM
-        p "Payment amount is < min"
+        ap "Payment amount is < min"
         return false
       end
 
       # Fees >= 10000
       if transaction["fees"] < 10_000
-        p "Transaction fees is < min"
+        ap "Transaction fees is < min"
         return false
       end
 
       # No outputs < 5400
       if TransactionUtils.low_outputs?(transaction)
-        p "Some outputs < 5400"
+        ap "Some outputs < 5400"
         return false
       end
 
@@ -121,6 +135,8 @@ module NoteRunner
     end
 
     def create_token(note)
+      return true if !note.encrypted_token.nil?
+
       encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
       note.encrypted_token = encrypted_token
       note.save

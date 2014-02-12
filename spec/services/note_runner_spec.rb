@@ -26,7 +26,7 @@ describe NoteRunner do
         )
     end
 
-    @notes = Note.pluck(:address)
+    @all_addresses = Note.pluck(:address)
     @transaction = FIXTURES::TRANSACTION
 
   end
@@ -37,8 +37,19 @@ describe NoteRunner do
 
   describe NoteRunner::Task do
     it "should check presence" do
-      expect(NoteRunner::Task.address_present?(["random"], @notes)).to eq(false)
-      expect(NoteRunner::Task.address_present?(@addresses_array, @notes)).to eq(true)
+      expect(
+        NoteRunner::Task.payment_made?(["random_input"], ["random_output"], @all_addresses)
+      ).to eq(false)
+
+      # This is an outgoing, and gives change to yourself
+      expect(
+        NoteRunner::Task.payment_made?(@addresses_array, @addresses_array, @all_addresses)
+      ).to eq(false)
+
+      # This is an incoming
+      expect(
+        NoteRunner::Task.payment_made?(["random_input"], @addresses_array, @all_addresses)
+      ).to eq(true)
     end
 
     it "should create payment" do
