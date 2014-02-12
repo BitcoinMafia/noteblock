@@ -52,3 +52,6 @@ gem 'roadie'
 
 gem 'pusher'
 gem 'pagerduty'
+
+gem 'devise'
+gem 'rails_admin'
