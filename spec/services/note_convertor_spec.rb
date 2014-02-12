@@ -3,13 +3,15 @@ require 'spec_helper'
 describe NoteConvertor do
 
   let(:note) { "I love you baby 4eva and eva" }
+  let(:note2) {
+    "To Jennifer Lawrence, how can I get in contact with you so we "\
+    "can run away together and start a family"
+  }
 
   let(:note_hex_array) {
     [
       "4c4f564549206c6f766520796f75206261627920",
       "3465766120616e64206576612020202020202020",
-      "2020202020202020202020202020202020202020",
-      "2020202020202020202020202020202020202020"
     ]
   }
 
@@ -17,12 +19,12 @@ describe NoteConvertor do
     [
       "3c4f564549206c6f766520796f75206261627920",
       "3465766120616e64206576612020202020202020",
-      "2020202020202020202020202020202020202020",
-      "2020202020202020202020202020202020202020"
     ]
   }
 
   let(:note_long)   {
+    "I love you baby 4eva and eva I love you baby 4eva and eva"\
+    "I love you baby 4eva and eva I love you baby 4eva and eva"\
     "I love you baby 4eva and eva I love you baby 4eva and eva"\
     "I love you baby 4eva and eva I love you baby 4eva and eva"
   }
@@ -37,6 +39,8 @@ describe NoteConvertor do
     expect(result).to eq(note)
   end
 
+  it "should convert note2 to array of hexes"
+
   it "should return error if not hexArray" do
     expect {
       NoteConvertor.hex_to_utf8(note_hex_array.join)
@@ -49,7 +53,7 @@ describe NoteConvertor do
     }.to raise_error(RuntimeError, /magic/)
   end
 
-  it "should return error if > 76 characters" do
+  it "should return error if > 136 characters" do
     expect {
       NoteConvertor.utf8_to_hex(note_long)
     }.to raise_error(RuntimeError, /length/)

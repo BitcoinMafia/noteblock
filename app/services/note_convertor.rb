@@ -2,10 +2,10 @@ module NoteConvertor
   extend self
 
   MAGIC_BYTES = "LOVE".unpack("H*")[0]
-  MAX_LENGTH = 80
+  MAX_LENGTH = 140
 
   def utf8_to_hex(note)
-    raise "Note length must be <= 76" if note.length > 76
+    raise "Note length must be <= 136" if note.length > 136
 
     initial_hex = MAGIC_BYTES + note.unpack("H*")[0]
     extra_length = MAX_LENGTH - initial_hex.length / 2
