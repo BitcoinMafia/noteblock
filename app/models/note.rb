@@ -38,6 +38,19 @@ class Note < ActiveRecord::Base
 
   # METHODS ==============================================================
 
+  def self.initial_create(params)
+    note = Note.new
+    note.address = params[:email]
+    note.content = params[:content]
+    note.sender = params[:sender]
+
+    # TODO: Bitcoin Key
+
+    note.address = 0
+    note.encrypted_private_key = 0
+    return note
+  end
+
   def self.generate_token
     SecureRandom.hex(64)
   end

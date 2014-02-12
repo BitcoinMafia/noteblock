@@ -1,6 +1,8 @@
 Noteblock::Application.routes.draw do
   root to: "application#index"
 
+  resources :notes, only: [:index, :show, :create]
+
   # Static Assets normally served before this
   # By the time it hits this, it's too late, unfound
   get "/templates" => "application#unfound_assets"

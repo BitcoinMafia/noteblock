@@ -1,4 +1,4 @@
-nbApp.controller( "landingCtrl", function( $scope, $modal ) {
+nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 
 	$scope.Note = {
 		create: function() {
@@ -11,14 +11,24 @@ nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 
 	var createNoteCtrl = function( $scope, $location, $modalInstance ) {
 
+		var Note = $resource( "/notes/:note_id" )
+
 		$scope.create = function() {
 			// Validate
+
 			// Server stuff
-			// Redirect on callback to confirm with queries
-			$modalInstance.dismiss( 'cancel' );
-			$location.path( "/confirm" ).search( {
-				address: "16ps38WzmDhEWMPQecVndrWZADekC4FU42"
+			Note.save( {
+				email: "asdf",
+			}, function( response ) {
+				debugger
+				$modalInstance.dismiss( 'cancel' );
+				$location.path( "notes/" + response.note_id + "/confirm" )
+
+			}, function( data ) {
+				// TODO: Handle error!
+				console.log( 'ERROR', data )
 			} )
+
 		};
 
 		$scope.cancel = function() {
