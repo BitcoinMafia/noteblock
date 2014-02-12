@@ -11,7 +11,7 @@
           </td>
           <td>
             <div class="h2 thin">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {{note.content}}
             </div>
           </td>
         </tr>
@@ -21,7 +21,7 @@
           </td>
           <td>
             <div class="h2 thin">
-              ScottyLi
+              {{note.sender}}
             </div>
           </td>
         </tr>
@@ -42,7 +42,7 @@
           </td>
           <td>
             <div class="h2 thin">
-              <a href="#" target="_blank">http://www.thenoteblock.com/notes/57</a>
+              <a href="http://www.thenoteblock.com/notes/{{note.id}}" target="_blank">http://www.thenoteblock.com/notes/{{note.id}}</a>
             </div>
           </td>
         </tr>
@@ -50,9 +50,9 @@
     </table>
     <blockquote>
       <div class="h3 thin">
-        Please confirm your note by sending any amount of BTC (> 0.0002) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href="/how-it-works">how this works.</a>
+        Please confirm your note by sending any amount of BTC (> 0.0005) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href="/how-it-works">how this works.</a>
       </div>
     </blockquote>
-    <h1 class='text-center'>{{address}}</h1>
+    <h1 class='text-center'>{{note.address}}</h1>
   </div>
 </div>

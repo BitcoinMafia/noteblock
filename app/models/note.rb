@@ -40,15 +40,43 @@ class Note < ActiveRecord::Base
 
   def self.initial_build(params)
     note = Note.new
-    note.address = params[:email]
+    note.email = params[:email]
     note.content = params[:content]
     note.sender = params[:sender]
 
-    # TODO: Bitcoin Key
+    # Bitcoin Key
     key = Bitcoin::Key.generate
     note.address = key.addr
     note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
     return note
+  end
+
+  # Be careful about revealing the encrypted_token
+  def self.retrieve(id: id)
+    note = self
+      .where(id: id)
+      .includes(:note_transactions)[0]
+
+    # Payment
+    total_paid = note.note_transactions.payments.sum(:satoshis)
+    if total_paid >= NoteTransaction::MINIMUM
+      payment_valid = true
+    end
+
+    # Note Creation
+    note_hex = NoteConvertor.utf8_to_hex(note.content).join
+
+    return {
+      id: note.id,
+      content: note.content,
+      sender: note.sender,
+      address: note.address,
+      payment_valid: payment_valid || false,
+      created_at: note.created_at,
+      total_paid: total_paid,
+      tx_hash: note.note_transactions.proofs[0].try(:tx_hash),
+      note_hex: note_hex
+    }
   end
 
   def self.generate_token

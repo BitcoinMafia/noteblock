@@ -1,5 +1,7 @@
-nbApp.controller( "confirmCtrl", function( $scope, $routeParams ) {
+nbApp.controller( "confirmCtrl", function( $scope, $routeParams, noteService ) {
 
-  $scope.address = $routeParams.address;
+  noteService.get( $routeParams.id, function( err, data ) {
+    $scope.note = data;
+  } )
 
 } )

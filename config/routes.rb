@@ -1,7 +1,9 @@
 Noteblock::Application.routes.draw do
   root to: "application#index"
 
-  resources :notes, only: [:index, :show, :create]
+  namespace :api do
+    resources :notes, only: [:index, :show, :create]
+  end
 
   # Static Assets normally served before this
   # By the time it hits this, it's too late, unfound

@@ -1,3 +1,0 @@
-nbApp.directive( "mainService", function() {
-
-} )

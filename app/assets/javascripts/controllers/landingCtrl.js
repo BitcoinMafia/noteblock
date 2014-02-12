@@ -9,16 +9,16 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 		}
 	}
 
+	// TODO
+	// REFACTOR INTO noteService
 	var createNoteCtrl = function( $scope, $location, $modalInstance ) {
 
-		var Note = $resource( "/notes/:note_id" )
+		var Note = $resource( "/notes/:id" )
 
 		$scope.note = {}
 
 		$scope.create = function() {
 			// Validate
-
-			debugger
 
 			// Server stuff
 			Note.save( {
@@ -27,7 +27,7 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 				sender: $scope.note.sender,
 			}, function( response ) {
 				$modalInstance.dismiss( 'cancel' );
-				$location.path( "notes/" + response.note_id + "/confirm" )
+				$location.path( "notes/" + response.id + "/confirm" )
 
 			}, function( data ) {
 				// TODO: Handle error!

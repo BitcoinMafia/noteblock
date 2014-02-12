@@ -96,6 +96,7 @@ table.table-note {
   tbody {
     td:nth-of-type(1) {
       text-align: right;
+      min-width: 200px;
     }
   }
 }
@@ -103,4 +104,8 @@ table.table-note {
 .alert-danger-lighter {
   background-color: lighten(@btn-danger-bg, 15%);
   border-color: lighten(@btn-danger-border, 15%);
+}
+
+.break {
+  word-break: break-word;
 }

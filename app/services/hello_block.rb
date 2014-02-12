@@ -59,7 +59,7 @@ module HelloBlock
 
             transaction = data[0]["message"]
             ap transaction["tx_hash"]
-            # NoteRunner.execute(transaction)
+            NoteRunner.execute(transaction)
           rescue => e
             # TODO PagerDuty
             ap "Runner Failed"

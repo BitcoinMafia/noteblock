@@ -1,63 +1,70 @@
 <div id="centerpiece">
   <div class='h1 text-center calvin-klein'>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. - ScottyLi
+    "{{note.content}}" - {{note.sender}}
   </div>
 </div>
 <BR>
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
-    <div class="alert alert-dismissable alert-danger alert-danger-lighter text-center">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <p class="lead">
-        THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.
-      </p>
+    <div ng-if="note.payment_valid">
+      <div class="alert alert-dismissable alert-danger alert-danger-lighter text-center">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p class="lead">
+          THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.
+        </p>
+      </div>
+    </div>
+    <div ng-if="!note.payment_valid">
+      <div class="alert alert-dismissable alert-warning text-center">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p class="lead">
+          THIS NOTE IS PENDING A 0.0005 BTC PAYMENT
+        </p>
+      </div>
     </div>
     <table class="table table-bordered table-striped table-note thin">
       <tbody>
         <tr>
           <td>FROM:</td>
-          <td>ScottyLi</td>
+          <td>{{note.sender}}</td>
         </tr>
         <tr>
           <td>NOTE (DECODED):</td>
           <td>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            {{note.content}}
           </td>
         </tr>
         <tr>
           <td>NOTE (RAW HEX):</td>
-          <td>
-            <a href="#">
-              mpjuaPusdVC5cKvVYCFX94bJX1SNUY8EJo
-            </a>
+          <td class='break'>
+            {{note.note_hex}}
           </td>
         </tr>
         <tr>
           <td>TRANSACTION HASH:</td>
           <td>
-            <a href="#">
-              6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3
+            <a href="https://helloblock.io/mainnet/transactions/{{note.tx_hash}}">
+              {{note.tx_hash}}
             </a>
           </td>
         </tr>
         <tr>
           <td>NOTE ID:</td>
           <td>
-            14
+            {{note.id}}
           </td>
         </tr>
         <tr>
-          <td>TIME RECEIVED:</td>
-          <td>2014-2-14 12:14 UTC</td>
+          <td>TIME CREATED:</td>
+          <td>{{note.created_at}}</td>
         </tr>
         <tr>
           <td>MAGIC BYTES:</td>
-          <td>0x98</td>
+          <td>4c4f5645</td>
         </tr>
         <tr>
           <td>BTC DEDICATED:</td>
-          <td>0.001 BTC</td>
+          <td>{{ note.total_paid }} BTC</td>
         </tr>
       </tbody>
 

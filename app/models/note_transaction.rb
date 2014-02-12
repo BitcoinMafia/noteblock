@@ -38,4 +38,17 @@ class NoteTransaction < ActiveRecord::Base
   MINIMUM = 50000
 
   # METHODS ==============================================================
+
+  def self.payments
+    self.where(tx_type: "payment")
+  end
+
+  def self.proofs
+    self.where(tx_type: "proof")
+  end
+
+  def self.withdrawals
+    self.where(tx_type: "withdrawal")
+  end
+
 end
