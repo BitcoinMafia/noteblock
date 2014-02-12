@@ -127,4 +127,20 @@ describe Note do
     end
 
   end
+
+  context "Creation" do
+    it "should run initial_create" do
+      params = {
+        email: "scottli_010@hotmail.com",
+        content: "Love you baby",
+        sender: "Jennifer Lawrence"
+      }
+
+      note = Note.initial_build(params)
+      expect(note.save).to eq(true)
+
+      private_key = AES.decrypt(note.encrypted_private_key, ENV["DECRYPTION_KEY"])
+      expect(private_key).to be_true
+    end
+  end
 end

@@ -1,7 +1,7 @@
 nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 
-	$scope.Note = {
-		create: function() {
+	$scope.NoteModal = {
+		open: function() {
 			$modal.open( {
 				templateUrl: "/templates/_create_note.html",
 				controller: createNoteCtrl,
@@ -13,14 +13,19 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 
 		var Note = $resource( "/notes/:note_id" )
 
+		$scope.note = {}
+
 		$scope.create = function() {
 			// Validate
 
+			debugger
+
 			// Server stuff
 			Note.save( {
-				email: "asdf",
+				email: $scope.note.email,
+				content: $scope.note.content,
+				sender: $scope.note.sender,
 			}, function( response ) {
-				debugger
 				$modalInstance.dismiss( 'cancel' );
 				$location.path( "notes/" + response.note_id + "/confirm" )
 

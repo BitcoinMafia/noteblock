@@ -38,16 +38,16 @@ class Note < ActiveRecord::Base
 
   # METHODS ==============================================================
 
-  def self.initial_create(params)
+  def self.initial_build(params)
     note = Note.new
     note.address = params[:email]
     note.content = params[:content]
     note.sender = params[:sender]
 
     # TODO: Bitcoin Key
-
-    note.address = 0
-    note.encrypted_private_key = 0
+    key = Bitcoin::Key.generate
+    note.address = key.addr
+    note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
     return note
   end
 
