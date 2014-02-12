@@ -1,4 +1,4 @@
-nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
+nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 
 	$scope.NoteModal = {
 		open: function() {
@@ -9,11 +9,8 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 		}
 	}
 
-	// TODO
-	// REFACTOR INTO noteService
-	var createNoteCtrl = function( $scope, $location, $modalInstance ) {
-
-		var Note = $resource( "/notes/:id" )
+	// TODO: REFACTOR
+	var createNoteCtrl = function( $scope, $location, $modalInstance, noteService ) {
 
 		$scope.note = {}
 
@@ -21,17 +18,16 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, $resource ) {
 			// Validate
 
 			// Server stuff
-			Note.save( {
+			noteService.post( {
 				email: $scope.note.email,
 				content: $scope.note.content,
 				sender: $scope.note.sender,
-			}, function( response ) {
+			}, function( err, data ) {
+				if ( !! err ) {
+					return;
+				}
 				$modalInstance.dismiss( 'cancel' );
-				$location.path( "notes/" + response.id + "/confirm" )
-
-			}, function( data ) {
-				// TODO: Handle error!
-				console.log( 'ERROR', data )
+				$location.path( "notes/" + data.id + "/confirm" );
 			} )
 
 		};

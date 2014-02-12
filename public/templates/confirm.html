@@ -31,8 +31,8 @@
           </td>
           <td>
             <div class="h2">
-              <span class="label label-primary">WAITING</span>
-              <span class="label label-success dim">RECEIVED</span>
+              <span class="label label-primary" ng-class="{dim: note.payment_valid}">WAITING</span>
+              <span class="label label-success" ng-class="{dim: !note.payment_valid}">RECEIVED</span>
             </div>
           </td>
         </tr>
