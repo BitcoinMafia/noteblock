@@ -3,7 +3,7 @@ module TransactionBuilder
   extend self
   extend Bitcoin::Builder
 
-  def build(from_address: nil, private_key: nil, to_addresses: nil, amount: 22000, fee: 10000)
+  def build(from_address: nil, private_key: nil, to_addresses: nil, amount: 22000, fee: 10000, compressed: false)
     if !from_address || !private_key || !to_addresses || !amount || !fee
       raise "missing arguments";
     end
@@ -12,7 +12,7 @@ module TransactionBuilder
     selected_unspents = self.select_unspents(raw_unspents, amount + fee)
 
     # TODO: Compressed/Uncompressed
-    key = Bitcoin::Key.new(private_key, nil, false)
+    key = Bitcoin::Key.new(private_key, nil, compressed)
 
     tx_hashes = selected_unspents.map { |u| u["tx_hash"] }
 
