@@ -8,6 +8,8 @@ Noteblock::Application.routes.draw do
     # TODO: Should be post
     get "/notes/:id/claim" => "notes#claim"
 
+    get "notes/top" => "notes#top"
+
     resources :notes, only: [:index, :show, :create]
   end
 

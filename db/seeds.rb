@@ -16,13 +16,13 @@
 )
 
 @note.note_transactions.create(
-  tx_hash: "6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3",
+  tx_hash: "6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f4",
   satoshis: 32_000,
   tx_type: "proof",
 )
 
 @note.note_transactions.create(
-  tx_hash: "6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f3",
+  tx_hash: "6f9e9570881e781db8c137c84c111a138e4a022e6b2def5e2a1589a802fe25f5",
   satoshis: 10_000,
   tx_type: "withdrawal",
 )
@@ -31,9 +31,15 @@
 10.times do
   key = Bitcoin.generate_key
 
-  Note.create(
+  note = Note.create(
     content: SecureRandom.hex(30),
     address: Bitcoin.pubkey_to_address(key[1]),
     encrypted_private_key: AES.encrypt(key[0], ENV["DECRYPTION_KEY"])
     )
+
+  note.note_transactions.create(
+    tx_hash: SecureRandom.hex(32),
+    satoshis: rand(1..100_000),
+    tx_type: "payment"
+  )
 end

@@ -1,5 +1,22 @@
 class Api::NotesController < ApplicationController
   def index
+    limit = params[:limit] || 25
+    offset = params[:offset] || 0
+    notes = Note.confirmed.order(:created_at).limit(limit).offset(offset)
+    notes = Note.cleanse(notes)
+
+    render json: notes
+  end
+
+  def top
+    limit = params[:limit] || 25
+    offset = params[:offset] || 0
+
+    # TODO: DUPS
+    notes = Note.confirmed.order("note_transactions.satoshis DESC").limit(limit).offset(offset)
+    notes = Note.cleanse(notes)
+
+    render json: notes
   end
 
   def show

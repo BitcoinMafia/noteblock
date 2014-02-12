@@ -2,7 +2,7 @@ class NoteTransaction < ActiveRecord::Base
 
   # VALIDATION =========================================================
 
-  validates :tx_hash, presence: true
+  validates :tx_hash, presence: true, uniqueness: true
   validates :satoshis, presence: true
   validates :tx_type, presence: true
 

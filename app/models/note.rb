@@ -46,6 +46,12 @@ class Note < ActiveRecord::Base
     )
   end
 
+  def self.confirmed
+    Note.includes(:note_transactions)
+      .where("note_transactions.id IS NOT NULL")
+      .references(:note_transactions)
+  end
+
   def self.initial_build(params)
     note = Note.new
     note.email = params[:email]
@@ -57,6 +63,18 @@ class Note < ActiveRecord::Base
     note.address = key.addr
     note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
     return note
+  end
+
+  # Makes sure tokens aren't revealed
+  def self.cleanse(notes)
+    notes.map do |note|
+      {
+        content: note.content,
+        sender: note.sender,
+        address: note.address,
+        created_at: note.created_at.to_i
+      }
+    end
   end
 
   # Be careful about revealing the encrypted_token
