@@ -12,9 +12,19 @@ module HelloBlock
 
     def post(resource, body: {})
       # TODO: PagerDuty
-      response = HTTParty.post("#{BASE}#{resource}", body: body)
-      Errors.code(response.code, response.body)
-      response['data']
+      begin
+        response = HTTParty.post("#{BASE}#{resource}", body: body)
+        Errors.code(response.code, response.body)
+        response['data']
+      rescue => e
+        PagerDutyMgr::CriticalBug.trigger("Post failed", {
+          inspect: e.inspect,
+          backtrace: e.backtrace
+        })
+        ap "HelloBlock::Client.post failed"
+        ap e.inspect
+        ap e.backtrace
+      end
     end
   end
 
@@ -62,7 +72,10 @@ module HelloBlock
             ap transaction["tx_hash"]
             NoteRunner.execute(transaction)
           rescue => e
-            # TODO PagerDuty
+            PagerDutyMgr::CriticalBug.trigger("Error in NoteRunner", {
+              inspect: e.inspect,
+              backtrace: e.backtrace
+            })
             ap "Runner Failed"
             ap e.inspect
             ap e.backtrace
@@ -71,7 +84,10 @@ module HelloBlock
       end
 
       # Shouldn't go there, means it's disconnected
-      # TODO: Pager duty!
+      PagerDutyMgr::CriticalBug.trigger("Socked Disconnected", {
+        inspect: e.inspect,
+        backtrace: e.backtrace
+      })
       p "DISCONNECTED!"
       p "reconnecting ..."
       self.recursive_connect()

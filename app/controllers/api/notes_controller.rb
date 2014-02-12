@@ -14,18 +14,24 @@ class Api::NotesController < ApplicationController
       render json: {
         result: false
       }
-
       return
     end
 
-    claimed = Note.claim(
-      encrypted_token: params[:encrypted_token],
-      to_address: params[:to_address]
-    )
+    begin
+      claimed = Note.claim(
+        encrypted_token: params[:encrypted_token],
+        to_address: params[:to_address]
+      )
 
-    render json: {
-      result: claimed
-    }
+      render json: {
+        result: claimed
+      }
+    rescue => e
+      PagerDutyMgr::CriticalBug.trigger("Post failed", {
+        inspect: e.inspect,
+        backtrace: e.backtrace
+      })
+    end
   end
 
   def create
