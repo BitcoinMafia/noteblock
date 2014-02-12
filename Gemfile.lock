@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/locksley/socket.io-ruby-client.git
-  revision: 82f0e8705ccb4cd291f304f336a99271ce6f5f31
+  revision: 3e812ade65b6be77d4d1f98086586f701562da85
   specs:
     socketio-client (0.0.2)
       rest-client (= 1.6.7)
