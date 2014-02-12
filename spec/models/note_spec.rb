@@ -97,27 +97,28 @@ describe Note do
       expect(token.length).to eq(128)
     end
 
-    it "should not save unencrypted token" do
-      @note.encrypted_token = Note.generate_token
-      expect(@note.save).to eq(false)
-    end
+    # it "should not save unencrypted token" do
+    #   @note.encrypted_token = Note.generate_token
+    #   expect(@note.save).to eq(false)
+    # end
 
     it "should otherwise save" do
-      encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
-      @note.encrypted_token = encrypted_token
+      # encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
+
+      @note.encrypted_token = Note.generate_token
       expect(@note.save).to eq(true)
     end
 
-    it "should allow queries on token" do
-      original_token = Note.generate_token
-      encrypted_token = AES.encrypt(original_token, ENV["DECRYPTION_KEY"])
-      @note.encrypted_token = encrypted_token
-      @note.save
+    # it "should allow queries on token" do
+    #   original_token = Note.generate_token
+    #   encrypted_token = AES.encrypt(original_token, ENV["DECRYPTION_KEY"])
+    #   @note.encrypted_token = encrypted_token
+    #   @note.save
 
-      note = Note.where(encrypted_token: encrypted_token)[0]
-      unencrypted_token =  AES.decrypt(note.encrypted_token, ENV["DECRYPTION_KEY"])
-      expect(unencrypted_token).to eq(original_token)
-    end
+    #   note = Note.where(encrypted_token: encrypted_token)[0]
+    #   unencrypted_token =  AES.decrypt(note.encrypted_token, ENV["DECRYPTION_KEY"])
+    #   expect(unencrypted_token).to eq(original_token)
+    # end
   end
 
   context "Assocations" do

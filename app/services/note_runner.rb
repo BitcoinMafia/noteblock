@@ -138,8 +138,8 @@ module NoteRunner
     def create_token(note)
       return true if !note.encrypted_token.nil?
 
-      encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
-      note.encrypted_token = encrypted_token
+      # encrypted_token = AES.encrypt(Note.generate_token, ENV["DECRYPTION_KEY"])
+      note.encrypted_token = Note.generate_token
       note.save
     end
 

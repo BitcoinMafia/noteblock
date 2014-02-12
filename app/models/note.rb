@@ -8,7 +8,7 @@ class Note < ActiveRecord::Base
   validates :email, email_format: { message: 'Email invalid', allow_nil: true }
 
   validate :private_key_encrypted
-  validate :token_encrypted
+  # validate :token_encrypted
 
   def private_key_encrypted
     return unless encrypted_private_key
@@ -21,16 +21,16 @@ class Note < ActiveRecord::Base
     end
   end
 
-  def token_encrypted
-    return unless encrypted_token
+  # def token_encrypted
+  #   return unless encrypted_token
 
-    # Check if encrypted_private_key all valid hex characters
-    # This implies it has not been AES encrypted
-    if !encrypted_token[/\H/]
-      errors.add(:note_id, "Cannot store unencrypted token")
-      return false
-    end
-  end
+  #   # Check if encrypted_private_key all valid hex characters
+  #   # This implies it has not been AES encrypted
+  #   if !encrypted_token[/\H/]
+  #     errors.add(:note_id, "Cannot store unencrypted token")
+  #     return false
+  #   end
+  # end
 
   # ASSOCIATIONS =========================================================
 
@@ -52,7 +52,7 @@ class Note < ActiveRecord::Base
   end
 
   # Be careful about revealing the encrypted_token
-  def self.retrieve(id: id)
+  def self.retrieve(id: nil)
     note = self
       .where(id: id)
       .includes(:note_transactions)[0]
@@ -77,6 +77,27 @@ class Note < ActiveRecord::Base
       tx_hash: note.note_transactions.proofs[0].try(:tx_hash),
       note_hex: note_hex
     }
+  end
+
+  def self.claim(id: nil, encrypted_token: nil)
+    note = Note.where(encrypted_token: encrypted_token)[0]
+
+    raw_transaction = TransactionBuilder.build(
+      from_address: note.address,
+      private_key: private_key,
+      to_addresses: to_addresses,
+      compressed: true
+    )
+
+    response = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])
+
+    note_transaction = note.note_transactions.new(
+      tx_hash: response["tx_hash"],
+      satoshis: 22000,
+      tx_type: "proof"
+    )
+
+    return note_transaction.save
   end
 
   def self.generate_token

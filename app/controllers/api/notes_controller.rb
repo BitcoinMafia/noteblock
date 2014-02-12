@@ -8,7 +8,10 @@ class Api::NotesController < ApplicationController
   end
 
   def claim
-    # note = Note.claim(id: params[:id], encrypted_token: params[:encrypted_token])
+    note = Note.claim(id: params[:id], encrypted_token: params[:encrypted_token])
+
+    render json: note
+
   end
 
   def create
