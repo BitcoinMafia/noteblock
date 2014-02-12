@@ -55,7 +55,7 @@ nbApp.config( function( $routeProvider ) {
 	} )
 
 	$routeProvider.when( "/notes/:id/claim", {
-		controller: "confirmCtrl",
+		controller: "notesCtrl",
 		templateUrl: "/templates/claim.html"
 	} )
 

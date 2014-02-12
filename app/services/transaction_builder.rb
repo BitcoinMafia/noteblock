@@ -35,6 +35,8 @@ module TransactionBuilder
 
       end
 
+      # binding.pry
+
       to_addresses.each do | address |
         t.output do |o|
           o.value(amount / to_addresses.length)

@@ -1,5 +1,6 @@
 nbApp.factory( "noteService", function( $resource ) {
   var NoteAPI = $resource( "/api/notes/:id" )
+  var NoteAPIClaim = $resource( "/api/notes/:id/claim" )
 
   return {
     get: function( id, callback ) {
@@ -19,6 +20,18 @@ nbApp.factory( "noteService", function( $resource ) {
         console.log( "ERR" )
         callback( err, null )
       } )
-    }
+    },
+    claim: function( id, to_address, encrypted_token, callback ) {
+      NoteAPIClaim.get( {
+        id: id,
+        to_address: to_address,
+        encrypted_token: encrypted_token
+      }, function( data ) {
+        callback( null, data )
+      }, function( err ) {
+        console.log( "ERROR" )
+        callback( err, null )
+      } )
+    },
   }
 } )

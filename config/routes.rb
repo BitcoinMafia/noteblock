@@ -2,6 +2,10 @@ Noteblock::Application.routes.draw do
   root to: "application#index"
 
   namespace :api do
+
+    # TODO: Should be post
+    get "/notes/:id/claim" => "notes#claim"
+
     resources :notes, only: [:index, :show, :create]
   end
 

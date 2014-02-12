@@ -7,11 +7,25 @@ class Api::NotesController < ApplicationController
     render json: note
   end
 
+
   def claim
-    note = Note.claim(id: params[:id], encrypted_token: params[:encrypted_token])
+    ap params
+    if !params[:encrypted_token] || !params[:to_address]
+      render json: {
+        result: false
+      }
 
-    render json: note
+      return
+    end
 
+    claimed = Note.claim(
+      encrypted_token: params[:encrypted_token],
+      to_address: params[:to_address]
+    )
+
+    render json: {
+      result: claimed
+    }
   end
 
   def create
