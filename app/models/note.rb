@@ -58,7 +58,7 @@ class Note < ActiveRecord::Base
 
   def self.initial_build(params)
     note = Note.new
-    note.email = params[:email]
+    note.email = params[:email] if !params[:email].blank?
     note.content = params[:content]
     note.sender = params[:sender]
 
