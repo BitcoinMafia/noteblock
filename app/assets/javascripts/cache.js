@@ -613,7 +613,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          <br>\n" +
     "          <div class=\"col-md-8\">\n" +
     "            <p class='lead text-center'>\n" +
-    "              <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "              <a class=\"\" href='/notes/{{note.id}}'>\n" +
     "                \"{{note.content}}\" - {{note.sender}}\n" +
     "              </a>\n" +
     "            </p>\n" +
