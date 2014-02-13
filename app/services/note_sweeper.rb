@@ -5,7 +5,7 @@ module NoteSweeper
     notes = Note.includes(:note_transactions).where(
       "note_transactions.tx_type = 'payment' OR note_transactions.tx_type = 'proof'")
     not_propagated = notes.map do |note|
-      note if note.note_transactions.proofs.blank?
+      note if note.note_transactions.proofs.blank? && note.note_transactions.payments.sum(:satoshis) >= NoteTransaction::MINIMUM
     end
 
     ap "THE FOLLOWING HAVE RECEIVED PAYMENT, BUT HAVE NOT PROPAGATED/EMBEDDED MESSAGE"
