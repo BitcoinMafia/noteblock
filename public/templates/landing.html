@@ -25,44 +25,48 @@
   <!-- TODO: refactor into partial -->
   <tabset>
     <tab heading="LATEST NOTES">
-      <div class="row note"  ng-repeat="note in latestNotes">
-        <br>
-        <div class="col-md-8">
-          <p class='lead text-center'>
-            <a class="text-gray" href='/notes/{{note.id}}'>
-              "{{note.content}}" - {{note.sender}}
-            </a>
-          </p>
-        </div>
-        <div class="col-md-2">
-          <p class='lead text-center' timeago="{{note.created_at}}" live='true'></p>
-        </div>
-        <div class="col-md-2">
-          <p class='lead text-center'>
-            <span class="label label-default label-lg dedicated" to-btc="{{note.satoshis}}"></span>
-            <small class='smaller'>DEDICATED</small>
-          </p>
+      <div infinite-scroll="loadMoreNotes('latest')" infinite-scroll-distance="1">
+        <div class="row note"  ng-repeat="note in notes.latest">
+          <br>
+          <div class="col-md-8">
+            <p class='lead text-center'>
+              <a class="text-gray" href='/notes/{{note.id}}'>
+                "{{note.content}}" - {{note.sender}}
+              </a>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <p class='lead text-center' timeago="{{note.created_at}}" live='true'></p>
+          </div>
+          <div class="col-md-2">
+            <p class='lead text-center'>
+              <span class="label label-default label-lg dedicated" to-btc="{{note.satoshis}}"></span>
+              <small class='smaller'>DEDICATED</small>
+            </p>
+          </div>
         </div>
       </div>
     </tab>
     <tab heading="TOP NOTES">
-      <div class="row note"  ng-repeat="note in topNotes">
-        <br>
-        <div class="col-md-8">
-          <p class='lead text-center'>
-            <a class="text-gray" href='/notes/{{note.id}}'>
-              "{{note.content}}" - {{note.sender}}
-            </a>
-          </p>
-        </div>
-        <div class="col-md-2">
-          <p class='lead text-center' timeago="{{note.created_at}}" live='true'></p>
-        </div>
-        <div class="col-md-2">
-          <p class='lead text-center'>
-            <span class="label label-default label-lg dedicated" to-btc="{{note.satoshis}}"></span>
-            <small class='smaller'>DEDICATED</small>
-          </p>
+      <div infinite-scroll="loadMoreNotes('top')" infinite-scroll-distance="1">
+        <div class="row note"  ng-repeat="note in notes.top">
+          <br>
+          <div class="col-md-8">
+            <p class='lead text-center'>
+              <a class="text-gray" href='/notes/{{note.id}}'>
+                "{{note.content}}" - {{note.sender}}
+              </a>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <p class='lead text-center' timeago="{{note.created_at}}" live='true'></p>
+          </div>
+          <div class="col-md-2">
+            <p class='lead text-center'>
+              <span class="label label-default label-lg dedicated" to-btc="{{note.satoshis}}"></span>
+              <small class='smaller'>DEDICATED</small>
+            </p>
+          </div>
         </div>
       </div>
     </tab>

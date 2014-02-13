@@ -67,8 +67,11 @@ class Note < ActiveRecord::Base
 
   # Makes sure tokens aren't revealed
   def self.cleanse(notes)
+
+    # TODO: note.note_transactions is n+1, need join with sum
     notes.map do |note|
       {
+        id: note.id,
         content: note.content,
         sender: note.sender || "Anonymous",
         address: note.address,
@@ -96,7 +99,7 @@ class Note < ActiveRecord::Base
     return {
       id: note.id,
       content: note.content,
-      sender: note.sender,
+      sender: note.sender || "Anonymous",
       address: note.address,
       payment_valid: payment_valid || false,
       created_at: note.created_at,

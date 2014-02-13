@@ -20,6 +20,7 @@
 //= require angular-resource
 //= require angular-ui-bootstrap-tpls
 //= require moment.min
+//= require ng-infinite-scroll.min
 //= require bitcoin
 //= require address
 //= require spin.min

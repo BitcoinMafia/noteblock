@@ -28,11 +28,11 @@
 )
 
 
-10.times do
+1000.times do
   key = Bitcoin.generate_key
 
   note = Note.create(
-    content: SecureRandom.hex(30),
+    content: ["love", "you", "marry", "me", "hey", "lol", "bitcoin", SecureRandom.hex(16)].sample(4).join(" "),
     address: Bitcoin.pubkey_to_address(key[1]),
     encrypted_private_key: AES.encrypt(key[0], ENV["DECRYPTION_KEY"])
     )
@@ -41,5 +41,11 @@
     tx_hash: SecureRandom.hex(32),
     satoshis: rand(1..100_000),
     tx_type: "payment"
+  )
+
+  note.note_transactions.create(
+    tx_hash: SecureRandom.hex(32),
+    satoshis: rand(22000),
+    tx_type: "proof"
   )
 end

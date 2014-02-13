@@ -31,7 +31,6 @@ nbApp.directive( "selected", function( $timeout ) {
     }
   }
 } )
-
 moment.fn.fromNowWithSeconds = function( a ) {
   var milliseconds = Math.abs( moment().diff( this ) );
 

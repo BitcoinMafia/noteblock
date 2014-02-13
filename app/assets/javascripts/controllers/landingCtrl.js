@@ -1,11 +1,14 @@
 nbApp.controller( "landingCtrl", function( $scope, $modal, noteService ) {
 
-	// Initial Data
-	noteService.query( "latest", function( err, data ) {
-		$scope.latestNotes = data
+	$scope.notes = {}
+	var LIMIT = 20
 
-		noteService.query( "top", function( err, data ) {
-			$scope.topNotes = data
+	// Initial Data
+	noteService.query( "latest", LIMIT, 0, function( err, data ) {
+		$scope.notes.latest = data
+
+		noteService.query( "top", LIMIT, 0, function( err, data ) {
+			$scope.notes.top = data
 		} )
 	} )
 
@@ -19,6 +22,57 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, noteService ) {
 	} )
 
 	// Infinite Scrolling
+	// STARTS AT
+	// OFFSET: 0
+
+	$scope.offset = {
+		top: LIMIT,
+		latest: LIMIT
+	}
+
+	$scope.finished = {
+		top: false,
+		latest: false
+	}
+
+	$scope.fetching = false
+
+	$scope.loadMoreNotes = function( type ) {
+		console.log( 'loading' )
+
+		if ( !$scope.notes[ type ] ) {
+			return;
+		}
+		if ( $scope.finished[ type ] ) {
+			return;
+		}
+
+		if ( $scope.fetching === true ) {
+			return;
+		}
+
+		// if ( $scope.notes[ type ].length ) {
+		// 	return;
+		// }
+
+		$scope.fetching = true;
+		noteService.query( type, LIMIT, $scope.offset[ type ], function( err, data ) {
+			if ( !! err ) {
+				console.log( "ERROR" )
+				return;
+			}
+
+			if ( data.length > 0 ) {
+				$scope.notes[ type ] = $scope.notes[ type ].concat( data );
+				$scope.offset[ type ] = $scope.notes[ type ].length;
+			} else {
+				$scope.finished[ type ] = true;
+			}
+
+			$scope.fetching = false;
+		} )
+
+	}
 
 	// Modal
 	$scope.NoteModal = {

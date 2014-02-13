@@ -13,9 +13,11 @@ nbApp.factory( "noteService", function( $resource ) {
         callback( err, null )
       } )
     },
-    query: function( id, callback ) {
+    query: function( type, limit, offset, callback ) {
       NoteAPI.query( {
-        id: id
+        id: type,
+        limit: limit || 20,
+        offset: offset || 0
       }, function( data ) {
         callback( null, data )
       }, function( err ) {

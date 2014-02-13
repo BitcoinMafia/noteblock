@@ -3,7 +3,8 @@
 var nbApp = angular.module( 'nbApp', [
 	'ngRoute',
 	'ngResource',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'infinite-scroll'
 ] )
 
 var PUSHERCLIENT = new Pusher( '6618588018b280759474' );
