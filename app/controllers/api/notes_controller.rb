@@ -2,7 +2,7 @@ class Api::NotesController < ApplicationController
   def index
     limit = params[:limit] || 25
     offset = params[:offset] || 0
-    notes = Note.confirmed.order("notes.created_at DESC").limit(limit).offset(offset)
+    notes = Note.confirmed.unflagged.order("notes.created_at DESC").limit(limit).offset(offset)
     notes = Note.cleanse(notes)
 
     render json: notes
@@ -13,7 +13,7 @@ class Api::NotesController < ApplicationController
     offset = params[:offset] || 0
 
     # TODO: DUPS
-    notes = Note.confirmed.order("note_transactions.satoshis DESC").limit(limit).offset(offset)
+    notes = Note.confirmed.unflagged.order("note_transactions.satoshis DESC").limit(limit).offset(offset)
     notes = Note.cleanse(notes)
 
     render json: notes

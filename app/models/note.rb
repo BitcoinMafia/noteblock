@@ -46,9 +46,13 @@ class Note < ActiveRecord::Base
     )
   end
 
+  def self.unflagged
+    self.where(flagged: false)
+  end
+
   def self.confirmed
     Note.includes(:note_transactions)
-      .where("note_transactions.id IS NOT NULL")
+      .where("note_transactions.tx_type = 'proof' ")
       .references(:note_transactions)
   end
 

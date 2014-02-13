@@ -554,44 +554,48 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <!-- TODO: refactor into partial -->\n" +
     "  <tabset>\n" +
     "    <tab heading=\"LATEST NOTES\">\n" +
-    "      <div class=\"row note\"  ng-repeat=\"note in latestNotes\">\n" +
-    "        <br>\n" +
-    "        <div class=\"col-md-8\">\n" +
-    "          <p class='lead text-center'>\n" +
-    "            <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
-    "              \"{{note.content}}\" - {{note.sender}}\n" +
-    "            </a>\n" +
-    "          </p>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-md-2\">\n" +
-    "          <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-md-2\">\n" +
-    "          <p class='lead text-center'>\n" +
-    "            <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
-    "            <small class='smaller'>DEDICATED</small>\n" +
-    "          </p>\n" +
+    "      <div infinite-scroll=\"loadMoreNotes('latest')\" infinite-scroll-distance=\"1\">\n" +
+    "        <div class=\"row note\"  ng-repeat=\"note in notes.latest\">\n" +
+    "          <br>\n" +
+    "          <div class=\"col-md-8\">\n" +
+    "            <p class='lead text-center'>\n" +
+    "              <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "                \"{{note.content}}\" - {{note.sender}}\n" +
+    "              </a>\n" +
+    "            </p>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-md-2\">\n" +
+    "            <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-md-2\">\n" +
+    "            <p class='lead text-center'>\n" +
+    "              <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
+    "              <small class='smaller'>DEDICATED</small>\n" +
+    "            </p>\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </tab>\n" +
     "    <tab heading=\"TOP NOTES\">\n" +
-    "      <div class=\"row note\"  ng-repeat=\"note in topNotes\">\n" +
-    "        <br>\n" +
-    "        <div class=\"col-md-8\">\n" +
-    "          <p class='lead text-center'>\n" +
-    "            <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
-    "              \"{{note.content}}\" - {{note.sender}}\n" +
-    "            </a>\n" +
-    "          </p>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-md-2\">\n" +
-    "          <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-md-2\">\n" +
-    "          <p class='lead text-center'>\n" +
-    "            <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
-    "            <small class='smaller'>DEDICATED</small>\n" +
-    "          </p>\n" +
+    "      <div infinite-scroll=\"loadMoreNotes('top')\" infinite-scroll-distance=\"1\">\n" +
+    "        <div class=\"row note\"  ng-repeat=\"note in notes.top\">\n" +
+    "          <br>\n" +
+    "          <div class=\"col-md-8\">\n" +
+    "            <p class='lead text-center'>\n" +
+    "              <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "                \"{{note.content}}\" - {{note.sender}}\n" +
+    "              </a>\n" +
+    "            </p>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-md-2\">\n" +
+    "            <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-md-2\">\n" +
+    "            <p class='lead text-center'>\n" +
+    "              <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
+    "              <small class='smaller'>DEDICATED</small>\n" +
+    "            </p>\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </tab>\n" +
