@@ -1,2 +1,46 @@
-<input type="text" ng-model="to_address">
-<a class="btn btn-defaut" ng-click="claim()">CLAIM</a>
+<div class="claim-content text-center col-md-6 col-md-offset-3">
+  <br>
+  <h1 class='thin'>
+    Hey there scottli_010 :)
+  </h1>
+  <br>
+  <blockquote>
+    <p class="lead">
+      If you are reading this, it means a special someone in your life <span>(Jennifer)</span> has sent you some Bitcoins for Valentine's Day.
+    </p>
+  </blockquote>
+  <blockquote>
+    <p class="lead">
+      What are Bitcoins anyway? See <a href="https://www.youtube.com/watch?v=Um63OQz3bjo">this video</a> for a concise explanation.
+    </p>
+  </blockquote>
+  <blockquote>
+    <p class="lead">
+      Not only did they send you Bitcoins, they also left you a note. However, this is no ordinary note. The note has been forever embedded into human history. This is because, in Bitcoin, you can attach any message to a transaction. Here's <a href="/how-it-works">how it works.</a>
+    </p>
+  </blockquote>
+  <blockquote>
+    <p class='h1 thin'>
+      "BLAH BLAH BLAH"
+    </p>
+    <p class="thin">
+      (And here's the <a href="/notes/1">whole thing</a>)
+    </p>
+  </blockquote>
+  <blockquote>
+    <p class="lead">
+      To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout Coinbase.com or Coinjar.io
+    </p>
+  </blockquote>
+  <div class='claim-box'>
+    <div class="input-group">
+      <!-- <input type="text" class="form-control"> -->
+      <input type="text" class='form-control square' ng-model="to_address">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
+      </span>
+    </div>
+  </div>
+  <br><br>
+  <br><br>
+</div>
