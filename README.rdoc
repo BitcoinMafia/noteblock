@@ -1,6 +1,4 @@
-== The Noteblock
-
-### Introduction
+### The Noteblock
 
 www.thenoteblock.com allows you to embed messages into the Blockchain.
 
