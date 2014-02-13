@@ -276,7 +276,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <div class=\"navbar-collapse collapse navbar-responsive-collapse\">\n" +
     "      <ul class=\"nav navbar-nav navbar-right\">\n" +
     "        <li>\n" +
-    "          <a href=\"https://www.github.com/BitcoinMafia/\" target=\"_blank\">\n" +
+    "          <a href=\"https://www.github.com/BitcoinMafia/noteblock\" target=\"_blank\">\n" +
     "            <i class=\"fa fa-code\"></i>\n" +
     "            <span>Source Code</span>\n" +
     "          </a>\n" +
