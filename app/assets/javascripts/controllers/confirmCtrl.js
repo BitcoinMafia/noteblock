@@ -6,9 +6,12 @@ nbApp.controller( "confirmCtrl", function( $scope, $routeParams, noteService ) {
     var confirmChannel = PUSHERCLIENT.subscribe( "confirm" );
     confirmChannel.bind( data.address, function( data ) {
       console.log( data )
-      // TODO:
-      // Pusher.beep()
-      // change the .dim
+
+      $scope.$apply( function() {
+        $scope.note.payment_valid = data.payment_valid
+      } )
+
+      Beep()
     } )
   } )
 

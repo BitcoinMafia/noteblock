@@ -16,9 +16,7 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, noteService ) {
 	var notesChannel = PUSHERCLIENT.subscribe( "notes" );
 	notesChannel.bind( "latest", function( data ) {
 		console.log( data )
-		// TODO:
-		// Pusher.beep()
-		// change the .dim
+		$scope.notes.latest.unshift( data )
 	} )
 
 	// Infinite Scrolling

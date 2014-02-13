@@ -341,13 +341,13 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <br><br>\n" +
     "    <section>\n" +
     "      <p class='super-lead'>\n" +
-    "        Hey there scottli_010 :)\n" +
+    "        Hey there {{note.name}} :)\n" +
     "      </p>\n" +
     "    </section>\n" +
     "    <br>\n" +
     "    <section>\n" +
     "      <p class=\"super-lead\">\n" +
-    "        If you are reading this, it means a special someone has sent you some Bitcoins for Valentine's Day.\n" +
+    "        If you are reading this, it means a special someone has sent you <span to-btc=\"{{note.remaining_balance}}\"></span> Bitcoins for Valentine's Day.\n" +
     "      </p>\n" +
     "    </section>\n" +
     "    <br>\n" +
@@ -359,48 +359,78 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <br>\n" +
     "    <section>\n" +
     "      <p class=\"super-lead\">\n" +
-    "        A personal note was also left for you, but this is no ordinary note. This note has been forever embedded into human history as it was included in the Blockchain. Here's <a href=\"/how-it-works\">how it works.</a>\n" +
+    "        A personal note was also left for you, but this is no ordinary note. This note has been forever embedded into human history as it was included in the Blockchain.\n" +
     "      </p>\n" +
     "    </section>\n" +
     "    <br>\n" +
     "    <blockquote>\n" +
     "      <p class='claim-note'>\n" +
-    "        \"Scott, please marry me so we can run away together and start a family.\"\n" +
+    "        \"{{note.content}}\"\n" +
     "      </p>\n" +
     "      <p class=\"claim-note\">\n" +
     "        <small>\n" +
-    "          Jennifer Lawrence\n" +
+    "          {{note.sender}}\n" +
     "        </small>\n" +
     "      </p>\n" +
     "    </blockquote>\n" +
     "    <section>\n" +
     "      <p class=\"super-lead\">\n" +
-    "        You can see the whole thing <a href=\"/note/1\">here</a>\n" +
+    "        You can see the whole thing <a href=\"/notes/{{note.id}}\">here</a>. Here's <a href=\"/how-it-works\">how it works.</a>\n" +
     "      </p>\n" +
     "    </section>\n" +
-    "    <br>\n" +
-    "    <section>\n" +
+    "    <section class='visible-xs'>\n" +
     "      <p class=\"super-lead\">\n" +
-    "        This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href=\"https://coinbase.com\">Coinbase.com</a> or <a href=\"https://coinjar.com\">Coinjar.io</a>\n" +
+    "        To claim your Bitcoins, please view this webpage in a Browser.\n" +
     "      </p>\n" +
     "    </section>\n" +
     "    <br>\n" +
-    "    <div class='claim-box'>\n" +
-    "      <form name=\"claimForm\">\n" +
-    "        <div ng-show=\"claimForm.$invalid\">\n" +
-    "          Not a valid Bitcoin Address\n" +
-    "        </div>\n" +
-    "        <div class=\"input-group\">\n" +
-    "          <span class=\"input-group-btn\">\n" +
-    "            <input\n" +
-    "              type=\"text\"\n" +
-    "              class='form-control square'\n" +
-    "              ng-model=\"to_address\"\n" +
-    "              validate-address=\"to_address\">\n" +
-    "            <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
+    "    <div class='hidden-xs'>\n" +
+    "      <section>\n" +
+    "        <p class=\"super-lead\">\n" +
+    "          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href=\"https://coinbase.com\">Coinbase.com</a> or <a href=\"https://coinjar.com\">Coinjar.io</a>\n" +
+    "        </p>\n" +
+    "      </section>\n" +
+    "      <br>\n" +
+    "      <div class='claim-box'>\n" +
+    "        <div ng-show=\"claimErrors.encrypted_token\" class=\"alert alert-danger text-center\">\n" +
+    "          <a class=\"close\" data-dismiss=\"alert\" href=\"#\" aria-hidden=\"true\">&times;</a>\n" +
+    "          <span class=\"h4 thin\">\n" +
+    "            This wasn't meant for you!\n" +
     "          </span>\n" +
     "        </div>\n" +
-    "      </form>\n" +
+    "        <div ng-show=\"claimErrors.withdraw\" class=\"alert alert-danger text-center\">\n" +
+    "          <a class=\"close\" data-dismiss=\"alert\" href=\"#\" aria-hidden=\"true\">&times;</a>\n" +
+    "          <span class=\"h4 thin\">\n" +
+    "            Sorry, something went wrong :( Please e-mail scott@helloblock.io\n" +
+    "          </span>\n" +
+    "        </div>\n" +
+    "        <div ng-show=\"claimErrors.address\" class=\"alert alert-danger text-center\">\n" +
+    "          <a class=\"close\" data-dismiss=\"alert\" href=\"#\" aria-hidden=\"true\">&times;</a>\n" +
+    "          <span class=\"h4 thin\">\n" +
+    "            Not a valid Bitcoin Address :(\n" +
+    "          </span>\n" +
+    "        </div>\n" +
+    "        <div ng-show=\"claimSuccess\" class=\"alert alert-success text-center\">\n" +
+    "          <a class=\"close\" data-dismiss=\"alert\" href=\"#\" aria-hidden=\"true\">&times;</a>\n" +
+    "          <span class=\"h4 thin\">\n" +
+    "            Success! You will receive the Bitcoins very shortly. Contact scott@helloblock.io if there are any problems.\n" +
+    "          </span>\n" +
+    "        </div>\n" +
+    "        <br>\n" +
+    "        <form name=\"claimForm\">\n" +
+    "          <div class=\"input-group\">\n" +
+    "            <span class=\"input-group-btn\">\n" +
+    "              <input\n" +
+    "                type=\"text\"\n" +
+    "                class='form-control square'\n" +
+    "                required\n" +
+    "                ng-model=\"to_address\"\n" +
+    "                validate-address=\"{{to_address}}\">\n" +
+    "              <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
+    "            </span>\n" +
+    "          </div>\n" +
+    "        </form>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "    <br><br>\n" +
     "    <br><br>\n" +
@@ -420,9 +450,11 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <div class=\"col-md-10 col-md-offset-1\">\n" +
     "    <blockquote>\n" +
     "      <div class=\"h2 thin\">\n" +
-    "        Please confirm your note by sending any amount of BTC (> 0.0005) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.001) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
     "      </div>\n" +
     "    </blockquote>\n" +
+    "    <h1 class='text-center'>{{note.address}}</h1>\n" +
+    "    <br>\n" +
     "    <table class=\"table table-striped table-confirm\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
@@ -462,13 +494,12 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2 thin\">\n" +
-    "              <a href=\"http://www.thenoteblock.com/notes/{{note.id}}\" target=\"_blank\">http://www.thenoteblock.com/notes/{{note.id}}</a>\n" +
+    "              <a href=\"/notes/{{note.id}}\" target=\"_blank\">http://www.thenoteblock.com/notes/{{note.id}}</a>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "      </tbody>\n" +
     "    </table>\n" +
-    "    <h1 class='text-center'>{{note.address}}</h1>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -559,7 +590,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          <br>\n" +
     "          <div class=\"col-md-8\">\n" +
     "            <p class='lead text-center'>\n" +
-    "              <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "              <a class=\"\" href='/notes/{{note.id}}'>\n" +
     "                \"{{note.content}}\" - {{note.sender}}\n" +
     "              </a>\n" +
     "            </p>\n" +
@@ -599,7 +630,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "      </div>\n" +
     "    </tab>\n" +
-    "    <div class=\"pull-right\">\n" +
+    "    <div class=\"pull-right btn-create\">\n" +
     "      <a class=\"btn btn-primary\" ng-click=\"NoteModal.open()\">+ CREATE A NOTE</a>\n" +
     "    </div>\n" +
     "\n" +
@@ -635,7 +666,8 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        </p>\n" +
     "      </div>\n" +
     "    </div>\n" +
-    "    <table class=\"table table-bordered table-striped table-note thin\">\n" +
+    "    <br>\n" +
+    "    <table class=\"table table-bordered table-striped table-note thin hidden-xs\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
     "          <td>FROM:</td>\n" +
@@ -683,6 +715,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </table>\n" +
     "  </div>\n" +
+    "  <br><br>\n" +
     "</div>\n"
   );
 

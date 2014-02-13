@@ -117,7 +117,7 @@ module NoteRunner
       })
 
       Pusher["confirm"].trigger(note.address, {
-        payment: true
+        payment_valid: true
       })
 
       return true

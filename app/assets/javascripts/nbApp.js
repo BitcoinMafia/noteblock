@@ -13,6 +13,11 @@ nbApp.config( function( $locationProvider ) {
 	$locationProvider.html5Mode( true );
 } )
 
+var Beep = function() {
+	var file = "/beep.wav";
+	( new Audio( file ) ).play()
+}
+
 nbApp.run( function( $rootScope, $location, $anchorScroll, $modal ) {
 	$rootScope.global = {}
 
