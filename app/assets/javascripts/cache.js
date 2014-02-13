@@ -313,13 +313,11 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <div class=\"modal-body\">\n" +
     "    <p class=\"lead\">\n" +
     "      <span class=\"h1 thin\">Hello, </span>\n" +
-    "      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "      tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "      the Noteblock was created to forever embed your love for someone into the Blockchain, whilst simultaneously sending them some Bitcoins.\n" +
     "    </p>\n" +
     "\n" +
     "    <p class=\"lead\">\n" +
-    "      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "      tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "      Why not try something unique this Valentine’s day, because roses will wither, but the Blockchain is forever ...\n" +
     "    </p>\n" +
     "\n" +
     "    <p class=\"lead pull-right\">\n" +
@@ -512,44 +510,61 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "<br>\n" +
     "<div class=\"row\">\n" +
     "  <div class=\"col-md-8 col-md-offset-2\">\n" +
+    "    <h2 class='text-center'>How do I send a love note?</h2>\n" +
     "    <blockquote>\n" +
     "      <p class=\"lead\">\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-    "        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-    "        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-    "        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
-    "        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n" +
+    "        1. Create a love note using “Create Note”. The e-mail and from fields are optional, but you must write a note no longer than 136 characters.\n" +
+    "      </p>\n" +
+    "      <p class='text-center'>\n" +
+    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      </p>\n" +
+    "      <p class=\"lead\">\n" +
+    "        2. Once created, send any amount of Bitcoins (minimum 0.001 BTC) to the address specified to confirm the note.\n" +
+    "      </p>\n" +
+    "      <p class='text-center'>\n" +
+    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      </p>\n" +
+    "      <p class=\"lead\">\n" +
+    "        3. Once the payment is received, The Noteblock will build and propagate the transaction with the note embedded. 0.0005 BTC will be used to build the transaction and embed your note into the Blockchain. The remaining balance will be sent to your recipient.\n" +
+    "      </p>\n" +
+    "      <p class='text-center'>\n" +
+    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      </p>\n" +
+    "      <p class=\"lead\">\n" +
+    "        4. After the note has been embedded, an e-mail will be sent out to your recipient (if specified). They will be able to claim the Bitcoins using the unique token provided in the e-mail.\n" +
+    "      </p>\n" +
+    "      <p class='text-center'>\n" +
+    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      </p>\n" +
+    "\n" +
+    "    </blockquote>\n" +
+    "    <br>\n" +
+    "    <h2 class='text-center'>How do messages get embedded?</h2>\n" +
+    "    <blockquote>\n" +
+    "      <p class=\"lead\">\n" +
+    "        Each standard Bitcoin address is a derivation of the 20 bytes `hash160` e.g.<a target=\"_blank\" href=\"https://helloblock.io/mainnet/addresses/17xVQ1b8EkZweCUnQXWCTNzm7MZSwVwByb\">17xVQ1b8EkZweCUnQXWCTNzm7MZSwVwByb</a>. This allows us to embed an arbitrary 20 bytes message in each output. When you put together a message, we build and propagation a transaction where your message is matched by the hash160s of the outputs.\n" +
+    "      </p>\n" +
+    "      <p class=\"lead\">\n" +
+    "        For example, <a target=\"_blank\" href=\"https://helloblock.io/mainnet/transactions/e3a9277237ef037f6e97219f3c79d4146f3431ae28af82980f912a5de6a4f935\">e3a9277237ef037f6e97219f3c79d4146f3431ae28af82980f912a5de6a4f935</a>. This transaction has 3 outputs. The first 2 outputs represent the message, which says “I love you til the end of time.” and the last output is the change output.\n" +
     "      </p>\n" +
     "    </blockquote>\n" +
+    "    <h2 class='text-center'>Technical Details</h2>\n" +
     "    <blockquote>\n" +
     "      <p class=\"lead\">\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-    "        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-    "        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-    "        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
-    "        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n" +
+    "        All NoteBlock messages will begin with version bytes 0x4c4f5645 (the hexadecimal representation for  ‘LOVE’) in the first output of a transaction.\n" +
+    "        <!--  If we identify a transaction where the first output has a hash160 that starts with that particular version byte we will try to decode it and display it as a message. -->\n" +
+    "      </p>\n" +
+    "      <p class=\"lead\">\n" +
+    "        This is built on top of the <a target=\"_blank\" href=\"https://helloblock.io\">HelloBlock API</a>\n" +
     "      </p>\n" +
     "    </blockquote>\n" +
+    "    <h2 class='text-center'>Manifesto</h2>\n" +
     "    <blockquote>\n" +
     "      <p class=\"lead\">\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-    "        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-    "        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-    "        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
-    "        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n" +
+    "        This was inspired by the upcoming v0.9 release which makes OP_RETURN a standard transaction output in Bitcoin. See <a target=\"_blank\" href=\"https://github.com/bitcoin/bitcoin/pull/2738\">pull/2738</a>, and <a target=\"_blank\" href=\"https://bitcoinfoundation.org/blog/?p=290\">this blog post</a>\n" +
     "      </p>\n" +
-    "    </blockquote>\n" +
-    "    <blockquote>\n" +
     "      <p class=\"lead\">\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-    "        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-    "        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-    "        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
-    "        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n" +
+    "        This has big implications for Bitcoin as a programmable currency protocol. Right now, developers have tried various ways to embed arbitrary messages (such as cryptographic hash of import documents) into the blockchain. Using the output’s hash160 to store the data payload is one of the common ways to embed messages. Making OP_RETURN standard has important implications for smart contracts, using Bitcoin transactions to prove / transfer ownership and will enable many more startups to develop innovative solutions using the Bitcoin protocol.\n" +
     "      </p>\n" +
     "    </blockquote>\n" +
     "  </div>\n" +
