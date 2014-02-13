@@ -13,8 +13,9 @@
           THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.
         </p>
       </div>
-      <div ng-show="{{}}" class='text-center'>
-        (Note that some Block Explorers are slow to recognize transactions, we recommended using <a href="https://helloblock.io/mainnet">HelloBlock</a>)
+      <br>
+      <div class='text-center'>
+        (Note that some Block Explorers are slow to recognize transactions, we recommended using <a target="_blank" href="https://helloblock.io/mainnet">HelloBlock</a>)
       </div>
     </div>
     <div ng-if="!note.payment_valid" ng-hide="!note">
@@ -47,7 +48,7 @@
         <tr>
           <td>TRANSACTION HASH:</td>
           <td>
-            <a href="https://helloblock.io/mainnet/transactions/{{note.tx_hash}}">
+            <a target="_blank" href="https://helloblock.io/mainnet/transactions/{{note.tx_hash}}">
               {{note.tx_hash}}
             </a>
           </td>

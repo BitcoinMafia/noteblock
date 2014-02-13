@@ -353,7 +353,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <br>\n" +
     "    <section>\n" +
     "      <p class=\"super-lead\">\n" +
-    "        <a href=\"https://www.youtube.com/watch?v=Um63OQz3bjo\">What are Bitcoins anyway?</a>\n" +
+    "        <a target=\"_blank\" href=\"https://www.youtube.com/watch?v=Um63OQz3bjo\">What are Bitcoins anyway?</a>\n" +
     "      </p>\n" +
     "    </section>\n" +
     "    <br>\n" +
@@ -387,7 +387,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <div class='hidden-xs'>\n" +
     "      <section>\n" +
     "        <p class=\"super-lead\">\n" +
-    "          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href=\"https://coinbase.com\">Coinbase.com</a> or <a href=\"https://coinjar.com\">Coinjar.io</a>\n" +
+    "          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a target=\"_blank\" href=\"https://coinbase.com\">Coinbase.com</a> or <a target=\"_blank\" href=\"https://coinjar.com\">Coinjar.io</a>\n" +
     "        </p>\n" +
     "      </section>\n" +
     "      <br>\n" +
@@ -426,7 +426,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "                required\n" +
     "                ng-model=\"to_address\"\n" +
     "                validate-address=\"{{to_address}}\">\n" +
-    "              <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
+    "              <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\" ng-class=\"{'btn-warning': claiming}\">CLAIM<span ng-show=\"claiming\">ING ...</span></button>\n" +
     "            </span>\n" +
     "          </div>\n" +
     "        </form>\n" +
@@ -494,7 +494,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          </td>\n" +
     "          <td>\n" +
     "            <div class=\"h2 thin\">\n" +
-    "              <a href=\"/notes/{{note.id}}\" target=\"_blank\">http://www.thenoteblock.com/notes/{{note.id}}</a>\n" +
+    "              <a href=\"/notes/{{note.id}}\">http://www.thenoteblock.com/notes/{{note.id}}</a>\n" +
     "            </div>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -657,12 +657,16 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          THIS NOTE HAS BEEN FOREVER EMBEDDED IN THE BLOCKCHAIN.\n" +
     "        </p>\n" +
     "      </div>\n" +
+    "      <br>\n" +
+    "      <div class='text-center'>\n" +
+    "        (Note that some Block Explorers are slow to recognize transactions, we recommended using <a target=\"_blank\" href=\"https://helloblock.io/mainnet\">HelloBlock</a>)\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "    <div ng-if=\"!note.payment_valid\" ng-hide=\"!note\">\n" +
     "      <div class=\"alert alert-dismissable alert-warning text-center\">\n" +
     "        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
     "        <p class=\"lead\">\n" +
-    "          THIS NOTE IS PENDING A 0.0005 BTC PAYMENT\n" +
+    "          THIS NOTE IS PENDING A 0.001 BTC PAYMENT\n" +
     "        </p>\n" +
     "      </div>\n" +
     "    </div>\n" +
@@ -688,7 +692,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        <tr>\n" +
     "          <td>TRANSACTION HASH:</td>\n" +
     "          <td>\n" +
-    "            <a href=\"https://helloblock.io/mainnet/transactions/{{note.tx_hash}}\">\n" +
+    "            <a target=\"_blank\" href=\"https://helloblock.io/mainnet/transactions/{{note.tx_hash}}\">\n" +
     "              {{note.tx_hash}}\n" +
     "            </a>\n" +
     "          </td>\n" +

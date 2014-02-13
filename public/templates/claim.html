@@ -15,7 +15,7 @@
     <br>
     <section>
       <p class="super-lead">
-        <a href="https://www.youtube.com/watch?v=Um63OQz3bjo">What are Bitcoins anyway?</a>
+        <a target="_blank" href="https://www.youtube.com/watch?v=Um63OQz3bjo">What are Bitcoins anyway?</a>
       </p>
     </section>
     <br>
@@ -49,7 +49,7 @@
     <div class='hidden-xs'>
       <section>
         <p class="super-lead">
-          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href="https://coinbase.com">Coinbase.com</a> or <a href="https://coinjar.com">Coinjar.io</a>
+          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a target="_blank" href="https://coinbase.com">Coinbase.com</a> or <a target="_blank" href="https://coinjar.com">Coinjar.io</a>
         </p>
       </section>
       <br>
@@ -88,7 +88,7 @@
                 required
                 ng-model="to_address"
                 validate-address="{{to_address}}">
-              <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
+              <button class="btn btn-success" type="button" ng-click="claim()" ng-class="{'btn-warning': claiming}">CLAIM<span ng-show="claiming">ING ...</span></button>
             </span>
           </div>
         </form>

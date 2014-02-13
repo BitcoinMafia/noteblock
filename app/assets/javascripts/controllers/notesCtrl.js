@@ -11,8 +11,11 @@ nbApp.controller( "notesCtrl", function( $scope, $routeParams, noteService ) {
   }
 
   $scope.claimSuccess = false
+  $scope.claiming = false
 
   $scope.claim = function() {
+    $scope.claiming = true
+
     if ( !$routeParams.encrypted_token ) {
       $scope.claimErrors.encrypted_token = true;
       return;
@@ -28,6 +31,7 @@ nbApp.controller( "notesCtrl", function( $scope, $routeParams, noteService ) {
       if ( !! err ) {
         console.log( "ERROR" );
         $scope.claimErrors.withdraw = true;
+        $scope.claiming = false;
         return;
       }
 
