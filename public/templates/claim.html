@@ -40,52 +40,59 @@
         You can see the whole thing <a href="/notes/{{note.id}}">here</a>. Here's <a href="/how-it-works">how it works.</a>
       </p>
     </section>
-    <br>
-    <section>
+    <section class='visible-xs'>
       <p class="super-lead">
-        This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href="https://coinbase.com">Coinbase.com</a> or <a href="https://coinjar.com">Coinjar.io</a>
+        To claim your Bitcoins, please view this webpage in a Browser.
       </p>
     </section>
     <br>
-    <div class='claim-box'>
-      <div ng-show="claimErrors.encrypted_token" class="alert alert-danger text-center">
-        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-        <span class="h4 thin">
-          This wasn't meant for you!
-        </span>
-      </div>
-      <div ng-show="claimErrors.withdraw" class="alert alert-danger text-center">
-        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-        <span class="h4 thin">
-          Sorry, something went wrong :( Please e-mail scott@helloblock.io
-        </span>
-      </div>
-      <div ng-show="claimErrors.address" class="alert alert-danger text-center">
-        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-        <span class="h4 thin">
-          Not a valid Bitcoin Address :(
-        </span>
-      </div>
-      <div ng-show="claimSuccess" class="alert alert-success text-center">
-        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-        <span class="h4 thin">
-          Success! You will receive the Bitcoins very shortly. Contact scott@helloblock.io if there are any problems.
-        </span>
-      </div>
+    <div class='hidden-xs'>
+      <section>
+        <p class="super-lead">
+          This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href="https://coinbase.com">Coinbase.com</a> or <a href="https://coinjar.com">Coinjar.io</a>
+        </p>
+      </section>
       <br>
-      <form name="claimForm">
-        <div class="input-group">
-          <span class="input-group-btn">
-            <input
-              type="text"
-              class='form-control square'
-              required
-              ng-model="to_address"
-              validate-address="{{to_address}}">
-            <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
+      <div class='claim-box'>
+        <div ng-show="claimErrors.encrypted_token" class="alert alert-danger text-center">
+          <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+          <span class="h4 thin">
+            This wasn't meant for you!
           </span>
         </div>
-      </form>
+        <div ng-show="claimErrors.withdraw" class="alert alert-danger text-center">
+          <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+          <span class="h4 thin">
+            Sorry, something went wrong :( Please e-mail scott@helloblock.io
+          </span>
+        </div>
+        <div ng-show="claimErrors.address" class="alert alert-danger text-center">
+          <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+          <span class="h4 thin">
+            Not a valid Bitcoin Address :(
+          </span>
+        </div>
+        <div ng-show="claimSuccess" class="alert alert-success text-center">
+          <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+          <span class="h4 thin">
+            Success! You will receive the Bitcoins very shortly. Contact scott@helloblock.io if there are any problems.
+          </span>
+        </div>
+        <br>
+        <form name="claimForm">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <input
+                type="text"
+                class='form-control square'
+                required
+                ng-model="to_address"
+                validate-address="{{to_address}}">
+              <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
     <br><br>
     <br><br>
