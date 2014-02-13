@@ -11,20 +11,31 @@
       See <a href="/how-it-works">how it works.</a>
     </p>
     <br>
-    <form class="form-horizontal">
+    <form class="form-horizontal" name="form.noteForm">
       <div class="form-group">
         <label class="col-sm-2 control-label h3 thin">EMAIL: </label>
         <div class="col-sm-10">
-          <input tabindex="1" type="text" class="form-control" ng-model="note.email" placeholder="(optional)">
+          <input
+          tabindex="1"
+          type="email"
+          name="email"
+          class="form-control"
+          ng-model="note.email"
+          placeholder="(optional)">
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label h3 thin">NOTE: </label>
         <div class="col-sm-10">
+          <div ng-show="form.noteForm.content.$error.maxlength">
+            Must be &lt;= 136 characters
+          </div>
           <textarea
-            tabindex="1"
+            tabindex="2"
             class='form-control'
+            name="content"
             placeholder="136 characters or less"
+            ng-maxlength="136"
             ng-model="note.content"
             rows="4"
           ></textarea>
@@ -34,14 +45,24 @@
       <div class="form-group">
         <label class="col-sm-2 control-label h3 thin">FROM: </label>
         <div class="col-sm-10">
-          <input tabindex="1" type="text" class="form-control" ng-model="note.sender" placeholder="(optional)">
+          <div ng-show="form.noteForm.sender.$invalid">
+            Must be &lt;= 50 characters
+          </div>
+          <input
+            tabindex="3"
+            type="text"
+            name="sender"
+            class="form-control"
+            ng-maxlength="50"
+            ng-model="note.sender"
+            placeholder="(optional)">
         </div>
       </div>
     </form>
 
   </div>
   <div class="modal-footer">
-    <button tabindex="3" class="btn btn-primary" ng-click="create()">CREATE</button>
+    <button tabindex="4" class="btn btn-primary" ng-click="create()">CREATE</button>
     <button class="btn btn-default" ng-click="cancel()">CANCEL</button>
   </div>
 </div>

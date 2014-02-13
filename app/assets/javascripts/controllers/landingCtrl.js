@@ -21,9 +21,14 @@ nbApp.controller( "landingCtrl", function( $scope, $modal ) {
 	var createNoteCtrl = function( $scope, $location, $modalInstance, noteService ) {
 
 		$scope.note = {}
+		$scope.form = {}
 
 		$scope.create = function() {
 			// Validate
+			console.log( "Invalid Note" )
+			if ( $scope.form.noteForm.$invalid || !$scope.form.noteForm.content.$modelValue ) {
+				return;
+			}
 
 			// Server stuff
 			noteService.post( {
