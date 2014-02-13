@@ -113,6 +113,7 @@ class Note < ActiveRecord::Base
       address: note.address,
       payment_valid: payment_valid || false,
       created_at: note.created_at,
+      epoch: note.created_at.to_i,
       total_paid: total_paid,
       sufficient_withdrawal: sufficient_withdrawal || false,
       remaining_balance: remaining_balance || 0,

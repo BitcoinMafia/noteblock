@@ -1,7 +1,7 @@
 module NoteRunner
   extend self
 
-  def execute(transaction)
+  def execute(transaction, compressed: false)
     input_addresses = TransactionUtils.pluck_input_addresses(transaction)
     output_addresses = TransactionUtils.pluck_output_addresses(transaction)
 
@@ -36,7 +36,7 @@ module NoteRunner
     end
 
     # # NoteTransaction
-    if !Task.create_proof(note);
+    if !Task.create_proof(note, compressed: compressed);
       ap "Note Proof Failed"
       return false
     end
@@ -123,8 +123,9 @@ module NoteRunner
       return true
     end
 
-    def create_proof(note)
+    def create_proof(note, compressed: false)
       hash160s = NoteConvertor.utf8_to_hex(note.content)
+      amount = hash160s.length * NoteTransaction::OUTPUT_MIN
       to_addresses = hash160s.map {|h| Bitcoin.hash160_to_address(h)}
 
       private_key = AES.decrypt(note.encrypted_private_key, ENV["DECRYPTION_KEY"])
@@ -132,7 +133,9 @@ module NoteRunner
       raw_transaction = TransactionBuilder.build(
         from_address: note.address,
         private_key: private_key,
-        to_addresses: to_addresses
+        to_addresses: to_addresses,
+        amount: amount,
+        compressed: compressed
       )
 
       response = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])

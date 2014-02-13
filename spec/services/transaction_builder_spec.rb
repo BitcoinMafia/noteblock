@@ -25,7 +25,8 @@ describe TransactionBuilder do
       from_address: from_address,
       private_key: private_key,
       to_addresses: @to_addresses,
-      compressed: true
+      compressed: true,
+      amount: @to_addresses.length * NoteTransaction::OUTPUT_MIN
     )
 
     expect(raw_transaction[:hex].scan(/\H/).blank?).to eq(true)
@@ -36,7 +37,8 @@ describe TransactionBuilder do
       from_address: from_address,
       private_key: private_key,
       to_addresses: @to_addresses,
-      compressed: true
+      compressed: true,
+      amount: @to_addresses.length * NoteTransaction::OUTPUT_MIN
     )
 
     res = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])

@@ -37,6 +37,7 @@ class NoteTransaction < ActiveRecord::Base
   MINIMUM = 100_000
   PROOF_COST = 50_000
   MINER_FEE = 10_000
+  OUTPUT_MIN = 5_500
 
   # METHODS ==============================================================
 

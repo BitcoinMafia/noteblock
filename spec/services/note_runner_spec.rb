@@ -37,7 +37,7 @@ describe NoteRunner do
   end
 
   it "should execute all up" do
-    expect(NoteRunner.execute(@transaction)).to eq(true)
+    expect(NoteRunner.execute(@transaction, compressed: true)).to eq(true)
   end
 
   describe NoteRunner::Task do
@@ -79,7 +79,8 @@ describe NoteRunner do
     end
 
     it "should create note proof" do
-      expect(NoteRunner::Task.create_proof(@note)).to eq(true)
+      # TODO: Tidy up compressed/uncompressed logic
+      expect(NoteRunner::Task.create_proof(@note, compressed: true)).to eq(true)
     end
 
     # TODO: Need better spec, Pusher should receive

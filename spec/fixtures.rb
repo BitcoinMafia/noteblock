@@ -34,7 +34,7 @@ FIXTURES::TRANSACTION = {
   "out" => [
     {
       "n" => 0,
-      "value" => 90_000,
+      "value" => 100_000,
       "scriptPubKey" => "76a914652c453e3f8768d6d6e1f2985cb8939db91a4e0588ac",
       "spent" => false,
       "address" => "mvaRDyLUeF4CP7Lu9umbU3FxehyC5nUz3L",
@@ -43,12 +43,12 @@ FIXTURES::TRANSACTION = {
       }
     }
   ],
-  "total_inputs_value" => 100_000,
-  "total_outputs_value" => 90_000,
+  "total_inputs_value" => 110_000,
+  "total_outputs_value" => 100_000,
   "fees" => 10000,
   "raw_hex" => "01000000012a0613c617f44e9ff8963d6d66043bc216309a6e6c3136fdc3236229695cbaee000000008b483045022100b221efe8d99824385547276657613a661dcfbb906188830913aaa16c3c18876d02200ee9c852a9291a48deb752768553841580e816913f52dfc6a05f966d142f5c09014104e1934263e84e202ebffca95246b63c18c07cd369c4f02de76dbd1db89e6255dacb3ab1895af0422e24e1d1099e80f01b899cfcdf9b947575352dbc1af57466b5ffffffff0110270000000000001976a914652c453e3f8768d6d6e1f2985cb8939db91a4e0588ac00000000",
   "estimated_tx_direction" => "incoming",
-  "estimated_tx_value" => 90_000
+  "estimated_tx_value" => 100_000
 }
 
 # This is fake

@@ -3,7 +3,7 @@ module TransactionBuilder
   extend self
   extend Bitcoin::Builder
 
-  def build(from_address: nil, private_key: nil, to_addresses: nil, amount: 22000, fee: 10000, compressed: false)
+  def build(from_address: nil, private_key: nil, to_addresses: nil, amount: nil, fee: 10000, compressed: false)
     if !from_address || !private_key || !to_addresses || !amount || !fee
       raise "missing arguments";
     end
@@ -34,8 +34,6 @@ module TransactionBuilder
         end
 
       end
-
-      # binding.pry
 
       to_addresses.each do | address |
         t.output do |o|
