@@ -202,7 +202,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    <br>\n" +
     "    <form class=\"form-horizontal\" name=\"form.noteForm\">\n" +
     "      <div class=\"form-group\">\n" +
-    "        <label class=\"col-sm-2 control-label h3 thin\">EMAIL: </label>\n" +
+    "        <label class=\"col-sm-2 control-label h3 thin\">TO EMAIL: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
     "          <input\n" +
     "          tabindex=\"1\"\n" +
@@ -450,7 +450,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <div class=\"col-md-10 col-md-offset-1\">\n" +
     "    <blockquote>\n" +
     "      <div class=\"h2 thin\">\n" +
-    "        Please confirm your note by sending any amount of BTC (> 0.001) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.001) to the following address. Once received, 0.0005 BTC will be used to forever embed your note into the Blockchain. The remaining balance will then be sent to your recipient via e-mail. See <a href=\"/how-it-works\">how this works.</a>\n" +
     "      </div>\n" +
     "    </blockquote>\n" +
     "    <h1 class='text-center'>{{note.address}}</h1>\n" +
