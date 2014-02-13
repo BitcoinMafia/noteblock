@@ -676,7 +676,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      </div>\n" +
     "      <br>\n" +
     "      <div class='text-center'>\n" +
-    "        (Note that some Block Explorers are slow to recognize transactions, we recommended using <a target=\"_blank\" href=\"https://helloblock.io/mainnet\">HelloBlock</a>)\n" +
+    "        (Note that some Block Explorers (such as blockchain.info) are slow to recognize pending transactions, we recommended using <a target=\"_blank\" href=\"https://helloblock.io/mainnet\">HelloBlock</a>)\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div ng-if=\"!note.payment_valid\" ng-hide=\"!note\">\n" +

@@ -14,6 +14,8 @@ describe Note do
 
     it "should not save if content >76 characters" do
       @note.content = "test content obviously too long, test content obviously too long"\
+      "test content obviously too long, test content obviously too long"\
+      "test content obviously too long, test content obviously too long"\
       "test content obviously too long, test content obviously too long"
       @note.address = address
       @note.encrypted_private_key = encrypted_private_key
