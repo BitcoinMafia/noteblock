@@ -200,20 +200,31 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      See <a href=\"/how-it-works\">how it works.</a>\n" +
     "    </p>\n" +
     "    <br>\n" +
-    "    <form class=\"form-horizontal\">\n" +
+    "    <form class=\"form-horizontal\" name=\"form.noteForm\">\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">EMAIL: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
-    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" ng-model=\"note.email\" placeholder=\"(optional)\">\n" +
+    "          <input\n" +
+    "          tabindex=\"1\"\n" +
+    "          type=\"email\"\n" +
+    "          name=\"email\"\n" +
+    "          class=\"form-control\"\n" +
+    "          ng-model=\"note.email\"\n" +
+    "          placeholder=\"(optional)\">\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">NOTE: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
+    "          <div ng-show=\"form.noteForm.content.$error.maxlength\">\n" +
+    "            Must be &lt;= 136 characters\n" +
+    "          </div>\n" +
     "          <textarea\n" +
-    "            tabindex=\"1\"\n" +
+    "            tabindex=\"2\"\n" +
     "            class='form-control'\n" +
+    "            name=\"content\"\n" +
     "            placeholder=\"136 characters or less\"\n" +
+    "            ng-maxlength=\"136\"\n" +
     "            ng-model=\"note.content\"\n" +
     "            rows=\"4\"\n" +
     "          ></textarea>\n" +
@@ -223,14 +234,24 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-2 control-label h3 thin\">FROM: </label>\n" +
     "        <div class=\"col-sm-10\">\n" +
-    "          <input tabindex=\"1\" type=\"text\" class=\"form-control\" ng-model=\"note.sender\" placeholder=\"(optional)\">\n" +
+    "          <div ng-show=\"form.noteForm.sender.$invalid\">\n" +
+    "            Must be &lt;= 50 characters\n" +
+    "          </div>\n" +
+    "          <input\n" +
+    "            tabindex=\"3\"\n" +
+    "            type=\"text\"\n" +
+    "            name=\"sender\"\n" +
+    "            class=\"form-control\"\n" +
+    "            ng-maxlength=\"50\"\n" +
+    "            ng-model=\"note.sender\"\n" +
+    "            placeholder=\"(optional)\">\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </form>\n" +
     "\n" +
     "  </div>\n" +
     "  <div class=\"modal-footer\">\n" +
-    "    <button tabindex=\"3\" class=\"btn btn-primary\" ng-click=\"create()\">CREATE</button>\n" +
+    "    <button tabindex=\"4\" class=\"btn btn-primary\" ng-click=\"create()\">CREATE</button>\n" +
     "    <button class=\"btn btn-default\" ng-click=\"cancel()\">CANCEL</button>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -365,13 +386,21 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "    </section>\n" +
     "    <br>\n" +
     "    <div class='claim-box'>\n" +
-    "      <div class=\"input-group\">\n" +
-    "        <!-- <input type=\"text\" class=\"form-control\"> -->\n" +
-    "        <input type=\"text\" class='form-control square' ng-model=\"to_address\">\n" +
-    "        <span class=\"input-group-btn\">\n" +
-    "          <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
-    "        </span>\n" +
-    "      </div>\n" +
+    "      <form name=\"claimForm\">\n" +
+    "        <div ng-show=\"claimForm.$invalid\">\n" +
+    "          Not a valid Bitcoin Address\n" +
+    "        </div>\n" +
+    "        <div class=\"input-group\">\n" +
+    "          <span class=\"input-group-btn\">\n" +
+    "            <input\n" +
+    "              type=\"text\"\n" +
+    "              class='form-control square'\n" +
+    "              ng-model=\"to_address\"\n" +
+    "              validate-address=\"to_address\">\n" +
+    "            <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
+    "          </span>\n" +
+    "        </div>\n" +
+    "      </form>\n" +
     "    </div>\n" +
     "    <br><br>\n" +
     "    <br><br>\n" +
