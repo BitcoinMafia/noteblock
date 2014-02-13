@@ -60,16 +60,29 @@ class Api::NotesController < ApplicationController
   end
 
   def create
-    ap "CREATING NOTE ..."
-    note = Note.initial_build(params)
+    begin
+      ap "CREATING NOTE ..."
+      note = Note.initial_build(params)
 
-    if note.save
-      render json: note
-    else
-      # TODO: Better error handling
+      if note.save
+        render json: note
+      else
+        # TODO: Better error handling
+        render json: {
+          message: "Note creation invalid"
+        }, code: 400
+      end
+    rescue => e
+      ap e.inspect
+      ap e.backtrace
+      PagerDutyMgr::CriticalBug.trigger("Create note failed", {
+        inspect: e.inspect,
+        backtrace: e.backtrace
+      })
+
       render json: {
-        message: "Note creation invalid"
-      }, code: 400
+        result: false
+      }, status: 400
     end
   end
 end
