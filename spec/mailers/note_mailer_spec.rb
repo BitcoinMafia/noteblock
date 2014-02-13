@@ -49,7 +49,7 @@ describe NoteMailer do
       end
 
       it "should render url" do
-        url = "http://www.thenoteblock.com/notes/#{@note_id}/claim?token=#{@encrypted_token}"
+        url = "http://www.thenoteblock.com/notes/#{@note_id}/claim?encrypted_token=#{@encrypted_token}"
         expect(@mail.body).to include("#{url}")
       end
 

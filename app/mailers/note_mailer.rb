@@ -10,7 +10,7 @@ class NoteMailer < ActionMailer::Base
 
     @recipient = email.split("@")[0]
     @sender = sender || "A secret admirer"
-    @url = "http://www.thenoteblock.com/notes/#{note_id}/claim?token=#{encrypted_token}"
+    @url = "http://www.thenoteblock.com/notes/#{note_id}/claim?encrypted_token=#{encrypted_token}"
     delivery_method = Noteblock::Application.config.action_mailer.delivery_method
 
     mail(
