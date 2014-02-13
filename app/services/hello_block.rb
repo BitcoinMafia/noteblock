@@ -84,10 +84,7 @@ module HelloBlock
       end
 
       # Shouldn't go there, means it's disconnected
-      PagerDutyMgr::CriticalBug.trigger("Socked Disconnected", {
-        inspect: e.inspect,
-        backtrace: e.backtrace
-      })
+      PagerDutyMgr::CriticalBug.trigger("Socked Disconnected")
       p "DISCONNECTED!"
       p "reconnecting ..."
       self.recursive_connect()
