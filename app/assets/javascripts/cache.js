@@ -508,33 +508,33 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  How It Works\n" +
     "</h1>\n" +
     "<br>\n" +
-    "<div class=\"row\">\n" +
+    "<div class=\"row how-it-works\">\n" +
     "  <div class=\"col-md-8 col-md-offset-2\">\n" +
     "    <h2 class='text-center'>How do I send a love note?</h2>\n" +
     "    <blockquote>\n" +
     "      <p class=\"lead\">\n" +
     "        1. Create a love note using “Create Note”. The e-mail and from fields are optional, but you must write a note no longer than 136 characters.\n" +
     "      </p>\n" +
-    "      <p class='text-center'>\n" +
-    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      <p class='text-center img-wrapper'>\n" +
+    "        <img src=\"http://i.imgur.com/X6ytvdl.png\">\n" +
     "      </p>\n" +
     "      <p class=\"lead\">\n" +
     "        2. Once created, send any amount of Bitcoins (minimum 0.001 BTC) to the address specified to confirm the note.\n" +
     "      </p>\n" +
-    "      <p class='text-center'>\n" +
-    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      <p class='text-center img-wrapper'>\n" +
+    "        <img src=\"http://i.imgur.com/zSxj4j2.png\">\n" +
     "      </p>\n" +
     "      <p class=\"lead\">\n" +
     "        3. Once the payment is received, The Noteblock will build and propagate the transaction with the note embedded. 0.0005 BTC will be used to build the transaction and embed your note into the Blockchain. The remaining balance will be sent to your recipient.\n" +
     "      </p>\n" +
-    "      <p class='text-center'>\n" +
-    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      <p class='text-center img-wrapper'>\n" +
+    "        <img src=\"http://i.imgur.com/ZngzRqH.png\">\n" +
     "      </p>\n" +
     "      <p class=\"lead\">\n" +
     "        4. After the note has been embedded, an e-mail will be sent out to your recipient (if specified). They will be able to claim the Bitcoins using the unique token provided in the e-mail.\n" +
     "      </p>\n" +
-    "      <p class='text-center'>\n" +
-    "        <img src=\"http://placehold.it/200x200\">\n" +
+    "      <p class='text-center img-wrapper'>\n" +
+    "        <img src=\"http://i.imgur.com/b6Z8zYw.png\">\n" +
     "      </p>\n" +
     "\n" +
     "    </blockquote>\n" +
@@ -567,6 +567,8 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        This has big implications for Bitcoin as a programmable currency protocol. Right now, developers have tried various ways to embed arbitrary messages (such as cryptographic hash of import documents) into the blockchain. Using the output’s hash160 to store the data payload is one of the common ways to embed messages. Making OP_RETURN standard has important implications for smart contracts, using Bitcoin transactions to prove / transfer ownership and will enable many more startups to develop innovative solutions using the Bitcoin protocol.\n" +
     "      </p>\n" +
     "    </blockquote>\n" +
+    "    <br><br>\n" +
+    "    <br><br>\n" +
     "  </div>\n" +
     "</div>\n"
   );
