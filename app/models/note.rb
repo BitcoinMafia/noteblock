@@ -2,7 +2,7 @@ class Note < ActiveRecord::Base
 
   # VALIDATION =========================================================
 
-  validates :content, presence: true, length: { maximum: 76 }
+  validates :content, presence: true, length: { maximum: 136 }
   validates :address, presence: true, uniqueness: true
   validates :encrypted_private_key, presence: true
   validates :email, email_format: { message: 'Email invalid', allow_nil: true }
@@ -57,6 +57,7 @@ class Note < ActiveRecord::Base
   end
 
   def self.initial_build(params)
+
     note = Note.new
     note.email = params[:email] if !params[:email].blank?
     note.content = params[:content]
@@ -66,6 +67,9 @@ class Note < ActiveRecord::Base
     key = Bitcoin::Key.generate
     note.address = key.addr
     note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
+
+    binding.pry
+
     return note
   end
 
