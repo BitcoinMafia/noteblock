@@ -13,7 +13,10 @@ class Api::NotesController < ApplicationController
     offset = params[:offset] || 0
 
     # TODO: DUPS
-    notes = Note.confirmed.unflagged.order("note_transactions.satoshis DESC").limit(limit).offset(offset)
+    note_transactions = NoteTransaction.payments.order("satoshis DESC").limit(limit).offset(offset).includes(:note)
+    notes = note_transactions.map do |ntx|
+      ntx.note
+    end
     notes = Note.cleanse(notes)
 
     render json: notes

@@ -36,8 +36,6 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, noteService ) {
 	$scope.fetching = false
 
 	$scope.loadMoreNotes = function( type ) {
-		console.log( 'loading' )
-
 		if ( !$scope.notes[ type ] ) {
 			return;
 		}
@@ -54,6 +52,7 @@ nbApp.controller( "landingCtrl", function( $scope, $modal, noteService ) {
 		// }
 
 		$scope.fetching = true;
+		console.log( 'loading' )
 		noteService.query( type, LIMIT, $scope.offset[ type ], function( err, data ) {
 			if ( !! err ) {
 				console.log( "ERROR" )
