@@ -34,7 +34,8 @@ class NoteTransaction < ActiveRecord::Base
   # CONSTANTS ============================================================
 
   # Actual minimum is = 10_000 (fee) + 37800 (5400 * 7)
-  MINIMUM = 50_000
+  MINIMUM = 100_000
+  PROOF_COST = 50_000
   MINER_FEE = 10_000
 
   # METHODS ==============================================================

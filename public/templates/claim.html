@@ -3,13 +3,13 @@
     <br><br>
     <section>
       <p class='super-lead'>
-        Hey there scottli_010 :)
+        Hey there {{note.name}} :)
       </p>
     </section>
     <br>
     <section>
       <p class="super-lead">
-        If you are reading this, it means a special someone has sent you some Bitcoins for Valentine's Day.
+        If you are reading this, it means a special someone has sent you <span to-btc="{{note.remaining_balance}}"></span> Bitcoins for Valentine's Day.
       </p>
     </section>
     <br>
@@ -21,23 +21,23 @@
     <br>
     <section>
       <p class="super-lead">
-        A personal note was also left for you, but this is no ordinary note. This note has been forever embedded into human history as it was included in the Blockchain. Here's <a href="/how-it-works">how it works.</a>
+        A personal note was also left for you, but this is no ordinary note. This note has been forever embedded into human history as it was included in the Blockchain.
       </p>
     </section>
     <br>
     <blockquote>
       <p class='claim-note'>
-        "Scott, please marry me so we can run away together and start a family."
+        "{{note.content}}"
       </p>
       <p class="claim-note">
         <small>
-          Jennifer Lawrence
+          {{note.sender}}
         </small>
       </p>
     </blockquote>
     <section>
       <p class="super-lead">
-        You can see the whole thing <a href="/note/1">here</a>
+        You can see the whole thing <a href="/notes/{{note.id}}">here</a>. Here's <a href="/how-it-works">how it works.</a>
       </p>
     </section>
     <br>
@@ -48,17 +48,40 @@
     </section>
     <br>
     <div class='claim-box'>
+      <div ng-show="claimErrors.encrypted_token" class="alert alert-danger text-center">
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+        <span class="h4 thin">
+          This wasn't meant for you!
+        </span>
+      </div>
+      <div ng-show="claimErrors.withdraw" class="alert alert-danger text-center">
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+        <span class="h4 thin">
+          Sorry, something went wrong :( Please e-mail scott@helloblock.io
+        </span>
+      </div>
+      <div ng-show="claimErrors.address" class="alert alert-danger text-center">
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+        <span class="h4 thin">
+          Not a valid Bitcoin Address :(
+        </span>
+      </div>
+      <div ng-show="claimSuccess" class="alert alert-success text-center">
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+        <span class="h4 thin">
+          Success! You will receive the Bitcoins very shortly. Contact scott@helloblock.io if there are any problems.
+        </span>
+      </div>
+      <br>
       <form name="claimForm">
-        <div ng-show="claimForm.$invalid">
-          Not a valid Bitcoin Address
-        </div>
         <div class="input-group">
           <span class="input-group-btn">
             <input
               type="text"
               class='form-control square'
+              required
               ng-model="to_address"
-              validate-address="to_address">
+              validate-address="{{to_address}}">
             <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
           </span>
         </div>

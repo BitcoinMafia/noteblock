@@ -4,20 +4,35 @@ nbApp.controller( "notesCtrl", function( $scope, $routeParams, noteService ) {
     $scope.note = data
   } )
 
+  $scope.claimErrors = {
+    encrypted_token: false,
+    withdraw: false,
+    address: false
+  }
+
+  $scope.claimSuccess = false
+
   $scope.claim = function() {
+    if ( !$routeParams.encrypted_token ) {
+      $scope.claimErrors.encrypted_token = true;
+      return;
+    }
 
     if ( $scope.claimForm.$invalid ) {
       console.log( "CLAIM FORM INVALID" )
+      $scope.claimErrors.address = true;
       return;
     }
 
     noteService.claim( $routeParams.id, $scope.to_address, $routeParams.encrypted_token, function( err, data ) {
       if ( !! err ) {
         console.log( "ERROR" );
+        $scope.claimErrors.withdraw = true;
         return;
       }
 
-      // Message
+      $scope.claimSuccess = true
+      return;
 
     } )
   }

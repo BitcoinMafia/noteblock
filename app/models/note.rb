@@ -91,23 +91,28 @@ class Note < ActiveRecord::Base
       .where(id: id)
       .includes(:note_transactions)[0]
 
+    # Note Creation
+    note_hex = NoteConvertor.utf8_to_hex(note.content).join
+
     # Payment
     total_paid = note.note_transactions.payments.sum(:satoshis)
     if total_paid >= NoteTransaction::MINIMUM
       payment_valid = true
+      remaining_balance = total_paid - NoteTransaction::PROOF_COST
+      sufficient_withdrawal = remaining_balance >= 5500 # min output is 5400
     end
-
-    # Note Creation
-    note_hex = NoteConvertor.utf8_to_hex(note.content).join
 
     return {
       id: note.id,
+      name: note.email.split("@")[0],
       content: note.content,
       sender: note.sender || "Anonymous",
       address: note.address,
       payment_valid: payment_valid || false,
       created_at: note.created_at,
       total_paid: total_paid,
+      sufficient_withdrawal: sufficient_withdrawal || false,
+      remaining_balance: remaining_balance || 0,
       tx_hash: note.note_transactions.proofs[0].try(:tx_hash),
       note_hex: note_hex
     }
