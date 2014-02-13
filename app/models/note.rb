@@ -68,8 +68,6 @@ class Note < ActiveRecord::Base
     note.address = key.addr
     note.encrypted_private_key = AES.encrypt(key.priv, ENV["DECRYPTION_KEY"])
 
-    binding.pry
-
     return note
   end
 
