@@ -79,6 +79,18 @@ module HelloBlock
             ap "Runner Failed"
             ap e.inspect
             ap e.backtrace
+          ensure
+            begin
+              if (ActiveRecord::Base.connection && ActiveRecord::Base.connection.active?)
+                ap "Closing ActiveRecord Connection"
+                ActiveRecord::Base.connection.close
+              end
+            rescue => e
+              raise CriticalError.new("ActiveRecord Connection did not close: #{e.inspect}", {
+                inspect: e.inspect,
+                backtrace: e.backtrace
+              })
+            end
           end
         end
       end
