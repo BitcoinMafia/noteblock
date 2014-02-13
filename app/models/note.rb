@@ -102,9 +102,12 @@ class Note < ActiveRecord::Base
       sufficient_withdrawal = remaining_balance >= 5500 # min output is 5400
     end
 
+    email = note.email
+    name = email.split("@")[0] if email
+
     return {
       id: note.id,
-      name: note.email.split("@")[0],
+      name: name,
       content: note.content,
       sender: note.sender || "Anonymous",
       address: note.address,

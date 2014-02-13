@@ -658,7 +658,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        </p>\n" +
     "      </div>\n" +
     "    </div>\n" +
-    "    <div ng-if=\"!note.payment_valid\">\n" +
+    "    <div ng-if=\"!note.payment_valid\" ng-hide=\"!note\">\n" +
     "      <div class=\"alert alert-dismissable alert-warning text-center\">\n" +
     "        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
     "        <p class=\"lead\">\n" +

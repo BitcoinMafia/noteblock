@@ -14,7 +14,7 @@
         </p>
       </div>
     </div>
-    <div ng-if="!note.payment_valid">
+    <div ng-if="!note.payment_valid" ng-hide="!note">
       <div class="alert alert-dismissable alert-warning text-center">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <p class="lead">
