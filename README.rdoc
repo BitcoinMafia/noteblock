@@ -1,19 +1,42 @@
-== Rails/Angular Boilerplate
+== The Noteblock
 
-1. Change name
+### Introduction
 
-Noteblock,
-nbApp,
-filenames nbApp,
-$ find . -name nbApp\*
-$ find . -name noteblock\*
+www.thenoteblock.com allows you to embed messages into the Blockchain.
 
-2. createuser -s -r user
-3. create/migrate db
-4. Change secret keys in .env with SecureRandom.hex(64)
-5. Pick bootswatch theme, default is yeti
+### Docs
 
-Deploy
-1. Heroku New Relic
-2. Heroku Memcachier
-3. Google Analytics
+TODO: Write some docs
+
+In the meantime, please email scott@helloblock.io to get started
+
+We use Foreman.
+
+```bash
+$ foreman run rails s
+```
+
+```bash
+$ foreman run rails c
+```
+
+```bash
+$ foreman run transactions:socket
+```
+
+You will need to set these env variables.
+
+``` bash
+SECRET_KEY=<key>
+BLOCKCHAIN_MODE=testnet
+RACK_ENV=development
+DECRYPTION_KEY=some_really_secure_thing
+MANDRILL_USERNAME=<email>
+MANDRILL_PASSWORD=<password>
+
+PUSHER_APP_ID=<id>
+PUSHER_KEY=<key>
+PUSHER_SECRET=<secret>
+
+PAGERDUTY=<key>
+```
