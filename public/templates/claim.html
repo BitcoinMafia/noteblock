@@ -48,13 +48,21 @@
     </section>
     <br>
     <div class='claim-box'>
-      <div class="input-group">
-        <!-- <input type="text" class="form-control"> -->
-        <input type="text" class='form-control square' ng-model="to_address">
-        <span class="input-group-btn">
-          <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
-        </span>
-      </div>
+      <form name="claimForm">
+        <div ng-show="claimForm.$invalid">
+          Not a valid Bitcoin Address
+        </div>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <input
+              type="text"
+              class='form-control square'
+              ng-model="to_address"
+              validate-address="to_address">
+            <button class="btn btn-success" type="button" ng-click="claim()">CLAIM</button>
+          </span>
+        </div>
+      </form>
     </div>
     <br><br>
     <br><br>

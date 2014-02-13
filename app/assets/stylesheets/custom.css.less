@@ -131,10 +131,19 @@ table.table-note {
   }
 }
 
-.claim-box input, .claim-box button {
-  font-size: 26px;
-  font-weight: 200;
-  height: 60px;
+.claim-box {
+  input, button {
+    font-size: 26px;
+    font-weight: 200;
+    height: 60px;
+  }
+
+  input, input:focus {
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    outline: 1px solid @brand-success;
+  }
 }
 
 .square {
@@ -148,7 +157,6 @@ table.table-note {
     color: white;
   }
 }
-
 
 form {
   .ng-invalid, .ng-invalid:focus {

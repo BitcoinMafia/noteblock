@@ -19,6 +19,8 @@
 //= require angular-route
 //= require angular-resource
 //= require angular-ui-bootstrap-tpls
+//= require bitcoin
+//= require address
 //= require spin.min
 //= require nbApp
 //= require_tree ./controllers
