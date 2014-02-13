@@ -132,8 +132,7 @@ module NoteRunner
       raw_transaction = TransactionBuilder.build(
         from_address: note.address,
         private_key: private_key,
-        to_addresses: to_addresses,
-        compressed: true
+        to_addresses: to_addresses
       )
 
       response = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])
