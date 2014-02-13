@@ -196,8 +196,8 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  </div>\n" +
     "  <div class=\"modal-body\">\n" +
     "    <p class=\"lead\">\n" +
-    "      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-    "      tempor incididunt ut labore et dolore magna aliqua.\n" +
+    "      Create your note here. If successful, you will be redirected to a confirmation page.\n" +
+    "      See <a href=\"/how-it-works\">how it works.</a>\n" +
     "    </p>\n" +
     "    <br>\n" +
     "    <form class=\"form-horizontal\">\n" +
@@ -213,7 +213,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "          <textarea\n" +
     "            tabindex=\"1\"\n" +
     "            class='form-control'\n" +
-    "            placeholder=\"80 characters or less\"\n" +
+    "            placeholder=\"136 characters or less\"\n" +
     "            ng-model=\"note.content\"\n" +
     "            rows=\"4\"\n" +
     "          ></textarea>\n" +
@@ -315,8 +315,71 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/claim.html',
-    "<input type=\"text\" ng-model=\"to_address\">\n" +
-    "<a class=\"btn btn-defaut\" ng-click=\"claim()\">CLAIM</a>\n"
+    "<div class=\"claim-content text-center row\">\n" +
+    "  <div class=\"col-md-6 col-md-offset-3\">\n" +
+    "    <br><br>\n" +
+    "    <section>\n" +
+    "      <p class='super-lead'>\n" +
+    "        Hey there scottli_010 :)\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <section>\n" +
+    "      <p class=\"super-lead\">\n" +
+    "        If you are reading this, it means a special someone has sent you some Bitcoins for Valentine's Day.\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <section>\n" +
+    "      <p class=\"super-lead\">\n" +
+    "        <a href=\"https://www.youtube.com/watch?v=Um63OQz3bjo\">What are Bitcoins anyway?</a>\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <section>\n" +
+    "      <p class=\"super-lead\">\n" +
+    "        A personal note was also left for you, but this is no ordinary note. This note has been forever embedded into human history as it was included in the Blockchain. Here's <a href=\"/how-it-works\">how it works.</a>\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <blockquote>\n" +
+    "      <p class='claim-note'>\n" +
+    "        \"Scott, please marry me so we can run away together and start a family.\"\n" +
+    "      </p>\n" +
+    "      <p class=\"claim-note\">\n" +
+    "        <small>\n" +
+    "          Jennifer Lawrence\n" +
+    "        </small>\n" +
+    "      </p>\n" +
+    "    </blockquote>\n" +
+    "    <section>\n" +
+    "      <p class=\"super-lead\">\n" +
+    "        You can see the whole thing <a href=\"/note/1\">here</a>\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <section>\n" +
+    "      <p class=\"super-lead\">\n" +
+    "        This page is a unique URL only available to you. To claim your Bitcoins, enter your address below and we will send you balance. If you're not sure how this works, checkout <a href=\"https://coinbase.com\">Coinbase.com</a> or <a href=\"https://coinjar.com\">Coinjar.io</a>\n" +
+    "      </p>\n" +
+    "    </section>\n" +
+    "    <br>\n" +
+    "    <div class='claim-box'>\n" +
+    "      <div class=\"input-group\">\n" +
+    "        <!-- <input type=\"text\" class=\"form-control\"> -->\n" +
+    "        <input type=\"text\" class='form-control square' ng-model=\"to_address\">\n" +
+    "        <span class=\"input-group-btn\">\n" +
+    "          <button class=\"btn btn-success\" type=\"button\" ng-click=\"claim()\">CLAIM</button>\n" +
+    "        </span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <br><br>\n" +
+    "    <br><br>\n" +
+    "    <br><br>\n" +
+    "    <br><br>\n" +
+    "  </div>\n" +
+    "\n" +
+    "</div>\n"
   );
 
 
@@ -326,6 +389,11 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "  <h1 class='text-center'>CONFIRMATION</h1>\n" +
     "  <br>\n" +
     "  <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "    <blockquote>\n" +
+    "      <div class=\"h2 thin\">\n" +
+    "        Please confirm your note by sending any amount of BTC (> 0.0005) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
+    "      </div>\n" +
+    "    </blockquote>\n" +
     "    <table class=\"table table-striped table-confirm\">\n" +
     "      <tbody>\n" +
     "        <tr>\n" +
@@ -371,11 +439,6 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "        </tr>\n" +
     "      </tbody>\n" +
     "    </table>\n" +
-    "    <blockquote>\n" +
-    "      <div class=\"h3 thin\">\n" +
-    "        Please confirm your note by sending any amount of BTC (> 0.0005) to the following address. Once received, your note will be forever stored in the Blockchain. See <a href=\"/how-it-works\">how this works.</a>\n" +
-    "      </div>\n" +
-    "    </blockquote>\n" +
     "    <h1 class='text-center'>{{note.address}}</h1>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -435,6 +498,12 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/landing.html',
+    "<div class=\"alert alert-info text-center\">\n" +
+    "  <a class=\"close\" data-dismiss=\"alert\" href=\"#\" aria-hidden=\"true\">&times;</a>\n" +
+    "  <span class=\"h2 thin\">\n" +
+    "    Embed an eternal love note into the Blockchain for Valentine's Day\n" +
+    "  </span>\n" +
+    "</div>\n" +
     "<div id=\"centerpiece\">\n" +
     "  <div class=\"text-center\">\n" +
     "    <span class='h1 title-fancy text-center'>The Noteblock</span>\n" +
@@ -446,7 +515,7 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "  <br>\n" +
     "  <div class='h1 text-center calvin-klein'>\n" +
-    "    Roses will wither, but the Blockchain is Forever.\n" +
+    "    Roses will wither, but the Blockchain is forever.\n" +
     "  </div>\n" +
     "</div>\n" +
     "\n" +
