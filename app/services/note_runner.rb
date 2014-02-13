@@ -112,7 +112,7 @@ module NoteRunner
       Pusher["notes"].trigger("latest", {
         content: note.content,
         sender: note.sender,
-        created_at: note.created_at,
+        created_at: note.created_at.to_i,
         satoshis: note.note_transactions.payments.sum(:satoshis)
       })
 
