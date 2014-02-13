@@ -551,33 +551,49 @@ angular.module('nbApp').run(['$templateCache', function($templateCache) {
     "<div class=\"container\">\n" +
     "  <div class=\"thick-line\"></div>\n" +
     "  <br>\n" +
+    "  <!-- TODO: refactor into partial -->\n" +
     "  <tabset>\n" +
     "    <tab heading=\"LATEST NOTES\">\n" +
-    "      <div class=\"row note\"  ng-repeat=\"i in [1, 2, 3, 4, 5, 6, 7]\">\n" +
+    "      <div class=\"row note\"  ng-repeat=\"note in latestNotes\">\n" +
     "        <br>\n" +
     "        <div class=\"col-md-8\">\n" +
     "          <p class='lead text-center'>\n" +
-    "            <a class=\"text-gray\" href='/notes/1'>\n" +
-    "              \"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.\" - Anonymous\n" +
+    "            <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "              \"{{note.content}}\" - {{note.sender}}\n" +
     "            </a>\n" +
     "          </p>\n" +
     "        </div>\n" +
     "        <div class=\"col-md-2\">\n" +
-    "          <p class='lead text-center'>\n" +
-    "            15 min ago\n" +
-    "          </p>\n" +
+    "          <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
     "        </div>\n" +
     "        <div class=\"col-md-2\">\n" +
     "          <p class='lead text-center'>\n" +
-    "            <span class=\"label label-default label-lg\">0.01 BTC</span>\n" +
+    "            <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
     "            <small class='smaller'>DEDICATED</small>\n" +
     "          </p>\n" +
     "        </div>\n" +
     "      </div>\n" +
-    "      <!-- <div ng-include=\"'/templates/blockExplorer/_tx.html'\"></div> -->\n" +
     "    </tab>\n" +
     "    <tab heading=\"TOP NOTES\">\n" +
-    "      <!-- <div ng-include=\"'/templates/blockExplorer/_tx.html'\"></div> -->\n" +
+    "      <div class=\"row note\"  ng-repeat=\"note in topNotes\">\n" +
+    "        <br>\n" +
+    "        <div class=\"col-md-8\">\n" +
+    "          <p class='lead text-center'>\n" +
+    "            <a class=\"text-gray\" href='/notes/{{note.id}}'>\n" +
+    "              \"{{note.content}}\" - {{note.sender}}\n" +
+    "            </a>\n" +
+    "          </p>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-md-2\">\n" +
+    "          <p class='lead text-center' timeago=\"{{note.created_at}}\" live='true'></p>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-md-2\">\n" +
+    "          <p class='lead text-center'>\n" +
+    "            <span class=\"label label-default label-lg dedicated\" to-btc=\"{{note.satoshis}}\"></span>\n" +
+    "            <small class='smaller'>DEDICATED</small>\n" +
+    "          </p>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
     "    </tab>\n" +
     "    <div class=\"pull-right\">\n" +
     "      <a class=\"btn btn-primary\" ng-click=\"NoteModal.open()\">+ CREATE A NOTE</a>\n" +
