@@ -70,9 +70,10 @@ class Note < ActiveRecord::Base
     notes.map do |note|
       {
         content: note.content,
-        sender: note.sender,
+        sender: note.sender || "Anonymous",
         address: note.address,
-        created_at: note.created_at.to_i
+        created_at: note.created_at.to_i,
+        satoshis: note.note_transactions.payments.sum(:satoshis)
       }
     end
   end

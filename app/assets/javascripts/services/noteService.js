@@ -13,6 +13,16 @@ nbApp.factory( "noteService", function( $resource ) {
         callback( err, null )
       } )
     },
+    query: function( id, callback ) {
+      NoteAPI.query( {
+        id: id
+      }, function( data ) {
+        callback( null, data )
+      }, function( err ) {
+        console.log( "ERROR" )
+        callback( err, null )
+      } )
+    },
     post: function( body, callback ) {
       NoteAPI.save( body, function( data ) {
         callback( null, data )

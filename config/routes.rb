@@ -9,6 +9,7 @@ Noteblock::Application.routes.draw do
     get "/notes/:id/claim" => "notes#claim"
 
     get "notes/top" => "notes#top"
+    get "notes/latest" => "notes#index"
 
     resources :notes, only: [:index, :show, :create]
   end

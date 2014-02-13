@@ -31,3 +31,42 @@ nbApp.directive( "selected", function( $timeout ) {
     }
   }
 } )
+
+moment.fn.fromNowWithSeconds = function( a ) {
+  var milliseconds = Math.abs( moment().diff( this ) );
+
+  if ( milliseconds > 0 && milliseconds < 60000 ) { // 60 seconds
+    var seconds = ( milliseconds / 1000 ).toFixed( 0 )
+    return seconds + ' secs ago';
+  }
+
+  return this.fromNow( a );
+}
+
+nbApp.directive( "timeago", function( $timeout ) {
+  return function( $scope, element, attrs ) {
+    var epoch = attrs.timeago
+
+    if ( epoch === "" ) {
+      $( element ).text( "n/a" )
+      return;
+    }
+
+    var update = function() {
+      var timeago = moment( epoch, "X" ).fromNowWithSeconds()
+      $( element ).text( timeago )
+    }
+
+    if ( attrs.live === 'true' ) {
+      var tick = function() {
+        update()
+        $timeout( function() {
+          tick()
+        }, 1000 )
+      }
+
+      tick()
+    }
+
+  }
+} )
