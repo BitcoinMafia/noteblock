@@ -139,7 +139,8 @@ class Note < ActiveRecord::Base
       private_key: private_key,
       to_addresses: [to_address],
       amount: amount,
-      compressed: compressed
+      compressed: compressed,
+      fee: NoteTransaction::MINER_FEE
     )
 
     response = BitcoinNodeAPI::Transactions.propagate(raw_transaction[:hex])
